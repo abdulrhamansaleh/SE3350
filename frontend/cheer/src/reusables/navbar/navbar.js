@@ -13,19 +13,19 @@ const NavBar = () => {
                         <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/home">CHEER</NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/home">Events</NavLink>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/events">Events</NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/schedule">Donate</NavLink>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/donate">Donate</NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/home">Contact Us</NavLink>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/contact">Contact Us</NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/home">Gallery</NavLink>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/gallary">Gallery</NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/home">Login</NavLink>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/cheer/login">Login</NavLink>
                     </li>
                 </ul>
                 

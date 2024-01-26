@@ -1,0 +1,57 @@
+.login_background{
+    height:89.5vh; /*???? I dont know why. If anyone can fix please do*/
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+.login_container{
+    width:30%;
+    height:50%;
+    /* background-color: rgba(128, 128, 128, 0.171); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10%;
+}
+p.login_header{
+    font-size: 2.5em;
+    font-style: bold;
+    margin-bottom: 5px;
+}
+p.login_subheader{
+    margin-top:0px;
+    margin-bottom: 30px;
+}
+input.login_input{
+    margin:10px;
+    width:80%;
+    height:8%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.459);
+}
+p.login_subtext{
+    margin:5px;
+    font-size: 0.8em;
+}
+
+.entry_login{
+    font-style: bold;
+    color: white;
+    background-color: rgb(197, 197, 10);
+    width:80%;
+    height:10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.entry_login:hover{
+    background-color:  rgb(224, 224, 10);
+}
