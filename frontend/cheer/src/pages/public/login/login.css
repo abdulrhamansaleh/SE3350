@@ -55,3 +55,6 @@ p.login_subtext{
 .entry_login:hover{
     background-color:  rgb(224, 224, 10);
 }
+.login_signin{
+    color:black;
+}
