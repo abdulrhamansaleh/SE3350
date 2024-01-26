@@ -3,6 +3,8 @@ import './home.css'
 
 import { NavLink } from 'react-router-dom'
 
+import AboutUs from '../aboutus/aboutus.js'
+
 import i1 from '../../../resources/images/placeholder1.jpg'
 
 function home() {
@@ -22,6 +24,7 @@ function home() {
             <img className='home_main_image' src={i1} alt="PH1"></img>
         </div>
       </div>
+      <AboutUs/>
     </div>
   )
 }

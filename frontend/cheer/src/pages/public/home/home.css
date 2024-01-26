@@ -1,3 +1,5 @@
+
+
 .home_background{
     width:100%;
     height:fit-content;
@@ -5,7 +7,7 @@
 }
 
 .home_main_container{
-    height:89vh;
+    height:80vh;
     display: flex;
     flex-direction: row;
 }
@@ -22,6 +24,7 @@ h1.home_main_header{
     margin-top: 0px;
     margin-bottom: 30%;
 }
+
 p.home_main_p{
     margin:0px;
 }

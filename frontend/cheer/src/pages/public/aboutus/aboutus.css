@@ -1,0 +1,38 @@
+.aboutus_main_container{
+    height:fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1.aboutus_main_header{
+    font-size: 2.5em;
+    margin-bottom: 0px;
+}
+
+.aboutus_subcontainer1{
+    width:80%;
+}
+
+img.aboutus_main_img{
+    height:40vh;
+    width: fit-content;
+    object-fit: contain;
+    margin-bottom:5px;
+    border-radius: 50%;
+    float:right;
+    shape-outside: circle(55%);
+    margin:10px;
+    
+}
+
+pre.aboutus_description{
+    white-space: pre-wrap;
+    text-align: justify;
+    font-size: 1.3em;
+}
+
+h2.aboutus_main_subheader{
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
