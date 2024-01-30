@@ -4,14 +4,13 @@ import './App.css';
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
 
-import Home from './pages/public/home/home';
-import Gallary from './pages/public/gallary/gallary'
-import Schedule from './pages/public/schedule/schedule'
-import Login from './pages/public/login/login'
-import Signup from './pages/public/signup/signup'
-
-import Employee_home from './pages/employee/employee_home'
-import Admin_page from './pages/admin/admin_home'
+import Home from './pages/public/home/home'; // Fix the file name to be 'home' instead of 'Home'
+import Gallery from './pages/public/gallery/Gallery'
+import Schedule from './pages/public/schedule/Schedule'
+import Login from './pages/public/login/Login'
+import SignUp from './pages/public/signUp/SignUp'
+import EmployeeHome from './pages/employee/EmployeeHome'
+import AdminPage from './pages/admin/AdminHome'
 
 const ROLES = {
   'User': 'User',
@@ -22,13 +21,13 @@ const ROLES = {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/cheer/home"/>}></Route>
+      <Route path="/" element={<Navigate to="/cheer/Home"/>}></Route>
       {/* Public Routes */}
         <Route path='/cheer/home' element={<Home/>}></Route>
-        <Route path='/cheer/gallary' element={<Gallary/>}></Route>
+        <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login/>}></Route>
-        <Route path='/cheer/signup' element={<Signup/>}></Route>
+        <Route path='/cheer/sign-up' element={<SignUp/>}></Route>
       
       
       

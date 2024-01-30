@@ -1,5 +1,5 @@
 import React from 'react'
-import './schedule.css'
+import './Schedule.css'
 
 export default function schedule() {
   return (

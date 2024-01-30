@@ -1,5 +1,5 @@
 import React,{useState, useEffect }from 'react'
-import './aboutus.css'
+import './AboutUs.css'
 import text from '../../../resources/text/aboutus.txt'
 import ph2 from '../../../resources/images/placeholder2.jpg'
 

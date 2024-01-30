@@ -1,9 +1,9 @@
 import React from 'react'
-import './home.css'
+import './Home.css'
 
 import { NavLink } from 'react-router-dom'
 
-import AboutUs from '../aboutus/aboutus.js'
+import AboutUs from '../aboutUs/AboutUs.js'
 
 import i1 from '../../../resources/images/placeholder1.jpg'
 

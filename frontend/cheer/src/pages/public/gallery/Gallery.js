@@ -1,5 +1,5 @@
 import React from 'react'
-import './gallary.css'
+import './Gallery.css'
 
 export default function gallary() {
   return (
