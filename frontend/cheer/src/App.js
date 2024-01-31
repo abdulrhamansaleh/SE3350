@@ -27,7 +27,7 @@ function App() {
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login/>}></Route>
-        <Route path='/cheer/sign-up' element={<SignUp/>}></Route>
+        <Route path='/cheer/signup' element={<SignUp/>}></Route>
       
       
       

@@ -15,7 +15,7 @@ function login() {
           <NavLink style={{"text-decoration": "none"}} className="entry_login" to="/cheer/page">Sign in</NavLink>
 
           <p className='login_subtext'>Forgot your password?</p>
-          <p className='login_subtext'>Dont have an Account? <b> <NavLink style={{"text-decoration": "none"}} className='login_signin' to="/cheer/page">Register here!</NavLink></b></p>
+          <p className='login_subtext'>Don't have an account? <b> <NavLink style={{"text-decoration": "none"}} className='login_signin' to="/cheer/signup">Register here!</NavLink></b></p>
       </div>
     </div>
   )
