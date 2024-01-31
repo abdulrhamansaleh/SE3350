@@ -4,11 +4,11 @@ import './App.css';
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
 
-import Home from './pages/public/home/home'; // Fix the file name to be 'home' instead of 'Home'
+import Home from './pages/public/home/Home'; // Fix the file name to be 'home' instead of 'Home'
 import Gallery from './pages/public/gallery/Gallery'
 import Schedule from './pages/public/schedule/Schedule'
 import Login from './pages/public/login/Login'
-import SignUp from './pages/public/signUp/SignUp'
+import SignUp from './pages/public/signup/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import AdminPage from './pages/admin/AdminHome'
 
