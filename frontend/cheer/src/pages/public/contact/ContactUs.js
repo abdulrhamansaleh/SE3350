@@ -22,7 +22,7 @@ function ContactUs () {
         e.preventDefault()
 
         emailjs.sendForm(
-            "service_7tat96p",
+            //"service_7tat96p", Uncomment this to fix. I don't want test emails as its linked to one of my emails right now.
             "template_b47tesh",
             ref.current,
             "TkQPg4iRQ6CGT-Md2").then((result) => {
