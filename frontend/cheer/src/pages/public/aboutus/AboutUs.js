@@ -34,7 +34,7 @@ function Aboutus() {
         </pre> */}
 
         <h2 className='aboutus_main_subheader'>
-            Meet Our Team!
+            
         </h2>
 
     </div>
