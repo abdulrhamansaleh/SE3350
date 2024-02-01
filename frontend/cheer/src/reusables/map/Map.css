@@ -1,0 +1,19 @@
+.map{
+    height: 80%;;
+    width:95%;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+.google-map{
+    width:100%;
+    height:100%;
+}
+
+.pin-text{
+    width:100px;
+}
+.pin-icon{
+    height:3em;
+    width:3em;
+}
