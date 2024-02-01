@@ -9,7 +9,7 @@ function Aboutus() {
     const [aboutus_text, set_aboutus_text] = useState("")
 
     useEffect(()=>{
-        fetch(text).then(r=>r.text()).then(data=> {set_aboutus_text(data); console.log(data)})
+        fetch(text).then(r=>r.text()).then(data=> {set_aboutus_text(data);})
     })    
 
   return (
@@ -29,10 +29,6 @@ function Aboutus() {
                 {aboutus_text}
             </pre>
         </div>
-        {/* <pre className='aboutus_description'>
-            {aboutus_text}
-        </pre> */}
-
         <h2 className='aboutus_main_subheader'>
             
         </h2>

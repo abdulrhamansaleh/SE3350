@@ -15,7 +15,6 @@
 }
 
 .contact_right{
-    background-color: red;
     width:50%;
     display: flex;
     flex-direction: column;
@@ -25,11 +24,40 @@
 
 .contact_left{
     width:50%;
-    background-color: aqua;
     padding:30px;
+    background-color:rgba(128, 128, 128, 0.342);
+    height: fit-content;
 }
 form.ContactForm{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
+
+input.contact_m_input{
+    margin:5px;
+    height:1.6em;
+    width:90%;    
+}
+
+textarea.contact_s_input{
+    margin:5px;
+    width:90%;
+}
+input.contact_submit{
+    margin:5px;
+    width:20%;
+    border-radius: 25px;
+    border-width: 1px;
+}
+input.contact_submit:hover{
+    background-color: rgba(128, 128, 128, 0.178);
+}
+
+p.contact_result_text{
+    text-align: center;
+    margin: 1px;
+    font-style: italic;
+}
+
