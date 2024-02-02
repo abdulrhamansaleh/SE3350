@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import emailjs from "@emailjs/browser"
+import {email_service} from '../../../reusables/email/email_service'
 
 import Map from "../../../reusables/map/Map";
 
 import './ContactUs.css'
 
 function ContactUs () {
-    const [email, setEmail] = useState({})
     const [success,setSuccess] = useState(null)
     const cheerEmail = 'abcgef@gmail.com'
     const ref = useRef()
@@ -20,20 +19,7 @@ function ContactUs () {
     
     const handleSubmit = (e) =>{
         e.preventDefault()
-
-        emailjs.sendForm(
-            //"service_7tat96p", Uncomment this to fix. I don't want test emails as its linked to one of my emails right now.
-            "template_b47tesh",
-            ref.current,
-            "TkQPg4iRQ6CGT-Md2").then((result) => {
-                console.log(result.text);
-                setSuccess(true)
-            }, (error) => {
-                console.log(error.text);
-                setSuccess(false)
-            }
-        );
-        
+        setSuccess(email_service(ref.current))
     }
 
     
@@ -50,7 +36,7 @@ function ContactUs () {
                         <textarea placeholder='Message Here' className='contact_s_input' rows={18} name='message'></textarea>
                         <input type="submit" className='contact_submit' value='Send' ></input>
                     </form>
-                    {success==null? <p className="contact_result_text">Your message has been sent!</p> : success ? <p className="contact_result_text">Your message has been sent!</p>:<p className="contact_result_text">Something went wrong, please try again later</p>}  
+                    {success==null? <div/> : success ? <p className="contact_result_text">Your message has been sent!</p>:<p className="contact_result_text">Something went wrong, please try again later</p>}  
                 </div>
                 <div className="contact_right" >
                     <Map location={location} zoomLevel={13} />
