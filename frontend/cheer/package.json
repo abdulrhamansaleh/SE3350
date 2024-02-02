@@ -16,7 +16,10 @@
     "web-vitals": "^2.1.4"
   },
   "options": {
-    "allowedHosts": ["localhost", ".localhost"],
+    "allowedHosts": [
+      "localhost",
+      ".localhost"
+    ],
     "proxy": "https://localhost:7000/"
   },
   "scripts": {
