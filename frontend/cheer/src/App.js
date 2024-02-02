@@ -10,7 +10,8 @@ import Schedule from './pages/public/schedule/Schedule'
 import Login from './pages/public/login/Login'
 import SignUp from './pages/public/signup/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
-import AdminPage from './pages/admin/AdminHome'
+import NewsletterUpload from './pages/admin/NewsletterUpload'
+import AdminHome from './pages/admin/AdminHome'
 
 const ROLES = {
   'User': 'User',
@@ -29,7 +30,9 @@ function App() {
         <Route path='/cheer/login' element={<Login/>}></Route>
         <Route path='/cheer/signup' element={<SignUp/>}></Route>
       
-      
+        // once authentication is established, place this under protected admin routes
+        <Route path='/admin' element={<AdminHome/>}></Route>
+        <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
       
       
       {/* Protected Routes For Accounts*/}
@@ -46,7 +49,7 @@ function App() {
 
       {/* Protected Routes For Admin*/}
       {/* <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
-          
+         
        </Route> */}
 
     </Routes>
