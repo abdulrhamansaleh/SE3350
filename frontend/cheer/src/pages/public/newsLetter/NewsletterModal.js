@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+// NewsletterModal.js
+import React from 'react';
+import Modal from 'NewsletterModal.js'; 
 
 const NewsletterModal = ({ isOpen, onClose, onSubscribe }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
-        <p>subscribe to our newsletter!</p>
-        <button onClick={onSubscribe}>Subscribe</button>
-      </div>
-    </div>
+    <Modal>
+      <h2>Subscribe to our Newsletter</h2>
+      <p>Stay updated with the latest news!</p>
+      <button onClick={onSubscribe}>Subscribe</button>
+      <button onClick={onClose}>Close</button>
+    </Modal>
   );
 };
 

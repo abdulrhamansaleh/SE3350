@@ -73,6 +73,21 @@ app.use('/childSignup', (req, res) => {
    
 })
 
+app.post('/subscribeNewsletter', (req, res) => {
+    // Extract user information from request, typically done after authentication
+    const userId = req.body.userId; // The userId should be retrieved after the user has been authenticated
+  
+    // Update the user's 'subscribed' status in the database
+    db.query('UPDATE CHEER.users SET subscribed = 1 WHERE id = ?', [userId], (error, results) => {
+      if (error) {
+        res.status(500).json({ error: 'Error subscribing to newsletter' });
+      } else {
+        res.json({ message: 'Subscribed successfully' });
+      }
+    });
+  });
+  
+
 dotenv.config()
 //const port = process.env.port;
 const port = 8080
