@@ -34,7 +34,7 @@ const getUsersFromJsonDb = () => {
     })
 }
 
-
+//CHEER-57
 app.use('/login', (req, res) => {
     //this is where the logic for password and username checking will happen
     //for now, we will just store the unhashed credentials for testing purposes
@@ -48,14 +48,30 @@ app.use('/login', (req, res) => {
     //         break 
     //     }
     // }
-    console.log(req.body)
+
+    
+    //get the username and password from the user trying to login and see if it matches the db
     res.send({
-      token: "false",
-      other: "idk",
+      token: true,//the value of this token will determine if the user is logged in 
+      parent: true, //use this flag after signup to see if the user is a parent 
       username: req.body.username,
       password: req.body.password,
     });
-  });
+});
+
+//CHEER-61
+app.use('/childSignup', (req, res) => {
+    let db //this would represent the database 
+
+    //loop through users and see if the username entered is a "registered" user
+    for (let e of db) {
+        //if the username entered matches the username in the db then perform the signup 
+        if (req.body.username === db.user.username) {
+            
+        }
+    }
+   
+})
 
 dotenv.config()
 //const port = process.env.port;

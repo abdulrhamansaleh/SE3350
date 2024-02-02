@@ -15,10 +15,7 @@
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
-<<<<<<< Updated upstream
-=======
   "proxy": "http://localhost:8080",
->>>>>>> Stashed changes
   "scripts": {
     "start": "NODE_ENV=production node_modules/react-scripts/bin/react-scripts.js start",
     "build": "react-scripts build",
@@ -44,11 +41,8 @@
     ]
   },
   "devDependencies": {
-<<<<<<< Updated upstream
-    "@iconify/react": "^4.1.1"
-=======
+    "@iconify/react": "^4.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.2"
->>>>>>> Stashed changes
   }
 }
