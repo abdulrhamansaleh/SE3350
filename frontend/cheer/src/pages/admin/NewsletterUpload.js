@@ -14,8 +14,7 @@ export default function NewsletterUpload() {
   }
 
   function sendOutNewsletter(){
-    // get a list of users that are subsrcibed (apiroute: to get all users subscribed to newsletter)
-    // use a mailing API to send file to all users
+    // call /send-newsletter in API
   }
 
   return (
