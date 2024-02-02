@@ -3,7 +3,8 @@
     height:7vh;
     /* background-image: linear-gradient(to right, rgb(71, 34, 34), rgb(97, 25, 25) ); */
     background-color: white;
-    margin:0px
+    margin:0px;
+    position: fixed;
 }
 .nav_container{
     height:100%;

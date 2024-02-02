@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useState} from 'react';
 
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
@@ -12,6 +13,7 @@ import SignUp from './pages/public/signup/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
+import useToken from './reusables/tokenHook/useToken';
 
 const ROLES = {
   'User': 'User',
@@ -20,6 +22,9 @@ const ROLES = {
 }
 
 function App() {
+
+  const { token, setToken } = useToken();
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/cheer/Home"/>}></Route>
@@ -27,7 +32,7 @@ function App() {
         <Route path='/cheer/home' element={<Home/>}></Route>
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
-        <Route path='/cheer/login' element={<Login/>}></Route>
+        <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/signup' element={<SignUp/>}></Route>
       
         // once authentication is established, place this under protected admin routes
