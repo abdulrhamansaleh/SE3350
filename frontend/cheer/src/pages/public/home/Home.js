@@ -3,7 +3,8 @@ import './Home.css'
 
 import { NavLink } from 'react-router-dom'
 
-import AboutUs from '../aboutUs/AboutUs.js'
+import AboutUs from '../aboutus/AboutUs.js'
+import ContactUs from '../contact/ContactUs.js'
 
 import i1 from '../../../resources/images/placeholder1.jpg'
 
@@ -25,6 +26,7 @@ function home() {
         </div>
       </div>
       <AboutUs/>
+      <ContactUs/>
     </div>
   )
 }

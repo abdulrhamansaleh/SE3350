@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
-import NavBar from './reusables/navBar/NavBar'
+import NavBar from './reusables/navbar/NavBar'
 import Footer from './reusables/footer/Footer'
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

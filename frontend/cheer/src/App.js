@@ -4,11 +4,11 @@ import './App.css';
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
 
-import Home from './pages/public/home/home'; // Fix the file name to be 'home' instead of 'Home'
+import Home from './pages/public/home/Home'; // Fix the file name to be 'home' instead of 'Home'
 import Gallery from './pages/public/gallery/Gallery'
 import Schedule from './pages/public/schedule/Schedule'
 import Login from './pages/public/login/Login'
-import SignUp from './pages/public/signUp/SignUp'
+import SignUp from './pages/public/signup/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import AdminPage from './pages/admin/AdminHome'
 
@@ -27,7 +27,7 @@ function App() {
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login/>}></Route>
-        <Route path='/cheer/sign-up' element={<SignUp/>}></Route>
+        <Route path='/cheer/signup' element={<SignUp/>}></Route>
       
       
       
