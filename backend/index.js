@@ -34,6 +34,18 @@ const getUsersFromJsonDb = () => {
     })
 }
 
+//CHEER-60
+app.use('/signup', (req, res) => {
+    // signup logic goes here
+
+    res.send({
+        email: req.body.username,
+        password: req.body.password,
+        reason: req.body.reason,
+        isVerified: false
+      });
+});
+
 //CHEER-57
 app.use('/login', (req, res) => {
     //this is where the logic for password and username checking will happen
