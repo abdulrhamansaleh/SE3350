@@ -1,60 +1,129 @@
-.login_background{
-    height:90vh; /*???? I dont know why. If anyone can fix please do*/
-    width:100%;
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-}
-.login_container{
-    width:30%;
-    height:50%;
-    /* background-color: rgba(128, 128, 128, 0.171); */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 10%;
-}
-p.login_header{
-    font-size: 2.5em;
-    font-style: bold;
-    margin-bottom: 5px;
-}
-p.login_subheader{
-    margin-top:0px;
-    margin-bottom: 30px;
-}
-input.login_input{
-    margin:10px;
-    width:80%;
-    height:8%;
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: rgba(128, 128, 128, 0.459);
-}
-p.login_subtext{
-    margin:5px;
-    font-size: 0.8em;
+.login-background {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3E4B4A;
+  position: relative;
 }
 
-.entry_login{
-    font-style: bold;
-    color: white;
-    background-color: rgb(197, 197, 10);
-    width:80%;
-    height:10%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.login-container {
+  width: 350px;
+  padding: 40px;
+  background: #3E4B4A;
+  box-shadow: 0 15px 25px #2A2A2A;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.entry_login:hover{
-    background-color:  rgb(224, 224, 10);
+.login-h1 {
+  color: #F4EDE7;
+  margin-top:1px;
+  font-weight: bold;
 }
-.login_signin{
-    color:black;
+
+.login-user_icon {
+  font-size: 100px;
+  color: #F4EDE7;
+  margin-right: 8px;
+}
+
+.login-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1ex;
+}
+
+.login-input_container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.login-input {
+  width: 90%;
+  padding: 20px 40px;
+  font-size: 16px;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-bottom: 1px solid #F4EDE7;
+  outline: none;
+  background: transparent;
+}
+
+.login-input:focus {
+  border-color: #E17B7B;
+}
+
+.login-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: #F4EDE7;
+  font-size: large;
+}
+
+.login-input::placeholder {
+  color: #F4EDE7;
+  opacity: 1;
+}
+
+.login-button {
+  padding: 10px 20px;
+  color: #F4EDE7;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 2.5px;
+  border: 1px solid #deafa1;
+  background: #deafa1;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #e8b5a5;
+  color: #000000;
+  border-radius: 5px;
+}
+
+.login-signin {
+  color: #F4EDE7;
+  text-decoration: none;
+}
+
+.login-signin:hover {
+  color: #deafa1;
+  text-decoration: underline;
+}
+
+.login-home_icon {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  width: 150px;
+  height: auto;
+  cursor: pointer;
+}
+
+.login-icon_button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  color: #F4EDE7;
+  cursor: pointer;
+}
+
+.login-icon_button:focus {
+  outline: none;
 }

@@ -1,84 +1,86 @@
-.signup_background{
-    height:90vh; /*???? I dont know why. If anyone can fix please do*/
-    width:100%;
-    display:flex;
-    flex-direction: row;
+.signup-background {
+    height: 100vh;
+    display: flex;
     align-items: center;
     justify-content: center;
-
-}
-.signup_container{
-    width:30%;
-    /* height:auto; */
-    /* background-color: rgba(128, 128, 128, 0.171); */
+    background: #3E4B4A;
+  }
+  
+  .signup-container {
+    width: 350px;
+    padding: 40px;
+    background: #3E4B4A;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 10%;
-}
-p.signup_header{
-    font-size: 2.5em;
-    font-style: bold;
-    margin-bottom: 5px;
-    text-align: center;
-}
-p.signup_subheader{
-    margin-top:0px;
-    /* margin-bottom: 30px; */
-    text-align: center;
-}
-input.signup_input{
-    margin:10px;
-    width:80%;
-    height:8%;
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: rgba(128, 128, 128, 0.459);
-    padding: 2%;
-}
-p.signup_info {
-    margin:5px;
-    margin-bottom: 0px;
-    text-align: left;
-}
-p.signup_subtext{
-    margin:5px;
-    font-size: 0.8em;
-}
+  }
+  
+  .signup-title {
+    color: #F4EDE7;
+    margin-bottom: 30px;
+    font-weight: bold;
+    margin-top:1px;
+  }
 
-.entry_signup{
-    font-style: bold;
-    color: white;
-    background-color: rgb(197, 197, 10);
-    width:80%;
-    height:10%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 5px;
-    margin: 10px auto;
-    margin-bottom: 10px;
-    padding: 2%;
-    font-size: 1em;
+  .signup-icon {
+    font-size: 100px;
+    color: #F4EDE7;
+    margin-right: 8px;
+  }
+  
+  .signup-input-container {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  
+  .signup-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    border: 2px solid transparent;
+    border-bottom: 1px solid #F4EDE7;
+    outline: none;
+    background: transparent;
+  }
+  
+  .signup-input::placeholder {
+    color: #F4EDE7;
+  }
+  
+  .signup-button {
+    padding: 10px 20px;
+    color: #F4EDE7;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    border: 1px solid #E17B7B;
+    background: #E17B7B;
     cursor: pointer;
-    /* text-decoration: none; */
-}
-
-button.entry_signup {
-    width: 210.39px;
-}
-
-.entry_signup:hover{
-    background-color:  rgb(224, 224, 10);
-}
-
-/* .entry_signup, .entry_signup:visited, .entry_signup:active {
-    color: white;
+    width: 100%;
+    border-radius: 5px;
+  }
+  
+  .signup-button:hover {
+    background: #deafa1;
+    color: #000000;
+  }
+  
+  .signup-subtext {
+    color: #F4EDE7;
+    font-size: 0.8em;
+    margin-top: 10px;
     text-decoration: none;
-} */
-
-.signup_signin{
-    color:black;
-}
+  }
+  
+  .signup-signin {
+    color: #F4EDE7;
+    text-decoration: none;
+  }
+  
+  .signup-signin:hover {
+    color: #E17B7B;
+  }
+  
