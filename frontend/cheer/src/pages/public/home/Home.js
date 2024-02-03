@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Home.css'
 
 import { NavLink } from 'react-router-dom'
 
 import AboutUs from '../aboutus/AboutUs.js'
 import ContactUs from '../contact/ContactUs.js'
-
+import NewsletterModal from '../newsLetter/NewsletterModal.js'
 import i1 from '../../../resources/images/placeholder1.jpg'
 
-function home() {
+function Home() {
+  const [showModal, setShowModal] = React.useState(false);
+  useEffect(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className='home_background'>
+      {showModal && <NewsletterModal onClose={handleClose} />}
       <div className='home_main_container'>
         <div className='home_left_container'>
           <h1 className='home_main_header'>Welcome to C.H.E.E.R</h1>
@@ -31,4 +41,4 @@ function home() {
   )
 }
 
-export default home
+export default Home

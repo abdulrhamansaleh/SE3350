@@ -92,3 +92,7 @@ app.listen(port, ()=>{
     console.log(`Listen on port ${port}`)
 })
 
+
+// API Routes
+const adminRoute = require('./routes/admin.route')
+app.use('/admin', adminRoute)
