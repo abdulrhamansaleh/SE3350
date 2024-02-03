@@ -1,61 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react'
 import './Home.css'
 
 import { NavLink } from 'react-router-dom'
 
 import AboutUs from '../aboutus/AboutUs.js'
 import ContactUs from '../contact/ContactUs.js'
-import NewsletterModal from '../newsLetter/NewsletterModal.js';
-
+import NewsletterModal from '../newsLetter/NewsletterModal.js'
 import i1 from '../../../resources/images/placeholder1.jpg'
 
 function Home() {
-  const [showNewsletterModal, setShowNewsletterModal] = useState(false);
-  const userIsLoggedIn = true; // Replace later with logic check
-  const userIsSubscribed = false; // Replace with subscription check
-
-  // Effect to check if we should show the newsletter modal
+  const [showModal, setShowModal] = React.useState(false);
   useEffect(() => {
-    if (userIsLoggedIn && !userIsSubscribed) {
-      setShowNewsletterModal(true);
-    }
-  }, [userIsLoggedIn, userIsSubscribed]);
-  // Handle the subscription logic
-  const handleSubscribe = async () => {
-    try {
-      // Replace with the actual API call to your backend
-      const response = await fetch('/api/subscribe-to-newsletter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          // Include other headers as needed, like authorization tokens
-        },
-        body: JSON.stringify({
-          // Include the necessary user data, like user ID
-        }),
-      });
-      const data = await response.json();
-      if (data.success) {
-        // Handle successful subscription here
-        setShowNewsletterModal(false);
-      } else {
-        // Handle errors here
-        console.error('Subscription failed:', data.error);
-      }
-    } catch (error) {
-      console.error('Error subscribing to newsletter:', error);
-    }
+    setShowModal(true);
+  }, []);
+
+  const handleClose = () => {
+    setShowModal(false);
   };
+
   return (
     <div className='home_background'>
-      {/* Render the NewsletterModal */}
-      {showNewsletterModal && (
-        <NewsletterModal
-          isOpen={showNewsletterModal}
-          onClose={() => setShowNewsletterModal(false)}
-          onSubscribe={handleSubscribe}
-        />
-      )}
+      {showModal && <NewsletterModal onClose={handleClose} />}
       <div className='home_main_container'>
         <div className='home_left_container'>
           <h1 className='home_main_header'>Welcome to C.H.E.E.R</h1>
