@@ -1,0 +1,69 @@
+.popup {
+    background: #FFFFFF; /* Assuming a white background */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Example shadow */
+    border-radius: 8px; /* Example border radius */
+    padding: 20px; /* Example padding */
+    width: 400px; /* Adjust the width as needed */
+    box-sizing: border-box; /* To include padding in the width */
+    width: 300px; /* Smaller width */
+    margin-right: 50px; /* Space from the right of the screen */
+    align-self: flex-end; /* Align to the right */
+    position: absolute; /* Positions popup within modal */
+    top: 0; /* Aligns popup to the top of modal */
+    right: 0; /* Aligns popup to the right of modal */
+    width: 300px; /* Adjust width to your preference */
+    margin-top: 20px; /* Space from the top edge of modal */
+    margin-right: 20px; /* Space from the right edge of modal */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note {
+    text-align: center;
+    margin-bottom: 20px; /* Space between note and input field */
+}
+
+.title {
+    font-size: 24px; /* Example font size */
+    color: #333333; /* Example text color */
+    margin-bottom: 8px; /* Space between title and subtitle */
+}
+
+.subtitle {
+    font-size: 16px; /* Example font size */
+    color: #666666; /* Example text color */
+}
+
+.input_field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px; /* Space between input field and button */
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF; /* Example button color */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit:hover {
+    background-color: #0056b3; /* Darker shade for hover state */
+}
+
+.modal {
+    justify-content: flex-end; /* Aligns popup to the right */
+    align-items: flex-start; /* Aligns popup to the top */
+    padding: 20px; /* Provides padding from the viewport edges */
+}
