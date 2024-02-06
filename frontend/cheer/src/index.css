@@ -1,3 +1,11 @@
+:root {
+  --cheer-dark: #6a5870;
+  --cheer-light: #f4ecdc;
+  --cheer-green: #647249;
+  --cheer-orange: #db7859;
+  --cheer-tan: #deafa1;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
