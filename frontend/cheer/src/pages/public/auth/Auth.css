@@ -62,7 +62,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 10px;
+    left: 3px;
     color: #F4EDE7;
     cursor: pointer;
   }

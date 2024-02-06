@@ -3,7 +3,7 @@ import './Auth.css'
 import { NavLink } from 'react-router-dom'
 import ReCAPTCHA from "react-google-recaptcha"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faLock, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock, faPenToSquare, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
@@ -11,6 +11,7 @@ function Signup() {
   const recaptcha = useRef();
   const navigate = useNavigate();
   const emailRef = useRef(null);
+  const textRef = useRef(null);
   const passwordRef = useRef(null);
 
   // const history = useHistory();
@@ -145,10 +146,17 @@ function Signup() {
             />
           </div>
           <div className="auth-input-container">
+            <button
+              aria-label="Focus password input" 
+              className="auth-icon_button" 
+              onClick={() => textRef.current && textRef.current.focus()}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} className="auth-icon" />
+            </button>
             <input
               className='auth-input'
               type='text'
-              // ref={textRef}
+              ref={textRef}
               placeholder='Reason for signing up'
               id='reason'
               value={data.reason}
