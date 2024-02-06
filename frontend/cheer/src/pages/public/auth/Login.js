@@ -87,6 +87,7 @@ async function loginUser(username, password) {
             </form>
             {/* <p className='auth-subtext'>Forgot your password?</p> */}
             <p className='auth-subtext'>Don't have an account? <NavLink className='auth-switch' to="/cheer/signup">Sign up!</NavLink></p>
+            <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
         </div>
     </div>
 );

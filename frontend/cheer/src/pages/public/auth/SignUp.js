@@ -159,6 +159,7 @@ function Signup() {
           <button className='auth-button'>Sign Up</button>
         </form>
         <p className='auth-subtext'>Already have an account? <NavLink className='auth-switch' to="/cheer/login">Sign in!</NavLink></p>
+        <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
       </div>
     </div>
   );
