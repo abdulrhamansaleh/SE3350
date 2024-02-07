@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import './Login.css'
+import './Auth.css'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,6 @@ import { useRef } from 'react'; // Import useRef hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
 async function loginUser(username, password) {
-  
 
   return fetch('http://localhost:8080/login', {
     method: 'POST',
@@ -39,54 +38,56 @@ async function loginUser(username, password) {
 
 
   return (
-    <div className='login-background'>
+    <div className='auth-background'>
         <img 
             src={HomeIcon}
             alt="Home Icon"
-            className="login-home_icon"
+            className="auth-home_icon"
             onClick={() => navigate('/cheer/home')}
         />
-        <div className='login-container'>
+        <div className='auth-container'>
             <div className="login-header">
                 <FontAwesomeIcon icon={faUser} className="login-user_icon" />
             </div>
-            <h1 className='login-h1'>Log In</h1>
+            <h1 className='auth-h1'>Log In</h1>
             <form onSubmit={handleSubmit}>
-                <div className="login-input_container">
+                <div className="auth-input-container">
                     <button
                         aria-label="Focus email input" 
-                        className="login-icon_button" 
+                        className="auth-icon_button" 
                         onClick={() => emailRef.current && emailRef.current.focus()}
                     >
-                        <FontAwesomeIcon icon={faEnvelope} className="login-icon" />
+                        <FontAwesomeIcon icon={faEnvelope} className="auth-icon" />
                     </button>
-                    <input 
+                    <input
+                        className="auth-input"
                         type="email" 
                         ref={emailRef}
-                        required
                         placeholder="Email"
-                        className="login-input"
+                        required
                     />
                 </div>
-                <div className="login-input_container">
+                <div className="auth-input-container">
                     <button
                         aria-label="Focus password input" 
-                        className="login-icon_button" 
+                        className="auth-icon_button" 
                         onClick={() => passwordRef.current && passwordRef.current.focus()}
                     >
-                        <FontAwesomeIcon icon={faLock} className="login-icon" />
+                        <FontAwesomeIcon icon={faLock} className="auth-icon" />
                     </button>
-                    <input 
+                    <input
+                        className="auth-input"
                         type="password" 
                         ref={passwordRef}
-                        required
                         placeholder="Password"
-                        className="login-input"
+                        required
                     />
                 </div>
-                <button type="submit" className="login-button">Submit</button>
+                <button type="submit" className="auth-button">Log In</button>
             </form>
-            <p>Don't have an account? <NavLink className='login-signin' to="/cheer/signup">Sign Up!</NavLink></p>
+            {/* <p className='auth-subtext'>Forgot your password?</p> */}
+            <p className='auth-subtext'>Don't have an account? <NavLink className='auth-switch' to="/cheer/signup">Sign up!</NavLink></p>
+            <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
         </div>
     </div>
 );
