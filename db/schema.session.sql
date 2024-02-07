@@ -14,7 +14,7 @@ CREATE TABLE Accounts (
 -- EmployeeDetails table
 CREATE TABLE EmployeeDetails (
     employee_detail_id INT AUTO_INCREMENT PRIMARY KEY,
-    account_id INT NOT NULL UNQIQUE,
+    account_id INT NOT NULL UNIQUE,
     employee_id VARCHAR(255) NOT NULL UNIQUE,
     join_date DATE,
     employee_number VARCHAR(50),
@@ -27,7 +27,7 @@ CREATE TABLE ParentDetails (
     parent_detail_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL UNIQUE,
     parent_number VARCHAR(50),
-    FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE SET NULL
+    FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT
 );
 
 -- Child table with the 'accepted' status specific to children
@@ -66,8 +66,8 @@ CREATE TABLE EventRegistrations (
     event_id INT,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id)
-);
+    FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE SET CASCADE
+);    
 
 -- event-specific waivers
 CREATE TABLE EventWaivers (
