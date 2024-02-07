@@ -2,6 +2,8 @@ import { React, useRef, useState } from 'react'
 import './SignUp.css'
 import { NavLink } from 'react-router-dom'
 import ReCAPTCHA from "react-google-recaptcha"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUserPlus  } from '@fortawesome/free-solid-svg-icons';
 
 function Signup() {
   const recaptcha = useRef();
@@ -85,52 +87,53 @@ function Signup() {
   }
   // 
   return (
-    <div className='signup_background'>
-      <div className='signup_container'>
-        <form onSubmit={signup}>
-          <p className='signup_header'>Welcome</p>
-          <p className='signup_subheader'>Sign up</p>
-          <input
-          className='signup_input'
-          type='text'
-          id='email'
-          placeholder='Email'
-          value={data.email}
-          onChange={(e) => setData({...data, email: e.target.value})}
-          required
-          />
-          <input
-          className='signup_input'
-          type='password'
-          id='password'
-          placeholder='Password'
-          value={data.password}
-          onChange={(e) => setData({...data, password: e.target.value})}
-          required
-          />
-          <p className='signup_info'>Why do you want to sign up? </p>
-          <input
-          className='signup_input'
-          type='text'
-          id='reason'
-          placeholder='Type here...'
-          value={data.reason}
-          onChange={(e) => setData({...data, reason: e.target.value})}
-          required
-          />
-          {/* <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY} /> */}
-          <button style={{"text-decoration": "none"}} className='entry_signup'>Sign up</button>
+    <div className='signup-background'>
+      <div className='signup-container'>
+        <div className='signup-icon'>
+        <FontAwesomeIcon icon={faUserPlus} />
+        </div>
+        <h1 className='signup-title'>Sign Up</h1>
+        <form className='signup-form' onSubmit={signup}>
+          <div className="signup-input-container">
+            <input
+              className='signup-input'
+              type='text'
+              id='email'
+              placeholder='Email'
+              value={data.email}
+              onChange={(e) => setData({...data, email: e.target.value})}
+              required
+            />
+          </div>
+          <div className="signup-input-container">
+            <input
+              className='signup-input'
+              type='password'
+              id='password'
+              placeholder='Password'
+              value={data.password}
+              onChange={(e) => setData({...data, password: e.target.value})}
+              required
+            />
+          </div>
+          <div className="signup-input-container">
+            <input
+              className='signup-input'
+              type='text'
+              id='reason'
+              placeholder='Reason for signing up'
+              value={data.reason}
+              onChange={(e) => setData({...data, reason: e.target.value})}
+              required
+            />
+          </div>
+          <button className='signup-button'>Sign Up</button>
         </form>
-
-          {/* <NavLink style={{"text-decoration": "none"}} className="entry_signup" onClick={signup} to="/cheer/page">Sign up</NavLink> */}
-          {/* <NavLink style={{"text-decoration": "none"}} className="entry_signup" onClick={checkCaptcha}>Sign up</NavLink> */}
-          <NavLink style={{"text-decoration": "none"}} className="entry_signup" to="/cheer/home">Return Home</NavLink>
-
-          <p className='signup_subtext'>Forgot your password?</p>
-          <p className='signup_subtext'>Already have an account? <b> <NavLink style={{"text-decoration": "none"}} className='signup_signin' to="/cheer/login">Sign in!</NavLink></b></p>
+        <p className='signup-subtext'>Forgot your password?</p>
+        <p className='signup-subtext'>Already have an account? <NavLink className='signup-signin' to="/cheer/login">Sign in!</NavLink></p>
       </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;
