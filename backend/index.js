@@ -100,6 +100,10 @@ app.post('/subscribeNewsletter', (req, res) => {
   });
   
 
+// API Routes
+const adminRoute = require('./routes/admin.route')
+app.use('/admin', adminRoute)
+
 dotenv.config()
 //const port = process.env.port;
 const port = 8080
@@ -108,6 +112,4 @@ app.listen(port, ()=>{
 })
 
 
-// API Routes
-const adminRoute = require('./routes/admin.route')
-app.use('/admin', adminRoute)
+
