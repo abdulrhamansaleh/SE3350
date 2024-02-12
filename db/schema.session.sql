@@ -6,8 +6,8 @@ CREATE TABLE Accounts (
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL
-    subscribed BOOLEAN DEFAULT FALSE
+    password_hash VARCHAR(255) NOT NULL,
+    subscribed BOOLEAN DEFAULT FALSE,
     accepted BOOLEAN DEFAULT FALSE
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE Child (
     verbal BOOLEAN DEFAULT FALSE,
     special_needs TEXT,
     accepted BOOLEAN DEFAULT FALSE,  -- This status is specific to Child entities
-    FOREIGN KEY (parent_account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE
+    FOREIGN KEY (parent_account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE
 );
 
@@ -65,7 +65,7 @@ CREATE TABLE EventRegistrations (
     event_id INT,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE SET CASCADE
+    FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE CASCADE
 );    
 
 -- event-specific waivers
