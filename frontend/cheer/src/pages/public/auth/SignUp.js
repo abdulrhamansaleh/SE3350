@@ -115,10 +115,7 @@ function Signup() {
           onClick={() => navigate('/cheer/home')}
         />
       <div className='auth-container'>
-        <div className='signup-icon'>
-          <FontAwesomeIcon icon={faUserPlus} />
-        </div>
-        <h1 className='auth-h1'>Sign Up</h1>
+        <h1 className='auth-h1'>Sign Up  <FontAwesomeIcon icon={faUserPlus} /></h1>
         <form onSubmit={signup}>
         <div className='auth-input-container-full'>
             <div className="auth-input-container-half">

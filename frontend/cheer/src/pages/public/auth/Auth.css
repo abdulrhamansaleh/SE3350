@@ -44,7 +44,7 @@
     font-size: large;
   }
 
-  .signup-icon, .login-user_icon {
+  .login-user_icon {
     font-size: 100px;
     color: #F4EDE7;
     /* margin-right: 8px; */
@@ -53,7 +53,7 @@
   .auth-input-container {
     position: relative;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .auth-input-container-full {
@@ -63,7 +63,7 @@
 
   .auth-input-container-half {
     margin-right: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .auth-input-container-half:last-child {
