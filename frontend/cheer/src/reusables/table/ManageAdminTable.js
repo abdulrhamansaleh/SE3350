@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import './ManageUsers.css'
 
 function Row(props) {
   const row  = props;
@@ -42,19 +43,17 @@ function Row(props) {
         }
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={50}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
                 Prompt
               </Typography>
               <p>{props.row["prompt"] || props.row["Prompt"]}</p>
-              <div>
-                <button>sadasdds</button>
-                <button>
-                  asdad
-                </button>
-              </div>
+              {props.row["Verified" || "verified"] =='no'||props.row["requested_change"||"Requested_Change"]=="yes" ? <div className='manageuser_button_container'>
+                <button className='manageuser_ad_button'>Accept</button>
+                <button className='manageuser_ad_button'>Decline</button>
+              </div> : <div></div>}
               <Table size="small" aria-label="purchases">
                 {/* <TableHead>
                   <TableRow>
@@ -113,11 +112,6 @@ export default function CollapsibleTable(props) {
                     <TableCell>{h}</TableCell>
                 )
             })}
-            {/* <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
