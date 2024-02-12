@@ -1,0 +1,18 @@
+.manageusers_main_container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding:5%;
+
+}
+.manageusers_search_container{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+}
+.manageuser_display_container{
+    width:100%;
+    padding: 8%;
+}

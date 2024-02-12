@@ -2,6 +2,8 @@ import './styles/AdminHome.css'
 
 import React, { useState } from 'react';
 import NewsletterUpload from './NewsletterUpload';
+import ManageUsers from './ManageUsers';
+import WaiverUpload from './WaiverUpload';
 
 const AdminPage = () => {
   const [currentView, setCurrentView] = useState('default');
@@ -15,9 +17,9 @@ const AdminPage = () => {
       case 'Upload Newsletters': 
       return <NewsletterUpload />
       case 'Upload Waiver':
-        return <div></div>
+        return <WaiverUpload/>
       case 'Manage Users':
-        return <div></div>
+        return <ManageUsers/>
       case 'Reported Chats':
         return <div></div>
       case 'Site Reviews':
