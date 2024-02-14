@@ -109,5 +109,15 @@ app.listen(port, ()=>{
 
 
 // API Routes
+
+// admin functionalities
 const adminRoute = require('./routes/admin.route')
 app.use('/admin', adminRoute)
+
+// parent functionalities
+const parentRoutes = require('./routes/parent.route')
+app.use('/parent', parentRoutes)
+
+// child functionalities
+const childRoutes = require('./routes/child.route')
+app.use('/child', childRoutes)

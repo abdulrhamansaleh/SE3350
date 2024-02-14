@@ -14,6 +14,7 @@ import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
 import useToken from './reusables/tokenHook/useToken';
+import ChildRegistration from './pages/parent/ChildSignup';
 
 const ROLES = {
   'User': 'User',
@@ -39,6 +40,9 @@ function App() {
         <Route path='/admin' element={<AdminHome/>}></Route>
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
       
+        // child registration and authentication
+        <Route path="/parent/register-my-child" element = {<ChildRegistration />}></Route>
+        {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}
       {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
