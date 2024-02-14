@@ -9,8 +9,8 @@ import Footer from './reusables/footer/Footer';
 
 const AppWithNavBar = () => {
   const location = useLocation();
-  const hideNavBarRoutes = ['/cheer/login', '/cheer/signup']; // Add the routes that should not display the navbar
-
+  const hideNavBarRoutes = ['/cheer/login', '/cheer/signup', '/cheer/contact']; // Add the routes that should not display the navbar
+  
   return (
     <>
       {!hideNavBarRoutes.includes(location.pathname) && <NavBar />}
@@ -34,3 +34,4 @@ root.render(
 );
 
 reportWebVitals();
+
