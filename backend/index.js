@@ -13,62 +13,65 @@ const bodyParser = require('body-parser')
 var validate_email = require('./validate/validate_email.js')
 var validate_password = require('./validate/validate_password.js')
 
-const fs = require("fs");
-var jsonDB = require('./jsonDB.json') 
+app.use(cors({
+  credentials: true, origin: 'https://localhost:3000'
+}));
 
-app.use(cors());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use("/", express.static('../client/public'))
+app.use(express.json()); //middleware to parse json
 // app.use("/",express.static('../client/build'))
 
-const getUsersFromJsonDb = () => {
-    fs.readFile("jsonDB.json", (error, data) => {
-        if (error) {
-            console.error(error);
-            throw error;
-        }
-        const info = JSON.parse(data)
-        return info.users
-    })
-}
+//CHEER-89
+app.post('/cheer/signup', (req, res) => {
+  
+  let sql = 'INSERT INTO Accounts (first_name, last_name, email, password_hash, accepted) VALUES (?, ?, ?, ?, ?)'
+  let values = [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.isVerified]
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      // if (err.code === 'ER_DUP_ENTRY') {
+      //   //tell user that that account already exists
+        
+      // }
+      throw err
+    }
 
-//CHEER-60
-app.use('/signup', (req, res) => {
-    // signup logic goes here
-
-    res.send({
-        email: req.body.username,
-        password: req.body.password,
-        reason: req.body.reason,
-        isVerified: false
-      });
+    console.log('1 record inserted into accounts')
+    res.send({success: true})
+  })
 });
 
-//CHEER-57
-app.use('/login', (req, res) => {
-    //this is where the logic for password and username checking will happen
-    //for now, we will just store the unhashed credentials for testing purposes
-    //if (validate_email(req.username) && validate_password(req.password))
-    // let usersList = getUsersFromJsonDb()
-    // for (user of usersList) {
-    //     if (user.username === req.username && user.password === req.password) {
-    //         res.send({
-    //             token: 'true'
-    //         })
-    //         break 
-    //     }
-    // }
+//CHEER-89
+app.post('/cheer/login', (req, res) => {
+  let sql = `SELECT * FROM Accounts ORDER BY account_id`
 
-    
-    //get the username and password from the user trying to login and see if it matches the db
-    res.send({
-      token: true,//the value of this token will determine if the user is logged in 
-      parent: true, //use this flag after signup to see if the user is a parent 
-      username: req.body.username,
-      password: req.body.password,
-    });
+  const checkEmailPasswordMatch = (accountsList) => {
+    for (let account of accountsList) {
+      if (account.email === req.body.email.email && account['password_hash'] === req.body.email.password) {
+        return true
+      }
+    }
+    return false 
+  }
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error executing SQL query:', err);
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    } 
+
+     // Check if any rows were returned
+     if (result.length > 0) {
+      if(checkEmailPasswordMatch(result)) {
+        res.send({success: true})
+      }
+    } else {
+      res.status(404).json({ error: 'No rows found' });
+    }
+  })
 });
 
 //CHEER-61

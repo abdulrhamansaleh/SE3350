@@ -33,7 +33,7 @@ function App() {
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
-        <Route path='/cheer/signup' element={<SignUp/>}></Route>
+        <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
       
         // once authentication is established, place this under protected admin routes
         <Route path='/admin' element={<AdminHome/>}></Route>

@@ -8,7 +8,7 @@ import { faEnvelope, faPhone, faLock, faPenToSquare, faUserPlus } from '@fortawe
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
-function Signup() {
+function Signup({ setToken }) {
   const recaptcha = useRef();
   const navigate = useNavigate();
   const emailRef = useRef(null);
@@ -31,6 +31,30 @@ function Signup() {
     reason: '',
     isVerified: false
   })
+
+  async function signUpPost() {
+
+    return fetch('/cheer/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(data => {
+        alert('stop')
+        console.log(data)
+        if (data.status === 200) {
+            setToken({loggedIn: true})
+            navigate('/cheer/home')
+        }
+    })
+  }
+
+  const signUpOnClick = async e => {
+    e.preventDefault();
+    const token = await signUpPost();
+  };
 
   const [error, setError] = useState(null);
 
@@ -116,7 +140,8 @@ function Signup() {
         />
       <div className='auth-container'>
         <h1 className='auth-h1'>Sign Up  <FontAwesomeIcon icon={faUserPlus} /></h1>
-        <form onSubmit={signup}>
+        <form >
+        {/* onSubmit={signup} */}
         <div className='auth-input-container-full'>
             <div className="auth-input-container-half">
               <input
@@ -238,7 +263,7 @@ function Signup() {
               onChange={(e) => setData({...data, reason: e.target.value})}
             />
           </div>
-          <button className='auth-button'>Sign Up</button>
+          <button onClick = {signUpOnClick} className='auth-button'>Sign Up</button>
           <br /> <br />
           {/* <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY} /> */}
         </form>

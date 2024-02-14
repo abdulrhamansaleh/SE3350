@@ -7,25 +7,30 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { useRef } from 'react'; // Import useRef hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
-async function loginUser(username, password) {
-
-  return fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    })
-  })
-    .then(data => data.json())
- }
-
  function Login({ setToken }) {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  async function loginUser(email, password) {
+
+    return fetch('/cheer/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      })
+    })
+      .then(data => {
+          if (data.status === 200) {
+              setToken({loggedIn: true})
+              navigate('/cheer/home')
+          }
+      })
+   }
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -33,7 +38,6 @@ async function loginUser(username, password) {
       email: emailRef.current.value,
       password: passwordRef.current.value
     });
-    setToken(token);
   };
 
 
