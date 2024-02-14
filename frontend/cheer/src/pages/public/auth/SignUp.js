@@ -42,7 +42,6 @@ function Signup({ setToken }) {
       body: JSON.stringify(data)
     })
       .then(data => {
-        alert('stop')
         console.log(data)
         if (data.status === 200) {
             setToken({loggedIn: true})
