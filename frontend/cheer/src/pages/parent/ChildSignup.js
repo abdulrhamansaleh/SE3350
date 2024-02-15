@@ -2,9 +2,11 @@ import React, {useState} from 'react'
 import './ChildSignup.css';
 import axios from 'axios'
 
-const ChildRegistration = () => {
+import useToken from '../../reusables/tokenHook/useToken';
+
+const ChildSignup = () => {
     const [data, setData] = useState({
-        parent_id: "",  // id of current user in route
+        parent: useToken().token,
         first_name: "",
         last_name: "",
         email: "",
@@ -17,6 +19,7 @@ const ChildRegistration = () => {
     setData({...data,[input.name]:input.value})
 }
 
+// fetch registration API endpoint 
 const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
@@ -65,7 +68,7 @@ const handleSubmit = async (e) =>{
                         class="input"
                         />
                         <fieldset class="selectors">
-                            <legend>Verbal?</legend>
+                            <legend>Are they verbal ?</legend>
                             <label>
                                 <input type="radio" 
                                     name="verbal" 
@@ -82,7 +85,7 @@ const handleSubmit = async (e) =>{
                             </label>
                         </fieldset>
                         <fieldset class="selectors">
-                            <legend>Special Needs?</legend>
+                            <legend>Are they special needs ? </legend>
                             <label>
                                 <input type="radio" 
                                     name="special_needs" 
@@ -107,4 +110,5 @@ const handleSubmit = async (e) =>{
         </div>
     )
 }
-export default ChildRegistration;
+
+export default ChildSignup;
