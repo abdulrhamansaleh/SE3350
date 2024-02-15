@@ -4,7 +4,8 @@ const router = express.Router();
 const db = require('../../db/db');
 
 router.post("/register-child", async(req, res) => {
-    const parent = req.body.parent_id
+    const user_token  = req.body.parent 
+    
     const first = req.body.first_name
     const last = req.body.last_name
     const email = req.body.email
@@ -12,16 +13,21 @@ router.post("/register-child", async(req, res) => {
     const isVerbal = req.body.isVerbal
     const isSpecialNeed = req.body.isSpecialNeed
 
-    // verify request data
+    /*
+        Validate Request Body 
+            - first and last name should be only string (no special chars or numbers)
+            - email should be of gmail domains 
+            - age should only be a number
+    */
 
-    // first and last name should not have any special characters or numbers
-    // email should be google email
-    // age should only be a number
+    /*
+        Creating Child Account 
+            - create a general account 
+                (account_id, first_name, last_name, email, type) # rest is default 
 
-    // create prospect child
-    general_account = ""
-    prospect_child = ""
-    
+            - create a prospect child account 
+                (account_id, parent_id(user_session.account_id), age, special_needs?, verbal?)
+    */
 })
 
 
