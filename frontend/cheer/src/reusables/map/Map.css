@@ -1,19 +1,28 @@
-.map{
-    height: 80%;;
-    width:95%;
-    border-width: 1px;
-    border-color: black;
+
+.map {
+    height: 100%; /* Increased height */
+    width: 70%; /* Decreased width */
+    margin: auto; /* Center the map */
+    border-width: 2px;
+    border-color: #333;
     border-style: solid;
-}
-.google-map{
-    width:100%;
-    height:100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.pin-text{
-    width:100px;
+.google-map {
+    width: 100%;
+    height: 100%;
 }
-.pin-icon{
-    height:3em;
-    width:3em;
+.pin-text {
+    width: 150px; /* Adjusted width */
+    color: #333; /* Text color */
+    font-size: 14px; /* Font size */
+    text-align: center; /* Centered text */
+}
+
+.pin-icon {
+    height: 40px; /* Increased size */
+    width: 40px; /* Increased size */
+    background-size: cover; /* Cover the entire area */
 }

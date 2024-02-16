@@ -52,10 +52,6 @@ const ContactUs = () => {
                 <div className="contact-form-field">
                   <input type="email" placeholder="Email Address (Required)" />
                 </div>
-                <div className="contact-checkbox-group">
-  <p>What is your message related to? (required)</p>
-  {/* Add more checkboxes as needed */}
-</div>
                 <div className="contact-form-field">
                   <textarea placeholder="Message"></textarea>
                 </div>

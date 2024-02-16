@@ -79,3 +79,40 @@ ul.navbar_list {
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
   }
+  .hamburger_icon {
+    display: none;
+}
+
+.hamburger_icon {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hamburger_icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .navbar_list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 20vh;
+        left: 0;
+        background-color: #647249;
+    }
+
+    .navbar_list.responsive {
+        display: flex;
+    }
+
+    .navbar_list_items {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar_list_items.login_button {
+        margin-left: 0;
+    }
+}

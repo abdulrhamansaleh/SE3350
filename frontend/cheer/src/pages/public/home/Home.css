@@ -1,67 +1,96 @@
+/* Home.css */
 
-
-.home_background{
-    width:100%;
-    height:fit-content;
-    border-top: 5px solid grey ;
+/* General background styling */
+.home-background {
+  width: 100%;;
+  background-color: #f4ecdc;
+  box-sizing: border-box;
 }
 
-.home_main_container{
-    min-height:80vh;
-    height:fit-content;
-    display: flex;
-    flex-direction: row;
+/* Landing section styling */
+.landing-section {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+  background-image: url('../../../resources/images/homebackground.jpg');
+  background-size: cover; /* Ensure the image covers the whole area */
+  background-repeat: no-repeat;
+  background-position: center; /* Center the background image */
+  text-align: center;
+  color: #f4ecdc;
+  min-height: 100vh; /* Make section at least as tall as the viewport */
+  width: 100%;
+  margin-top: 20vh;
+}
+/* Overlay styling */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Black background with 50% opacity */
+  z-index: 1; /* Ensure the overlay is below the text */
 }
 
-.home_left_container{
-    width:50%;
-    padding-left: 10%;
-    padding-top: 10%;;
-
+/* Ensure text is above the overlay */
+.landing-title, .landing-subtitle, .main-entry-button {
+  position: relative;
+  z-index: 2;
 }
 
-h1.home_main_header{
-    font-size: 4em;
-    margin-top: 0px;
-    margin-bottom: 30%;
+/* Title and subtitle styling */
+.landing-title {
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 20px; /* Adjust this to control space between title and subtitle */
+  font-weight: bolder;
+  text-shadow: 2px 2px 4px #000000;
 }
 
-p.home_main_p{
-    margin:0px;
+.landing-subtitle {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin-top: 20px; /* Adjust this to control space between title and subtitle */
+  text-shadow: 1px 1px 2px #000000;
 }
 
-.main_entry_container{
-    width:80%;
-    height: fit-content;
-    padding-top:5%;
-    padding-bottom:5%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    border-radius: 10px;;
-}
-.main_entry_container:hover{
-    background-color: rgba(128, 128, 128, 0.103);
-}
-
-.main_entry_button{
-    background:none;
-    border:none;
-    font-size: 1.5em;
-    color:black;
-    padding:5px;
-    border-radius: 10px;;
-}
-.main_entry_button:hover{
-    background-color: rgba(41, 40, 40, 0.103);
+/* Button styling */
+.main-entry-button {
+  background-color: var(--cheer-orange); /* Make sure this variable is defined in your CSS or replace with a hex color */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.5em;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+  box-shadow: 3px 3px 6px #000000; /* Box shadow for better visibility */
 }
 
-.home_right_container{
-    width:50%;
-    padding:10%;
+.main-entry-button:hover {
+  background-color: #647249; /* Updated to a darker orange color */
 }
-img.home_main_image{
-    width:100%;
-    height:100%;
-    object-fit: contain;
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  .landing-section {
+    padding: 50px 10px;
+  }
+
+  .landing-title {
+    font-size: 2rem;
+  }
+
+  .landing-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .main-entry-button {
+    padding: 10px 18px; /* Slightly reduce padding on mobile */
+  }
 }
