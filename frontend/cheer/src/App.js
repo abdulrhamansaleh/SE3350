@@ -43,7 +43,7 @@ function App() {
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
       
         // child registration and authentication
-        <Route path="/parent/register-my-child" element = {<ChildSignup token = {token} />}></Route>
+        <Route path="/parent/register-my-child" element = {<ChildSignup parent = {token} />}></Route>
         {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}

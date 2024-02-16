@@ -4,9 +4,9 @@ import axios from 'axios'
 
 import useToken from '../../reusables/tokenHook/useToken';
 
-const ChildSignup = () => {
+const ChildSignup = ({parent}) => {
     const [data, setData] = useState({
-        parent: useToken().token,
+        parent: parent,
         first_name: "",
         last_name: "",
         email: "",
