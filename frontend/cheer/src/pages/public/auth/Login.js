@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Auth.css'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,7 @@ import HomeIcon from '../../../resources/images/homeicon.png'
 
   async function loginUser(email, password) {
 
-    return fetch('/cheer/login', {
+    const res = await fetch('/cheer/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -24,20 +24,20 @@ import HomeIcon from '../../../resources/images/homeicon.png'
         password: password,
       })
     })
-      .then(data => {
-          if (data.status === 200) {
-              setToken({loggedIn: true})
-              navigate('/cheer/home')
-          }
-      })
+      return res.json()
    }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
-      email: emailRef.current.value,
-      password: passwordRef.current.value
-    });
+    loginUser({
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }).then((data) => {
+        if (data.success) {
+            setToken({loggedIn: true, account_id: data.account.account_id})
+            navigate('/cheer/home')
+        }
+      })
   };
 
 

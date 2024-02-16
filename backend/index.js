@@ -48,12 +48,15 @@ app.post('/cheer/login', (req, res) => {
   let sql = `SELECT * FROM Accounts ORDER BY account_id`
 
   const checkEmailPasswordMatch = (accountsList) => {
+    let match = {match: false, account: {}}
     for (let account of accountsList) {
       if (account.email === req.body.email.email && account['password_hash'] === req.body.email.password) {
-        return true
+        match.match = true
+        match.account = account
+        return match
       }
     }
-    return false 
+    return match 
   }
 
   db.query(sql, (err, result) => {
@@ -62,11 +65,11 @@ app.post('/cheer/login', (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
       return;
     } 
-
+    let accountData = checkEmailPasswordMatch(result)
      // Check if any rows were returned
      if (result.length > 0) {
-      if(checkEmailPasswordMatch(result)) {
-        res.send({success: true})
+      if(accountData.match) {
+        res.send({success: true, account: accountData.account})
       }
     } else {
       res.status(404).json({ error: 'No rows found' });
