@@ -24,7 +24,7 @@ export default function NewsletterUpload() {
         <div class="icon-container">
           <FontAwesomeIcon icon={faFilePdf} />
         </div>
-        <form onSubmit={sendOutNewsletter}>
+        <form class='file-upload-container-newsletter' onSubmit={sendOutNewsletter}>
           <input type="file" name="file" onChange={handleFileChange} />
           <button class="send-file">Send Out</button>
         </form>

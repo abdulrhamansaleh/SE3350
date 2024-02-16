@@ -85,6 +85,81 @@ app.use('/childSignup', (req, res) => {
    
 })
 
+//CHEER-72
+app.get('/admin/get/all/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/verified/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=1', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/un-verified/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=0', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/subscribed/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE subscribed=1', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/requested-change/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE requested_change=1', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/users/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["child"], (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/parents/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["parent"], (error, results)=>{
+    if(error){
+      console.log(error)
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/employees/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["employee"], (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+
 app.post('/subscribeNewsletter', (req, res) => {
     // Extract user information from request, typically done after authentication
     const userId = req.body.userId; // The userId should be retrieved after the user has been authenticated

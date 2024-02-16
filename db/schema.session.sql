@@ -6,9 +6,10 @@ CREATE TABLE Accounts (
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL
-    subscribed BOOLEAN DEFAULT FALSE
-    accepted BOOLEAN DEFAULT FALSE
+    password_hash VARCHAR(255) NOT NULL,
+    subscribed BOOLEAN DEFAULT FALSE,
+    accepted BOOLEAN DEFAULT FALSE,
+    requested_change BOOLEAN DEFAULT FALSE
 );
 
 -- EmployeeDetails table
