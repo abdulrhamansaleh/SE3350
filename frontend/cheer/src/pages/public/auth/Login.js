@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './Auth.css'
 import { NavLink } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,33 +7,37 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { useRef } from 'react'; // Import useRef hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
-async function loginUser(username, password) {
-
-  return fetch('http://localhost:8080/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    })
-  })
-    .then(data => data.json())
- }
-
  function Login({ setToken }) {
   const navigate = useNavigate();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
+  async function loginUser(email, password) {
+
+    const res = await fetch('/cheer/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      })
+    })
+      return res.json()
+   }
+
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
-      email: emailRef.current.value,
-      password: passwordRef.current.value
-    });
-    setToken(token);
+    loginUser({
+        email: emailRef.current.value,
+        password: passwordRef.current.value
+      }).then((data) => {
+        if (data.success) {
+            setToken({loggedIn: true, account_id: data.account.account_id})
+            navigate('/cheer/home')
+        }
+      })
   };
 
 
