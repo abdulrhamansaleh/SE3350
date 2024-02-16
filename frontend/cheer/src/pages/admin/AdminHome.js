@@ -45,7 +45,7 @@ const AdminNavigation = ({ onLinkClick }) => {
   return (
     <div id="sidebar">
       <div className="sidebar-header">
-        <h3>Admin</h3>
+        <h3>Admin Dashboard</h3>
       </div>
       <ul className="sidebar-menu">
         <li className="admin-sidebar-link" onClick={() => onLinkClick('Upload Newsletters')}>Upload Newsletters</li>

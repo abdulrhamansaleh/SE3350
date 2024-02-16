@@ -3,16 +3,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding:5%;
-
+    padding:1cm;
 }
 .manageusers_search_container{
-    width:100%;
+    width:90%;
     display:flex;
     flex-direction: row;
     gap:10px;
+    padding-bottom:1%;
+    padding-left: 8%;
+    padding-right: 8%;
 }
 .manageuser_display_container{
-    width:100%;
-    padding: 8%;
+    width:90%;
+    padding-left: 8%;
+    padding-right: 8%;
 }

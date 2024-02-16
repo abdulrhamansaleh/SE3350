@@ -85,6 +85,17 @@ app.use('/childSignup', (req, res) => {
    
 })
 
+//CHEER-72
+app.get('/admin/get/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+
 app.post('/subscribeNewsletter', (req, res) => {
     // Extract user information from request, typically done after authentication
     const userId = req.body.userId; // The userId should be retrieved after the user has been authenticated
