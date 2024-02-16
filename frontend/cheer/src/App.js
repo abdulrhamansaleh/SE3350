@@ -17,6 +17,9 @@ import useToken from './reusables/tokenHook/useToken';
 import ChildSignup from './pages/parent/ChildSignup';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import ChildSignup from './pages/parent/ChildSignup';
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const ROLES = {
   'User': 'User',
@@ -36,14 +39,14 @@ function App() {
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
-        <Route path='/cheer/signup' element={<SignUp/>}></Route>
+        <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
       
         // once authentication is established, place this under protected admin routes
         <Route path='/admin' element={<AdminHome/>}></Route>
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
       
         // child registration and authentication
-        <Route path="/parent/register-my-child" element = {<ChildSignup token = {token} />}></Route>
+        <Route path="/parent/register-my-child" element = {<ChildSignup parent = {token} />}></Route>
         {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}

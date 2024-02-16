@@ -5,7 +5,8 @@ body{
     display: flex;
 }
 .sidebar-header{
-  border-top-right-radius: 100px;
+  padding-top: 8vh;
+  /* border-top-right-radius: 100px; */
   background: olive;
   min-height: 5vh;
   text-align: center;
@@ -18,15 +19,16 @@ body{
 
 #sidebar {
   border-top-right-radius: 50px;
-  height: 100vh;
+  min-height:98vh;
   width: 250px;
   background-color: #ece9d7;
   color: black;
 }
 
 .admin-content-container {
-    flex-grow: 1;
-    padding: 20px;
+  flex-grow: 1;
+  padding: 20px;
+  margin-top: 5vh;
 }
 
 .sidebar-menu li {

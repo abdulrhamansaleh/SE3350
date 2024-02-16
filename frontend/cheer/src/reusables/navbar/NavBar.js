@@ -9,6 +9,7 @@ const NavBar = () => {
     const onLogOut = () => {
         googleLogout();
     }
+
     return(
         <div className='nav_background'>
             <div className='nav_container'>
@@ -42,6 +43,11 @@ const NavBar = () => {
                             Log Out
                         </button>
                     </li>
+                    {/* 
+                        <li className='navbar_list_items'>
+                            <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/register/child">Register Child</NavLink>
+                        </li>
+                    */}
                 </ul>
                 
             </div>
