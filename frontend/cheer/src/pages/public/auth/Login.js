@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { useRef } from 'react'; // Import useRef hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
+import GoogleAuthLogin from './GoogleAuth';
+
 async function loginUser(username, password) {
 
   return fetch('http://localhost:8080/login', {
@@ -84,6 +86,11 @@ async function loginUser(username, password) {
                     />
                 </div>
                 <button type="submit" className="auth-button">Log In</button>
+
+                <div>
+                    Login Using Google
+                    <GoogleAuthLogin />
+                </div>
             </form>
             {/* <p className='auth-subtext'>Forgot your password?</p> */}
             <p className='auth-subtext'>Don't have an account? <NavLink className='auth-switch' to="/cheer/signup">Sign up!</NavLink></p>

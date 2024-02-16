@@ -16,6 +16,8 @@ import AdminHome from './pages/admin/AdminHome'
 import useToken from './reusables/tokenHook/useToken';
 import ChildSignup from './pages/parent/ChildSignup';
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 const ROLES = {
   'User': 'User',
   'Admin': 'Admin',
