@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './NavBar.css';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,46 +8,42 @@ import {
     faDonate, 
     faEnvelope, 
     faImages, 
-    faSignInAlt,
-    faBars // Import the bars icon for the hamburger menu
+    faSignInAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
-    const [isNavExpanded, setIsNavExpanded] = useState(false); // State to handle the nav expansion
-
     return (
         <div className='nav_background'>
             <div className='nav_container'>
-                <FontAwesomeIcon icon={faBars} className="hamburger_icon" onClick={() => { setIsNavExpanded(!isNavExpanded); console.log('Clicked!'); }} />
-
-                <ul className={`navbar_list ${isNavExpanded ? "responsive" : ""}`}>
+                {/* Navigation menu */}
+                <ul className="navbar_list">
                     <li className='navbar_list_items'>
-                        <NavLink className="nav_link" to="/cheer/home" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/home">
                             <FontAwesomeIcon icon={faHome} /> CHEER
                         </NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink className="nav_link" to="/cheer/events" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/events">
                             <FontAwesomeIcon icon={faCalendarAlt} /> Events
                         </NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink className="nav_link" to="/cheer/donate" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/donate">
                             <FontAwesomeIcon icon={faDonate} /> Donate
                         </NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink className="nav_link" to="/cheer/contact" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/contact">
                             <FontAwesomeIcon icon={faEnvelope} /> Contact Us
                         </NavLink>
                     </li>
                     <li className='navbar_list_items'>
-                        <NavLink className="nav_link" to="/cheer/gallery" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/gallery">
                             <FontAwesomeIcon icon={faImages} /> Gallery
                         </NavLink>
                     </li>
                     <li className='navbar_list_items login_button'>
-                        <NavLink className="nav_link" to="/cheer/login" onClick={() => setIsNavExpanded(false)}>
+                        <NavLink className="nav_link" to="/cheer/login">
                             <FontAwesomeIcon icon={faSignInAlt} /> Login
                         </NavLink>
                     </li>
