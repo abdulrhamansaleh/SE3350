@@ -1,10 +1,14 @@
 import React from 'react'
 import './NavBar.css'
 import { NavLink } from 'react-router-dom'
-
+import { googleLogout } from '@react-oauth/google';
 
 
 const NavBar = () => {
+
+    const onLogOut = () => {
+        googleLogout();
+    }
     return(
         <div className='nav_background'>
             <div className='nav_container'>
@@ -32,6 +36,12 @@ const NavBar = () => {
                             <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/register/child">Register Child</NavLink>
                         </li>
                     */}
+                    {/* Only Allow for users logged in using GoogleAuth*/}
+                    <li className='navbar_list_items'>
+                        <button type = "Submit" onClick={onLogOut}>
+                            Log Out
+                        </button>
+                    </li>
                 </ul>
                 
             </div>
