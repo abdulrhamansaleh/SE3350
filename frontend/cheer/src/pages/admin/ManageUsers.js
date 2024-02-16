@@ -6,7 +6,7 @@ function ManageUsers() {
     const [rows, setRows] = useState([])
 
     useEffect(()=>{
-        fetch("/admin/get/users",{
+        fetch("/admin/get/all/users",{
 
         }).then(
             response=>{if(response.ok)return response.json()}
@@ -16,10 +16,18 @@ function ManageUsers() {
     },[])
 
     const handleChange = ()=>{
-        fetch("/admin/get/users",{
+        var x = document.getElementById("user_type_dropdown").value
+        fetch('/admin/get/'+document.getElementById("user_type_dropdown").value+'/users',{
 
         }).then(
-            response=>{if(response.ok)return response.json()}
+            response=>{
+                if(response.ok){
+                    return response.json()
+                }else{
+                    setRows([])
+                }
+
+            }
         ).then(
             data=>setRows(data) 
         )
@@ -30,12 +38,12 @@ function ManageUsers() {
     return (
         <div className='manageusers_main_container'>
             <div className='manageusers_search_container'>
-                <select onChange={handleChange}>
+                <select onChange={handleChange} id="user_type_dropdown">
                     <option>Everyone</option>
                     <option>Verified</option>
                     <option>Un-Verified</option>
                     <option>Subscribed</option>
-                    <option>Requested Change</option>
+                    <option>Requested-Change</option>
                     <option>Users</option>
                     <option>Parents</option>
                     <option>Employees</option>
@@ -48,7 +56,6 @@ function ManageUsers() {
                 </form>
             </div>
             <div className='manageuser_display_container'>  
-            {console.log({rows})}
                 <CTable table_data={rows}/>
             </div>
         </div>
