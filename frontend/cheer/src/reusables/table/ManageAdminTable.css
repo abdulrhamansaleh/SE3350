@@ -1,0 +1,13 @@
+.manageuser_button_container{
+    gap:10px;
+    display: flex;
+
+}
+.manageuser_ad_button{
+    
+}
+.table_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

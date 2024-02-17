@@ -17,7 +17,7 @@ h2 {
     margin-bottom: 20px; 
 }
 
-.file-upload-container form {
+form.file-upload-container-newsletter {
     display: flex; 
     flex-direction: row; 
     align-items: center; 
@@ -95,4 +95,21 @@ input[type="file"]:hover::file-selector-button,
 .icon-container .fa-file-pdf {
     font-size: 48px;
     color: #333;
+}
+
+.waiver_upload_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:10px;
+}
+.waiver_upload_file_container{
+    gap:20px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+select.waiver_upload_dropdown{
+    width:80%;
 }
