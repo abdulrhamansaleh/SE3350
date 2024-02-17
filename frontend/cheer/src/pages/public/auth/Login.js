@@ -90,19 +90,16 @@ import GoogleAuthLogin from './GoogleAuth';
                     />
                 </div>
                 <button type="submit" className="auth-button">Log In</button>
-
-                <div>
-                    Login Using Google
-                    <GoogleAuthLogin />
-                </div>
             </form>
-            <div>
-                Login Using Google
-                <GoogleAuthLogin />
-            </div>
             {/* <p className='auth-subtext'>Forgot your password?</p> */}
             <p className='auth-subtext'>Don't have an account? <NavLink className='auth-switch' to="/cheer/signup">Sign up!</NavLink></p>
             <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
+            <div class="div-container">
+            <hr style={{"border-top": "1px solid #ccc", "margin-top": "20px"}}/>
+                <div class="google-auth-login">
+                    <GoogleAuthLogin setToken={setToken}/>
+                </div>
+            </div>
         </div>
     </div>
 );

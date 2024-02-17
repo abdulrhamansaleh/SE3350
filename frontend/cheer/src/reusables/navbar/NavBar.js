@@ -37,11 +37,8 @@ const NavBar = () => {
                             <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/register/child">Register Child</NavLink>
                         </li>
                     */}
-                    {/* Only Allow for users logged in using GoogleAuth*/}
                     <li className='navbar_list_items'>
-                        <button type = "Submit" onClick={onLogOut}>
-                            Log Out
-                        </button>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
                     </li>
                     {/* 
                         <li className='navbar_list_items'>

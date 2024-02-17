@@ -4,9 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
-const OAUTH_CLIENT_SECRET = "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"
-
-function GoogleAuthLogin() {
+function GoogleAuthLogin({ setToken }) {
     const redirect = useNavigate()
 
     const onSuccess = async (response) => {
@@ -16,11 +14,13 @@ function GoogleAuthLogin() {
         let uri = '/child/authenticate'
         const res = await axios.post(uri, {email: email})
 
-        if (res.status != 200) {
-            
+        if (res.data.status == 200){
+            setToken({loggedIn: true, account_id: res.data.id})
+            redirect('/cheer/home')
         }
-
-        redirect('/cheer/home')
+        else{
+            redirect('/cheer/signup')
+        }
     }
 
     const onFailure = (res) => {
@@ -30,9 +30,9 @@ function GoogleAuthLogin() {
     return(
         <div id="oauth-sign-in">
             <GoogleLogin
-            onSuccess={onSuccess}
-            onError={onFailure}
-            />;
+                onSuccess={onSuccess}
+                onError={onFailure}
+            />
         </div>
     )
 }

@@ -14,11 +14,8 @@ import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
 import useToken from './reusables/tokenHook/useToken';
-import ChildSignup from './pages/parent/ChildSignup';
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import ChildSignup from './pages/parent/ChildSignup';
-
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const ROLES = {
@@ -46,7 +43,7 @@ function App() {
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
       
         // child registration and authentication
-        <Route path="/parent/register-my-child" element = {<ChildSignup parent = {token} />}></Route>
+        <Route path="/parent/register-my-child" element = {<ChildSignup />}></Route>
         {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}

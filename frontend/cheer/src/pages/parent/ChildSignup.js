@@ -1,30 +1,36 @@
 import React, {useState} from 'react'
 import './ChildSignup.css';
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-import useToken from '../../reusables/tokenHook/useToken';
+const ChildSignup = () => {
+    const parent_id = JSON.parse(sessionStorage.getItem("token")).account_id
 
-const ChildSignup = ({parent}) => {
+    const redirect = useNavigate()
+
     const [data, setData] = useState({
-        parent: parent,
+        parent: parent_id,
         first_name: "",
         last_name: "",
         email: "",
         age: "",
-        isVerbal: "",
-        isSpecialNeed: "",
+        verbal: "",
+        special_needs: "",
     });
 
     const handleChange = ({currentTarget:input}) => {
     setData({...data,[input.name]:input.value})
 }
 
-// fetch registration API endpoint 
 const handleSubmit = async (e) =>{
     e.preventDefault()
     try {
-        const url = `http://localhost:8080/parent/register-child`
-        const {data: res} = await axios.post(url, data);
+        const url = `/parent/register-child`
+        const res = await axios.post(url, data);
+
+        if (res.data.status == 200) {
+            redirect('/cheer/home')
+        }
     }
     catch(err){
     }
@@ -72,14 +78,14 @@ const handleSubmit = async (e) =>{
                             <label>
                                 <input type="radio" 
                                     name="verbal" 
-                                    value="yes" 
+                                    value="1" 
                                     onChange={handleChange} 
                                     required /> Yes
                             </label>
                             <label>
                                 <input type="radio" 
                                     name="verbal" 
-                                    value="no" 
+                                    value="0" 
                                     onChange={handleChange} 
                                     required /> No
                             </label>
@@ -89,20 +95,20 @@ const handleSubmit = async (e) =>{
                             <label>
                                 <input type="radio" 
                                     name="special_needs" 
-                                    value="yes" 
+                                    value="1" 
                                     onChange={handleChange} 
                                     required /> Yes
                             </label>
                             <label>
                                 <input type="radio" 
                                     name="special_needs" 
-                                    value="no" 
+                                    value="0" 
                                     onChange={handleChange} 
                                     required /> No
                             </label>
                         </fieldset>
                         <button type = "Submit" class="green_btn">
-                            Register
+                            Register Child
                         </button>
                     </form>
                 </div>
