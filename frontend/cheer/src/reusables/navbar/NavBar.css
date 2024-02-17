@@ -1,55 +1,81 @@
-.nav_background{
-    width:100%;
-    height:7vh;
-    /* background-image: linear-gradient(to right, rgb(71, 34, 34), rgb(97, 25, 25) ); */
-    background-color: white;
-    margin:0px;
+.nav_background {
+    width: 100%;
+    height: 20vh; /* Adjust the height as needed */
+    background-color: #647249; /* Your chosen NavBar color */
+    margin: 0px;
     position: fixed;
-}
-.nav_container{
-    height:100%;
-    width:100%;
-    display:flex;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure the navbar stays on top */
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Center the navbar contents */
 }
 
-ul.navbar_list{
+.nav_container {
+    width: 90%; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    justify-content: space-between; /* Space between the logo and navigation */
+}
+
+ul.navbar_list {
     list-style: none;
     display: flex;
-    justify-content: flex-start;
-    margin: 0;
-    gap:50px;
-    padding-right:3vw;
-    padding-top: 5px;
-    height:100%;
-    width:100%;
-}
-
-
-li.navbar_list_items{
-    color: black;
-    font-size: 1.2em; 
-    height:60%;
-    width: fit-content;
-    padding:5px;
-    /* border:2px;
-    border-style: solid;
-    border-color: black; */
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0; /* Remove default padding */
+    gap: 20px; /* Space between nav items */
+}
+
+.navbar_list_items {
+    color: white; /* Text color for the nav items */
+    font-size: 1.2em;
+    padding: 10px 15px;
     border-radius: 5px;
-}
-li.navbar_list_items:hover {
-    background-color: rgba(56, 47, 47, 0.362);
+    transition: color 0.3s ease; /* Transition for color change */
 }
 
-li.navbar_list_items:last-of-type{
-    margin-left:auto;
+.navbar_list_items:hover {
+    color: #a8ddb5; /* Lighter color on hover for nav items */
 }
 
-.nav_link{
-    color:rgb(0, 0, 0) !important;
-    font-size: 1em;
-    
+.nav_link {
+    color: inherit; /* Inherits color from navbar_list_items */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
 }
+
+/* Login Button Styling */
+.navbar_list_items.login_button {
+    background-color: var(--cheer-orange); /* Use your coral color variable */
+    color: white; /* Text color for the login button */
+    padding: 12px 20px;
+    border-radius: 30px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    margin-left: 500px; /* Push the login button to the end */
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    animation: pulse 2s infinite; /* Apply the pulse animation */
+}
+
+.navbar_list_items.login_button:hover {
+    background-color: darken(var(--cheer-orange), 10%); /* Darker on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+  } 

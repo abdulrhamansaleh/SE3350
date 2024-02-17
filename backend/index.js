@@ -192,3 +192,6 @@ app.listen(port, ()=>{
 // API Routes
 const adminRoute = require('./routes/admin.route')
 app.use('/admin', adminRoute)
+
+const newsletterModalRoute = require('./routes/newslettermodal.route')
+app.use('/api', newsletterModalRoute)

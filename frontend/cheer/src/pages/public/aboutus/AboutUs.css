@@ -1,38 +1,55 @@
-.aboutus_main_container{
-    height:fit-content;
+.aboutus_main_container {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    background-color: #f4ecdc;
+  }
+  
+  .aboutus_content_container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .aboutus_text_section {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-h1.aboutus_main_header{
-    font-size: 2.5em;
-    margin-bottom: 0px;
-}
-
-.aboutus_subcontainer1{
-    width:80%;
-}
-
-img.aboutus_main_img{
-    height:40vh;
-    width: fit-content;
-    object-fit: contain;
-    margin-bottom:5px;
-    border-radius: 50%;
-    float:right;
-    shape-outside: circle(55%);
-    margin:10px;
-    
-}
-
-pre.aboutus_description{
-    white-space: pre-wrap;
-    text-align: justify;
-    font-size: 1.3em;
-}
-
-h2.aboutus_main_subheader{
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
+    justify-content: center;
+    max-width: 50%;
+  }
+  
+  .aboutus_main_header {
+    font-size: 7em;
+    color: #db7859; /* Adjust the color to match your brand */
+    margin-top: 20px; /* Spacing between text and header */
+  }
+  
+  .aboutus_mission,
+  .aboutus_vision {
+    font-size: 1em;
+    color: #333; /* Dark text color for readability */
+  }
+  
+  .aboutus_main_img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 1024px) {
+    .aboutus_content_container {
+      flex-direction: column-reverse;
+    }
+  
+    .aboutus_main_img,
+    .aboutus_text_section {
+      max-width: 100%;
+    }
+  
+    .aboutus_main_header {
+      text-align: center;
+    }
+  }
+  

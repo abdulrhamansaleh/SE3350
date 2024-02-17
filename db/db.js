@@ -1,15 +1,15 @@
-var mysql = require('mysql2')
+const dotenv = require('dotenv/config');
+dotenv.config();
+const mysql = require('mysql2/promise');
 
-db = mysql.createConnection({
-    host:'database-1.czefro9i2zbd.us-east-1.rds.amazonaws.com',
-    user:'admin',
-    password: 'ywy957p3',
-    database: 'CHEER'
-})
+async function db() {
+    const connection = await mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+    });
+    return connection;
+}
 
-db.connect(function(err){
-    if(err) throw err;
-    console.log("Connected!")
-})
-
-module.exports = db
+module.exports = db;
