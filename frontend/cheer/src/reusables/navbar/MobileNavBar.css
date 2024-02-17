@@ -1,0 +1,15 @@
+/* Hide MobileNavBar on larger screens */
+.mobile-nav-bar {
+    display: none;
+  }
+  
+  /* Hide existing NavBar on smaller screens */
+  @media (max-width: 768px) {
+    .desktop-nav-bar {
+      display: none;
+    }
+    .mobile-nav-bar {
+      display: block;
+    }
+  }
+  

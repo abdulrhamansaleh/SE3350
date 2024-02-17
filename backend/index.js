@@ -194,6 +194,9 @@ app.listen(port, ()=>{
 const adminRoute = require('./routes/admin.route')
 app.use('/admin', adminRoute)
 
+const newsletterModalRoute = require('./routes/newslettermodal.route')
+app.use('/api', newsletterModalRoute)
+
 // parent functionalities
 const parentRoutes = require('./routes/parent.route')
 app.use('/parent', parentRoutes)
