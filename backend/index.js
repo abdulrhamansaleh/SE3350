@@ -188,10 +188,19 @@ app.listen(port, ()=>{
     console.log(`Listen on port ${port}`)
 })
 
-
 // API Routes
+
+// admin functionalities
 const adminRoute = require('./routes/admin.route')
 app.use('/admin', adminRoute)
 
 const newsletterModalRoute = require('./routes/newslettermodal.route')
 app.use('/api', newsletterModalRoute)
+
+// parent functionalities
+const parentRoutes = require('./routes/parent.route')
+app.use('/parent', parentRoutes)
+
+// child functionalities
+const childRoutes = require('./routes/child.route')
+app.use('/child', childRoutes)

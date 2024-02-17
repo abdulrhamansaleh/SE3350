@@ -10,8 +10,15 @@ import {
     faImages, 
     faSignInAlt
 } from '@fortawesome/free-solid-svg-icons';
+import { googleLogout } from '@react-oauth/google';
+
 
 const NavBar = () => {
+
+    const onLogOut = () => {
+        googleLogout();
+    }
+
     return (
         <div className='nav_background'>
             <div className='nav_container'>
@@ -46,6 +53,9 @@ const NavBar = () => {
                         <NavLink className="nav_link" to="/cheer/login">
                             <FontAwesomeIcon icon={faSignInAlt} /> Login
                         </NavLink>
+                    </li>
+                    <li className='navbar_list_items'>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
                     </li>
                 </ul>
             </div>
