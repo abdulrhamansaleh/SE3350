@@ -1,14 +1,15 @@
 -- Accounts table
 CREATE TABLE Accounts (
     account_id INT AUTO_INCREMENT PRIMARY KEY,
-    type ENUM ('parent', 'child', 'employee') NOT NULL,
+    type ENUM ('parent', 'child', 'employee', 'admin') DEFAULT 'parent' NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     subscribed BOOLEAN DEFAULT FALSE,
-    accepted BOOLEAN DEFAULT FALSE
+    accepted BOOLEAN DEFAULT FALSE,
+    requested_change BOOLEAN DEFAULT FALSE
 );
 
 -- EmployeeDetails table
@@ -24,7 +25,7 @@ CREATE TABLE EmployeeDetails (
 -- ParentDetails table
 CREATE TABLE ParentDetails (
     account_id INT NOT NULL UNIQUE,
-    parent_number VARCHAR(50),
+    parent_number VARCHAR(11) NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT
 );
 

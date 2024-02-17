@@ -6,6 +6,14 @@
   --cheer-tan: #deafa1;
 }
 
+:root {
+  --cheer-dark: #6a5870;
+  --cheer-light: #f4ecdc;
+  --cheer-green: #647249;
+  --cheer-orange: #db7859;
+  --cheer-tan: #deafa1;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

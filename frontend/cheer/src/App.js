@@ -8,8 +8,8 @@ import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 import Home from './pages/public/home/Home'; // Fix the file name to be 'home' instead of 'Home'
 import Gallery from './pages/public/gallery/Gallery'
 import Schedule from './pages/public/schedule/Schedule'
-import Login from './pages/public/login/Login'
-import SignUp from './pages/public/signup/SignUp'
+import Login from './pages/public/auth/Login'
+import SignUp from './pages/public/auth/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
@@ -33,7 +33,7 @@ function App() {
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
-        <Route path='/cheer/signup' element={<SignUp/>}></Route>
+        <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/contact' element={<ContactUs/>}></Route>
         <Route path='cheer/donate' element={<Donate/>}></Route>
         // once authentication is established, place this under protected admin routes
