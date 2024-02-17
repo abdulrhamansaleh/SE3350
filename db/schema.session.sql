@@ -14,7 +14,6 @@ CREATE TABLE Accounts (
 
 -- EmployeeDetails table
 CREATE TABLE EmployeeDetails (
-    employee_detail_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL UNIQUE,
     employee_id VARCHAR(255) NOT NULL UNIQUE,
     join_date DATE,
@@ -25,7 +24,6 @@ CREATE TABLE EmployeeDetails (
 
 -- ParentDetails table
 CREATE TABLE ParentDetails (
-    parent_detail_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL UNIQUE,
     parent_number VARCHAR(11) NOT NULL,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT
@@ -33,13 +31,14 @@ CREATE TABLE ParentDetails (
 
 -- Child table with the 'accepted' status specific to children
 CREATE TABLE Child (
-    child_id INT AUTO_INCREMENT PRIMARY KEY,
+    account_id INT NOT NULL UNIQUE,
     parent_account_id INT NOT NULL,
     age INT,
     verbal BOOLEAN DEFAULT FALSE,
     special_needs TEXT,
     accepted BOOLEAN DEFAULT FALSE,  -- This status is specific to Child entities
-    FOREIGN KEY (parent_account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE
+    FOREIGN KEY (parent_account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE,
+    FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE CASCADE
 );
 
 -- Newsletters table for admin uploads
@@ -67,7 +66,7 @@ CREATE TABLE EventRegistrations (
     event_id INT,
     registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id),
-    FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE SET CASCADE
+    FOREIGN KEY (event_id) REFERENCES Events(event_id) ON DELETE CASCADE
 );    
 
 -- event-specific waivers

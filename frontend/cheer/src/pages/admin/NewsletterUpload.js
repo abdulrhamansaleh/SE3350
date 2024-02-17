@@ -23,7 +23,7 @@ export default function NewsletterUpload() {
       const formData = new FormData();
       formData.append('pdf', file);
 
-      const url = `http://localhost:8080/admin/send-newsletter`
+      const url = '/admin/send-newsletter'
       let result = await axios.post(url, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });

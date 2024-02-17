@@ -1,43 +1,36 @@
-import React,{useState, useEffect }from 'react'
-import './AboutUs.css'
-import text from '../../../resources/text/aboutus.txt'
-import ph2 from '../../../resources/images/placeholder2.jpg'
+import React from 'react';
+import './AboutUs.css';
+import teamPhoto from '../../../resources/images/olli.jpg'; // Replace with the path to your team photo
 
-
-function Aboutus() {
-
-    const [aboutus_text, set_aboutus_text] = useState("")
-
-    useEffect(()=>{
-        fetch(text).then(r=>r.text()).then(data=> {set_aboutus_text(data);})
-    })    
-
+function AboutUs() {
   return (
     <div className='aboutus_main_container'>
-        <h1 className='aboutus_main_header'>
-            About Us
-        </h1>
-        <h2 className='aboutus_main_subheader'>
-            Our Mission
-        </h2>
+      <div className='aboutus_content_container'>
+        <div className='aboutus_text_section'>
+          <div className='aboutus_text_container'>
+            <h1 className='aboutus_main_header'>OLLI</h1>
+            <p className='aboutus_mission'>
+            OLLI is a registered not-for-profit 
+caregiver driven company with 
+four areas of focus: Cheer Group; 
+Cheer Works; Cheer Connections; 
+and, Cheer Living.
+            </p>
+            <p className='aboutus_vision'>
+            Vision Statement—
+To be a community of inclusion and 
+a circle of friendship that supports 
+and enhances the lives of our loved 
+ones with intellectual disabilities as 
+well as the whole family
+            </p>
+          </div>
 
-        
-        
-        <div className='aboutus_subcontainer1'>
-            <img className='aboutus_main_img'  src={ph2} alt='placeholder2'/>
-            <pre className='aboutus_description'>
-                {aboutus_text}
-            </pre>
         </div>
-        <h2 className='aboutus_main_subheader'>
-            
-        </h2>
-
+        <img className='aboutus_main_img' src={teamPhoto} alt='Zendesk Team' />
+      </div>
     </div>
-  )
+  );
 }
 
-
-
-
-export default Aboutus
+export default AboutUs;

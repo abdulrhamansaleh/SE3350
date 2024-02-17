@@ -7,30 +7,45 @@ import reportWebVitals from './reportWebVitals';
 import NavBar from './reusables/navbar/NavBar';
 import Footer from './reusables/footer/Footer';
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import MobileNavBar from './reusables/navbar/MobileNavBar';
 const AppWithNavBar = () => {
   const location = useLocation();
-  const hideNavBarRoutes = ['/cheer/login', '/cheer/signup']; // Add the routes that should not display the navbar
+  const hideNavBarRoutes = ['/cheer/login', '/cheer/signup', '/cheer/contact']; // Add the routes that should not display the navbar
+  const OAUTH_CLIENT_ID = "378445406446-am4uikvslek3och9rohrr6ct3fsic9jr.apps.googleusercontent.com"
 
+  
   return (
     <>
-      {!hideNavBarRoutes.includes(location.pathname) && <NavBar />}
-      <App />
+      {!hideNavBarRoutes.includes(location.pathname) && (
+        <>
+          <div className="desktop-nav-bar"> {/* Updated class name */}
+            <NavBar />
+          </div>
+          <div className="mobile-nav-bar"> {/* Updated class name */}
+            <MobileNavBar />
+          </div>
+        </>
+      )}
+      
+        <GoogleOAuthProvider clientId={OAUTH_CLIENT_ID}>
+          <App />
+        </GoogleOAuthProvider>
     </>
   );
 };
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<AppWithNavBar />}/>
+          <Route path="/*" element={<AppWithNavBar />}/>
       </Routes>
       <Footer />
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 reportWebVitals();
+

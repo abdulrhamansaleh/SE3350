@@ -3,6 +3,11 @@ import { IoClose, IoMail } from 'react-icons/io5';
 import './NewsletterModal.css';
 
 const NewsletterModal = ({ onClose }) => {
+    
+    var account = ""
+    if (sessionStorage.getItem('token')) {
+        account = JSON.parse(sessionStorage.getItem('token')).account_id
+    }
     const [email, setEmail] = useState('');
     const modalRef = useRef();
 
@@ -20,12 +25,37 @@ const NewsletterModal = ({ onClose }) => {
 
     const handleSubscribe = async () => {
         if (email) {
-            // Add subscription logic 
-            onClose();
+            try {
+                const isValidEmail = (email) => {
+                    return /\S+@\S+\.\S+/.test(email);
+                };
+                
+                if (!isValidEmail(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }                
+                const response = await fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ accountId: account , email: email}),
+                });
+                if (response.ok) {
+                    // Handle successful subscription
+                    onClose();
+                } else {
+                    const errorText = await response.text();
+                    alert(`Error subscribing: ${errorText}`);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error subscribing');
+            }
         } else {
             alert('Please enter an email address');
         }
-    };
+    };    
 
     return (
         <div className="newsletter-modal">

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {BrowserRouter, Route, Routes, Navigate, Outlet} from 'react-router-dom'
 
@@ -15,6 +15,9 @@ import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
 import useToken from './reusables/tokenHook/useToken';
 
+import ChildSignup from './pages/parent/ChildSignup';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import ContactUs from './pages/public/contact/ContactUs';
 const ROLES = {
   'User': 'User',
   'Admin': 'Admin',
@@ -34,11 +37,12 @@ function App() {
         <Route path='/cheer/schedule' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
-      
-        // once authentication is established, place this under protected admin routes
+        <Route path='/cheer/contact' element={<ContactUs/>}></Route>
+        {/*  <Route path='cheer/donate' element={<Donate/>}></Route> */}
         <Route path='/admin' element={<AdminHome/>}></Route>
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
-      
+        <Route path="/parent/register-my-child" element = {<ChildSignup />}></Route>
+        {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}
       {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

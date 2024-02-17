@@ -7,6 +7,9 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import { useRef } from 'react'; // Import useRef hook
 import HomeIcon from '../../../resources/images/homeicon.png'
 
+
+import GoogleAuthLogin from './GoogleAuth';
+
  function Login({ setToken }) {
   const navigate = useNavigate();
   const emailRef = useRef(null);
@@ -39,7 +42,6 @@ import HomeIcon from '../../../resources/images/homeicon.png'
         }
       })
   };
-
 
   return (
     <div className='auth-background'>
@@ -92,6 +94,12 @@ import HomeIcon from '../../../resources/images/homeicon.png'
             {/* <p className='auth-subtext'>Forgot your password?</p> */}
             <p className='auth-subtext'>Don't have an account? <NavLink className='auth-switch' to="/cheer/signup">Sign up!</NavLink></p>
             <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
+            <div class="div-container">
+            <hr style={{"border-top": "1px solid #ccc", "margin-top": "20px"}}/>
+                <div class="google-auth-login">
+                    <GoogleAuthLogin setToken={setToken}/>
+                </div>
+            </div>
         </div>
     </div>
 );
