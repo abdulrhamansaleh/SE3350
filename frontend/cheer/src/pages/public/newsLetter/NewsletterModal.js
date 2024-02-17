@@ -3,6 +3,11 @@ import { IoClose, IoMail } from 'react-icons/io5';
 import './NewsletterModal.css';
 
 const NewsletterModal = ({ onClose }) => {
+    
+    var account = ""
+    if (sessionStorage.getItem('token')) {
+        account = JSON.parse(sessionStorage.getItem('token')).account_id
+    }
     const [email, setEmail] = useState('');
     const modalRef = useRef();
 
@@ -34,7 +39,7 @@ const NewsletterModal = ({ onClose }) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ accountId: 1 }),
+                    body: JSON.stringify({ accountId: account , email: email}),
                 });
                 if (response.ok) {
                     // Handle successful subscription

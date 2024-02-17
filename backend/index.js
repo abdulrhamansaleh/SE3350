@@ -179,7 +179,6 @@ app.post('/subscribeNewsletter', (req, res) => {
       }
     });
   });
-  
 
 dotenv.config()
 //const port = process.env.port;
@@ -188,7 +187,23 @@ app.listen(port, ()=>{
     console.log(`Listen on port ${port}`)
 })
 
-// API Routes
+
+app.get('/user-permission', (req, res) => {
+  var user = "SELECT * FROM Account WHERE account_id = ?";
+  var accountId = req.query.account; // Assuming the query parameter name is 'account'
+
+  // Execute the query with the account_id
+  db.query(user, [accountId], (error, results) => {
+    if (error) {
+      // Handle the error, possibly sending a server error response
+      console.error('Error executing query:', error);
+      res.status(500).send('Internal Server Error');
+    } else {
+      // Send the query results back to the client
+      res.json(results);
+    }
+  });
+});
 
 // admin functionalities
 const adminRoute = require('./routes/admin.route')
