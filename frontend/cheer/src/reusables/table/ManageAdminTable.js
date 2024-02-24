@@ -21,6 +21,12 @@ function Row(props) {
   const [rowData, setRowData] = useState({})
   const subdata = props.row["subdata"||"Subdata"]  //used in commented section
 
+  // useEffect(()=>{ FOR LATER
+  //   fetch(props.route,{
+  //       method:"GET",
+  //   }).then(response=> {if(response.ok)return response.json()})
+  //   .then(data=>setRowData(data))
+  // },[])
 
   return (
     <React.Fragment>
@@ -41,17 +47,7 @@ function Row(props) {
               if(d.toLowerCase()==='prompt'||d.toLowerCase()==='subdata'){
                 return     
               }
-              if(d=="accepted"){
-                if(props.row[d]==1){
-                  return(
-                    <TableCell >Accepted</TableCell> 
-                  )
-                }else{
-                  return(
-                    <TableCell >Pending</TableCell> 
-                  )
-                }
-              }
+
               return(
                 <TableCell >{props.row[d]}</TableCell> 
               )
@@ -114,50 +110,18 @@ function Row(props) {
 
 
 export default function CollapsibleTable(props) {
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(2);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [pageData, setPageData]= useState([])
-  const [maxRows, setMaxRows] = useState(0)
-
-  useEffect(()=>{
-      getMaxRow()
-      getData()
-  },[props.type, page,rowsPerPage  ])
 
   const handleChangePage = (event, newPage) => {
     //get next data
     setPage(newPage);
   };
 
-  const getMaxRow = () =>{
-    fetch(props.url.toString()+'/length'+'?'+ new URLSearchParams({
-      type: props.type
-    }),{
-      method:"GET"
-    }).then(response=> {
-      if(response.ok)
-        return response.json()
-      }).then(data=>setMaxRows(data[0].max))
-  }
-
-  const getData = () =>{
-    fetch(props.url.toString()+'?'+ new URLSearchParams({
-      length: rowsPerPage,
-      offset: page,
-      type: props.type
-    }), {
-      method: 'GET'
-    }).then(response=> {
-      if(response.ok)
-        return response.json()
-      }).then(data=>setPageData(data))
-  }
-
-
   const handleChangeRowsPerPage = (event) => {
     //get new data
     setRowsPerPage(parseInt(event.target.value, 10));
-
+    setPage(0);
   };
   return (
     <div className='table_container'>
@@ -166,11 +130,12 @@ export default function CollapsibleTable(props) {
         <TableHead>
           <TableRow>
             <TableCell />
-            {Object.keys(pageData[0]?pageData[0]:pageData).map((h)=>{
+            {Object.keys(props.table_data[0]?props.table_data[0]:props.table_data).map((h)=>{
                 if(h.toLowerCase()==='prompt'||h.toLowerCase()==='subdata'){
                   return
                 }
-                h = h.charAt(0).toUpperCase() + h.slice(1)    
+                h = h.charAt(0).toUpperCase() + h.slice(1)
+              
                 return(
                     <TableCell>{h}</TableCell>
                 )
@@ -178,7 +143,7 @@ export default function CollapsibleTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-            {pageData.map((d)=>{
+            {props.table_data.map((d)=>{
                 return(
                     <Row row={d}/>
                 )
@@ -189,7 +154,7 @@ export default function CollapsibleTable(props) {
     <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={maxRows}
+          count={props.table_data.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

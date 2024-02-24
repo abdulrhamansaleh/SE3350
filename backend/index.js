@@ -92,87 +92,79 @@ app.use('/childSignup', (req, res) => {
 })
 
 //CHEER-72
-app.get('/admin/get/users',(req,res)=>{
-  var queryString=""
-  const count = req.query.length
-  const offset = req.query.offset
-  const type = req.query.type
-  switch(type){
-    case "Everyone":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts LIMIT ? OFFSET ?'
-      break;
-    case "Verified":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=1 LIMIT ? OFFSET ?'
-      break;
-    case "Un-Verified":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=0 LIMIT ? OFFSET ?'
-      break;
-    case "Subscribed":
-      queryString = 'SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE subscribed=1 LIMIT ? OFFSET ?'
-      break;
-    case "Requested-Change":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE requested_change=1 LIMIT ? OFFSET ?'
-      break;
-    case "Users":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type="child" LIMIT ? OFFSET ?'
-      break;
-    case "Parents":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type="parent" LIMIT ? OFFSET ?'
-      break;
-    case "Employees":
-      queryString='SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type="employee" LIMIT ? OFFSET ?'
-      break;
-  }
-  db.query(queryString, [parseInt(count), parseInt(count*offset)], (error,result)=>{
+app.get('/admin/get/all/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts', (error, results)=>{
     if(error){
-      console.log(error)
-      res.status(500).json({error:'Error getting rows'})
+      res.status(500).json({error:'Error occurred while getting rows'})
     }else{
-      res.json(result)
+      return res.json(results)
     }
   })
 })
-
-app.get('/admin/get/users/length',(req,res)=>{
-  var queryString=""
-  const type = req.query.type
-  switch(type){
-    case "Everyone":
-      queryString='SELECT COUNT(*) AS max FROM Accounts'
-      break;
-    case "Verified":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE accepted=1'
-      break;
-    case "Un-Verified":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE accepted=0'
-      break;
-    case "Subscribed":
-      queryString = 'SELECT COUNT(*) AS max FROM Accounts WHERE subscribed=1'
-      break;
-    case "Requested-Change":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE requested_change=1'
-      break;
-    case "Users":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE type="child"'
-      break;
-    case "Parents":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE type="parent"'
-      break;
-    case "Employees":
-      queryString='SELECT COUNT(*) AS max FROM Accounts WHERE type="employee"'
-      break;
-  }
-  db.query(queryString, (error,result)=>{
+app.get('/admin/get/verified/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=1', (error, results)=>{
     if(error){
-      console.log(error)
-      res.status(500).json({error:'Error getting max rows'})
+      res.status(500).json({error:'Error occurred while getting rows'})
     }else{
-      res.json(result)
+      return res.json(results)
     }
   })
 })
-
-
+app.get('/admin/get/un-verified/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE accepted=0', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/subscribed/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE subscribed=1', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/requested-change/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE requested_change=1', (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/users/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["child"], (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/parents/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["parent"], (error, results)=>{
+    if(error){
+      console.log(error)
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
+app.get('/admin/get/employees/users',(req,res)=>{
+  db.query('SELECT account_id, first_name, last_name, type, email, accepted FROM Accounts WHERE type=?',["employee"], (error, results)=>{
+    if(error){
+      res.status(500).json({error:'Error occurred while getting rows'})
+    }else{
+      return res.json(results)
+    }
+  })
+})
 
 app.post('/subscribeNewsletter', (req, res) => {
     // Extract user information from request, typically done after authentication
