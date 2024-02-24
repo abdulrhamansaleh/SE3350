@@ -2,7 +2,6 @@ body{
   background:whitesmoke;
 }
 .container {
-    margin-top:9%;
     display: flex;
 }
 .sidebar-header{
