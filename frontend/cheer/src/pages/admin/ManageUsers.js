@@ -3,34 +3,11 @@ import './styles/ManageUsers.css'
 import CTable from '../../reusables/table/ManageAdminTable'
 
 function ManageUsers() {
-    const [rows, setRows] = useState([])
-
-    useEffect(()=>{
-        fetch("/admin/get/all/users",{
-
-        }).then(
-            response=>{if(response.ok)return response.json()}
-        ).then(
-            data=>setRows(data) 
-        )
-    },[])
+    const [type, setType] = useState("Everyone")
 
     const handleChange = ()=>{
-        var x = document.getElementById("user_type_dropdown").value
-        fetch('/admin/get/'+document.getElementById("user_type_dropdown").value+'/users',{
-
-        }).then(
-            response=>{
-                if(response.ok){
-                    return response.json()
-                }else{
-                    setRows([])
-                }
-
-            }
-        ).then(
-            data=>setRows(data) 
-        )
+        setType(document.getElementById("user_type_dropdown").value)
+        console.log(type)
     }
     const h =["First Name","Last Name","Email","Type","Verified?","Subscribed?"]
     const d = [{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" ,Prompt: "abcd efg hijklmno p qrs tuv wx yz" , requested_change: "no"},{First_Name:"Aug" ,Last_Name: "Zil", Email: "abc@gmail.com",Type:"user" ,Verified:"yes" ,Subscribed:"no" , requested_change: "yes"},]
@@ -56,7 +33,7 @@ function ManageUsers() {
                 </form>
             </div>
             <div className='manageuser_display_container'>  
-                <CTable table_data={rows}/>
+                <CTable url={"/admin/get/users"} type={type}/>
             </div>
         </div>
     )
