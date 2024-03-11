@@ -50,7 +50,13 @@
     /* margin-right: 8px; */
   }
   
-  .auth-input-container {
+  .signup-input-container {
+    position: relative;
+    width: 118%;
+    margin-bottom: 20px;
+  }
+
+  .login-input-container {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -64,10 +70,6 @@
   .auth-input-container-half {
     margin-right: 20px;
     margin-bottom: 20px;
-  }
-
-  .auth-input-container-half:last-child {
-    margin-right: 18%;
   }
 
   .auth-icon_button {

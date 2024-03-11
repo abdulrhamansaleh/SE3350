@@ -57,7 +57,7 @@ import GoogleAuthLogin from './GoogleAuth';
             </div>
             <h1 className='auth-h1'>Log In</h1>
             <form onSubmit={handleSubmit}>
-                <div className="auth-input-container">
+                <div className="login-input-container">
                     <button
                         aria-label="Focus email input" 
                         className="auth-icon_button" 
@@ -73,7 +73,7 @@ import GoogleAuthLogin from './GoogleAuth';
                         required
                     />
                 </div>
-                <div className="auth-input-container">
+                <div className="login-input-container">
                     <button
                         aria-label="Focus password input" 
                         className="auth-icon_button" 

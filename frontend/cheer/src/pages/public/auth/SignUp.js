@@ -167,7 +167,7 @@ function Signup({ setToken }) {
               />
             </div>
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus email input" 
               className="auth-icon_button" 
@@ -186,7 +186,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus phone input" 
               className="auth-icon_button" 
@@ -206,7 +206,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus password input" 
               className="auth-icon_button" 
@@ -225,7 +225,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus confirm password input" 
               className="auth-icon_button" 
@@ -244,7 +244,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus reason input" 
               className="auth-icon_button" 
