@@ -198,7 +198,7 @@ function Signup({ setToken }) {
               className='auth-input'
               mask="(999) 999-9999"
               maskChar="_"
-              ref={phoneRef}
+              inputRef={phoneRef}
               placeholder='Phone number'
               id='phone'
               value={data.phone}
