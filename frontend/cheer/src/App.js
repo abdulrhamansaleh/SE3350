@@ -18,6 +18,7 @@ import useToken from './reusables/tokenHook/useToken';
 import ChildSignup from './pages/parent/ChildSignup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ContactUs from './pages/public/contact/ContactUs';
+
 const ROLES = {
   'User': 'User',
   'Admin': 'Admin',

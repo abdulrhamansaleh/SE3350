@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import NewsletterUpload from './NewsletterUpload';
 import ManageUsers from './ManageUsers';
 import WaiverUpload from './WaiverUpload';
+import AdminCommunalCalendar from '../admin/AdminCommuncalCalendar';
 
 const AdminPage = () => {
   const [currentView, setCurrentView] = useState('default');
@@ -25,7 +26,7 @@ const AdminPage = () => {
       case 'Site Reviews':
         return <div></div> 
       case 'Communal Calendar':
-        return <div></div>
+        return <div><AdminCommunalCalendar /></div>
       default:
         return <div></div>;
     }
