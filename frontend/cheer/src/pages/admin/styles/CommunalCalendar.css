@@ -1,4 +1,5 @@
 .modal-overlay {
+    overflow: auto;
     position: fixed;
     top: 0;
     left: 0;
@@ -26,6 +27,7 @@
 }
 
 .form_container {
+    overflow: auto;
     background-color: #ece9d7;
     display: flex;
     flex-direction: column;
@@ -33,6 +35,7 @@
 }
 
 .form-input {
+    color:black;
     outline: none;
 	border: none;
 	width: 370px;
@@ -42,6 +45,12 @@
 	font-size: 14px;
     background-color: white;
     border: 1px solid #ccc;
+}
+
+textarea{
+    width: 300px; 
+    height: 150px;
+    resize: none;
 }
 
 .btn {
@@ -59,6 +68,7 @@
 }
 
 .modal-title{
+    color:white;
     justify-content: center;
     text-align: center;
     margin: -20px -20px 20px -20px; 
