@@ -1,0 +1,18 @@
+.manage_events_background{
+    display:flex;
+    flex-direction: row;
+    width:100%;
+    height:100%;
+    background-color: blue;
+}
+
+.manage_events_currentEvents_container{
+    background-color: red;
+    width:50%;
+    padding: 5%;
+}
+
+.manage_events_create_edit_container{
+    background-color: green;
+    width:50%;
+}

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 var app = express();
 const db = require('../db/db.js')
 const dotenv = require('dotenv')
+const bcrypt = require('bcrypt')
 const saltRounds=10
 // var generate_token = require('./jwt/generate_token.js')
 // var generate_refresh = require('./jwt/generate_refresh.js')
@@ -12,6 +13,7 @@ const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
 var validate_email = require('./validate/validate_email.js')
 var validate_password = require('./validate/validate_password.js')
+var clean_phone_number = require('./validate/clean_number')
 
 app.use(cors({
   credentials: true, origin: 'https://localhost:3000'
@@ -24,58 +26,116 @@ app.use("/", express.static('../client/public'))
 app.use(express.json()); //middleware to parse json
 // app.use("/",express.static('../client/build'))
 
-//CHEER-89
-app.post('/cheer/signup', (req, res) => {
-  
-  let sql = 'INSERT INTO Accounts (first_name, last_name, email, password_hash, accepted) VALUES (?, ?, ?, ?, ?)'
-  let values = [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.isVerified]
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      // if (err.code === 'ER_DUP_ENTRY') {
-      //   //tell user that that account already exists
-        
-      // }
-      throw err
-    }
-
-    console.log('1 record inserted into accounts')
-    res.send({success: true})
-  })
-});
-
-//CHEER-89
-app.post('/cheer/login', (req, res) => {
-  let sql = `SELECT * FROM Accounts ORDER BY account_id`
-
-  const checkEmailPasswordMatch = (accountsList) => {
-    let match = {match: false, account: {}}
-    for (let account of accountsList) {
-      if (account.email === req.body.email.email && account['password_hash'] === req.body.email.password) {
-        match.match = true
-        match.account = account
-        return match
-      }
-    }
-    return match 
+app.post('/cheer/signup',(req,res)=>{
+  const {fname,lname,email,phone,password, cpassword, reason} = req.body
+  if(!validate_email(email)){
+    return res.status(401).send({"msg":"Please use a valid email"})
   }
+  if(password === cpassword){
+    if(!validate_password(cpassword)){
+      return res.status(401).send({"msg":"Password must be 6-16 character long and must contain at least one number and special character"})
+    }
+    bcrypt.genSalt(saltRounds, function(err, salt){
+      if(err) {console.log(err); return res.status(500).send({"msg": "Error has occured"}) }
+      bcrypt.hash(password, salt, function(err,hash){
+        var q = "INSERT INTO CHEER.Accounts(`type`, first_name, last_name, email, password_hash, subscribed, accepted, requested_change)VALUES('parent',?,?,?,?,0,0,0);"
+        db.query(q, [fname,lname,email,hash], (err,result)=>{
+          if(err){  
+            console.log(err)
+            if(err.code === 'ER_DUP_ENTRY'){
+              return res.status(500).send({"msg":"Email already in use"})
+            }
+            return res.status(500).send({"msg":"An error has occured"})
+          }
+          var q2 ="INSERT INTO CHEER.ParentDetails(account_id, parent_number)VALUES(?, ?)";
+          db.query(q2, [result.insertId, clean_phone_number(phone)], (err)=>{
+            if(err){console.log(err);return res.status(500).send({"msg":"An error has occured"})}
+            //JWT and cookie stuff here
+            return res.status(200).send({"msg":"Success"})
+          })
+        })
+      })
+    })
+  }else{
+    return res.status(401).send({"msg": "Passwords must match"})
+  }
+})
 
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing SQL query:', err);
-      res.status(500).json({ error: 'Internal server error' });
-      return;
-    } 
-    let accountData = checkEmailPasswordMatch(result)
-     // Check if any rows were returned
-     if (result.length > 0) {
-      if(accountData.match) {
-        res.send({success: true, account: accountData.account})
-      }
-    } else {
-      res.status(404).json({ error: 'No rows found' });
+
+
+//CHEER-89
+// app.post('/cheer/signup', (req, res) => {
+  
+//   let sql = 'INSERT INTO Accounts (first_name, last_name, email, password_hash, accepted) VALUES (?, ?, ?, ?, ?)'
+//   let values = [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.isVerified]
+//   db.query(sql, values, (err, result) => {
+//     if (err) {
+//       // if (err.code === 'ER_DUP_ENTRY') {
+//       //   //tell user that that account already exists
+        
+//       // }
+//       throw err
+//     }
+
+//     console.log('1 record inserted into accounts')
+//     res.send({success: true})
+//   })
+// });
+
+app.post('/cheer/login', (req,res)=>{
+  const {email, password} = req.body
+  var q ="SELECT email, password_hash FROM Accounts WHERE email = ?"
+  db.query(q,[email], (err,result)=>{
+    if(result==null){
+      return res.status(404).send({"msg":"Email not registered "})
+    }else{
+      bcrypt.compare(password, result[0].password_hash, function(err,hashresult){
+        if(err){console.log(err); return res.status(500).send({"msg":"Error has occured"})}
+        if(hashresult){
+          return res.send({success: true})
+          //cookie and JWT stuff here
+        }else{
+          return res.status(401).send({"msg":"Password does not match"})
+        }
+      })
     }
   })
-});
+  
+})
+
+//CHEER-89
+// app.post('/cheer/login', (req, res) => {
+//   let sql = `SELECT * FROM Accounts ORDER BY account_id`
+
+//   const checkEmailPasswordMatch = (accountsList) => {
+//     let match = {match: false, account: {}}
+//     for (let account of accountsList) {
+//       if (account.email === req.body.email.email && account['password_hash'] === req.body.email.password) {
+//         match.match = true
+//         match.account = account
+//         return match
+//       }
+//     }
+//     return match 
+//   }
+
+//   db.query(sql, (err, result) => {
+//     if (err) {
+//       console.error('Error executing SQL query:', err);
+//       res.status(500).json({ error: 'Internal server error' });
+//       return;
+//     } 
+//     let accountData = checkEmailPasswordMatch(result)
+//      // Check if any rows were returned
+//      if (result.length > 0) {
+//       if(accountData.match) {
+//         res.send({success: true, account: accountData.account})
+//       }
+//     } else {
+//       res.status(404).json({ error: 'No rows found' });
+//     }
+//   })
+// });
 
 //CHEER-61
 app.use('/childSignup', (req, res) => {
@@ -132,7 +192,6 @@ app.get('/admin/get/users',(req,res)=>{
     }
   })
 })
-
 app.get('/admin/get/users/length',(req,res)=>{
   var queryString=""
   const type = req.query.type
@@ -213,6 +272,19 @@ app.get('/user-permission', (req, res) => {
   });
 });
 
+app.get('/events',(req,res)=>{
+  let q = "SELECT * FROM Events"
+  db.query(q, (err,result)=>{
+    if(err){
+      console.log(err)
+      return res.status(500).send({"msg":"Error has occured"})
+    }
+    else{
+      return res.json(result)
+    }
+  })
+})
+
 // admin functionalities
 const adminRoute = require('./routes/admin.route')
 app.use('/admin', adminRoute)
@@ -227,3 +299,7 @@ app.use('/parent', parentRoutes)
 // child functionalities
 const childRoutes = require('./routes/child.route')
 app.use('/child', childRoutes)
+
+// event functionalities
+// const eventRoute = require('./routes/events.route')
+// app.use('/event', eventRoute)

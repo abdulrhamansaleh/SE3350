@@ -10,13 +10,13 @@ function WaiverUpload() {
     const [file, setFile] = useState()
     const [events, setEvents] = useState([])
 
-    // useEffect(()=>{
-    //   fetch("",{
+    useEffect(()=>{
+      fetch("/event/get/events",{
 
-    //   }).then(
-    //     response=> {if(response.ok)return response.json()}
-    //   ).then(data=>setEvents(data))
-    // },{})
+      }).then(
+        response=> {if(response.ok)return response.json()}
+      ).then(data=>setEvents(data))
+    },{})
 
     function handleFileChange(event){
       setFile(event.target.files[0])
@@ -35,14 +35,14 @@ function WaiverUpload() {
       <form onSubmit={uploadWaiver} className='waiver_upload_form'>
         <div className='waiver_upload_file_container'>
           <input type="file" name="file" onChange={handleFileChange} />
-          <button class="send-file">Send Out</button>
+          <button class="send-file">Upload Waiver</button>
         </div>
         <select className='waiver_upload_dropdown'>
-          {events.map((event)=>{
+          {/* {events.map((event)=>{
             return(
               <option>{event.name}</option>
             )
-          })}
+          })} */}
         </select>
       </form>
     </div>

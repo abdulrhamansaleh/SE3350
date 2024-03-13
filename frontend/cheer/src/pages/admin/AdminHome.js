@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import NewsletterUpload from './NewsletterUpload';
 import ManageUsers from './ManageUsers';
 import WaiverUpload from './WaiverUpload';
+import ManageEvents from './ManageEvents';
 
 const AdminPage = () => {
   const [currentView, setCurrentView] = useState('default');
@@ -16,8 +17,8 @@ const AdminPage = () => {
     switch (currentView) {
       case 'Upload Newsletters': 
       return <NewsletterUpload />
-      case 'Upload Waiver':
-        return <WaiverUpload/>
+      case 'Manage Events':
+        return <ManageEvents/>
       case 'Manage Users':
         return <ManageUsers/>
       case 'Reported Chats':
@@ -49,7 +50,7 @@ const AdminNavigation = ({ onLinkClick }) => {
       </div>
       <ul className="sidebar-menu">
         <li className="admin-sidebar-link" onClick={() => onLinkClick('Upload Newsletters')}>Upload Newsletters</li>
-        <li className="admin-sidebar-link" onClick={() => onLinkClick('Upload Waiver')}>Upload Waiver</li>
+        <li className="admin-sidebar-link" onClick={() => onLinkClick('Manage Events')}>Event Manager</li>
         <li className="admin-sidebar-link" onClick={() => onLinkClick('Manage Users')}>Manage Users</li>
         <li className="admin-sidebar-link" onClick={() => onLinkClick('Reported Chats')}>Reported Chats</li>
         <li className="admin-sidebar-link" onClick={() => onLinkClick('Site Reviews')}>Site Reviews</li>
