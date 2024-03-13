@@ -12,9 +12,10 @@ const CreateEventModal = ({date, onClose}) => {
     title: "",
     description: "",
     transportation: "",
-    start : "",
+    start: "",
     end: ""
   });
+  
 
   const handleChange = ({currentTarget:input}) => {
     setData({...data,[input.name]:input.value})
@@ -84,7 +85,7 @@ const CreateEventModal = ({date, onClose}) => {
               />
               <input className = "form-input" value={date} disabled />
               <div>
-                <button type="submit" className="btn">Create Event</button>
+                <button type="Submit" className="btn">Create Event</button>
                 <button onClick={onClose} className="btn">Exit</button>
               </div>
             </form>
