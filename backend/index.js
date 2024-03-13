@@ -151,6 +151,72 @@ app.use('/childSignup', (req, res) => {
    
 })
 
+app.get('/admin/get/events/length',(req,res)=>{
+  var queryString=""
+  const start_date = req.query.start_date
+  const end_state = req.query.end_date
+  
+  const type = req.query.type
+  switch(type){
+    case "All":
+      queryString = "SELECT COUNT(*) FROM Events"
+      break;
+    case "Future":
+      queryString = "SELECT COUNT(*) FROM Events WHERE start_time > CURRENT_DATE()"
+      break;
+    case "Previous":
+      queryString = "SELECT COUNT(*) FROM Events WHERE start_time < CURRENT_DATE()"
+      break;
+    case "Custom":
+      queryString = "SELECT COUNT(*) FROM Events WHERE start_time >= ? AND end_time <=?"
+      break;
+  }
+  db.query()
+})
+
+app.get('/admin/get/events',(req,res)=>{
+  var queryString=""
+  const start_date = req.query.start_date
+  const end_state = req.query.end_date
+  
+  const type = req.query.type
+  switch(type){
+    case "All":
+      queryString = "SELECT * FROM Events"
+      break;
+    case "Future":
+      queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
+      break;
+    case "Previous":
+      queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
+      break;
+    case "Custom":
+      queryString = "SELECT * FROM Events WHERE start_time >= ? AND end_time <=?"
+      break;
+  }
+  db.query()
+})
+
+app.post('/admin/add/event',(req,res)=>{
+  const {name, descirption, start_date,end_date, transport} = req.body
+  var queryString='INSERT INTO Events (title, description, start_time, end_time, transport_details) VALUES =(?,?,?,?,?)'
+})
+
+app.post('/admin/edit/event',(req,res)=>{
+  
+})
+
+app.delete('/admin/delete/event',(req,res)=>{
+  var queryString='DELETE FROM Events WHERE id=?'
+  const id = req.query.id
+  db.query(queryString,[id],(err,result)=>{
+    if(err){
+      console.log(err)
+      return res.status(500).send({"msg":"Error has occured"})
+    }
+    return res.json(result)
+  })
+})
 //CHEER-72
 app.get('/admin/get/users',(req,res)=>{
   var queryString=""
@@ -271,19 +337,6 @@ app.get('/user-permission', (req, res) => {
     }
   });
 });
-
-app.get('/events',(req,res)=>{
-  let q = "SELECT * FROM Events"
-  db.query(q, (err,result)=>{
-    if(err){
-      console.log(err)
-      return res.status(500).send({"msg":"Error has occured"})
-    }
-    else{
-      return res.json(result)
-    }
-  })
-})
 
 // admin functionalities
 const adminRoute = require('./routes/admin.route')

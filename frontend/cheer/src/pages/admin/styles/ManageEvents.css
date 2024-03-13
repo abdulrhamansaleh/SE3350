@@ -10,9 +10,17 @@
     background-color: red;
     width:50%;
     padding: 5%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:50px;
 }
 
 .manage_events_create_edit_container{
     background-color: green;
     width:50%;
+}
+.manage_events_calander_container{
+    gap:50px;
 }
