@@ -68,33 +68,33 @@ export default function CollapsibleTable(props) {
     setPage(newPage);
   };
 
-  // const getMaxRow = () =>{
-  //   fetch(props.url.toString()+'/length'+'?'+ new URLSearchParams({
-  //     type: props.type,
-  //     start_date : props.start_date,
-  //     end_date: props.end_date
-  //   }),{
-  //     method:"GET"
-  //   }).then(response=> {
-  //     if(response.ok)
-  //       return response.json()
-  //     }).then(data=>setMaxRows(data[0].max))
-  // }
+  const getMaxRow = () =>{
+    fetch(props.url.toString()+'/length'+'?'+ new URLSearchParams({
+      type: props.type,
+      start_date : props.start_date,
+      end_date: props.end_date
+    }),{
+      method:"GET"
+    }).then(response=> {
+      if(response.ok)
+        return response.json()
+      }).then(data=>setMaxRows(data[0].max))
+  }
 
-  // const getData = () =>{
-  //   fetch(props.url.toString()+'?'+ new URLSearchParams({
-  //     length: rowsPerPage,
-  //     offset: page,
-  //     type: props.type,s
-  //     start_date : props.start_date,
-  //     end_date: props.end_date
-  //   }), {
-  //     method: 'GET'
-  //   }).then(response=> {
-  //     if(response.ok)
-  //       return response.json()
-  //     }).then(data=>setPageData(data))
-  // }
+  const getData = () =>{
+    fetch(props.url.toString()+'?'+ new URLSearchParams({
+      length: rowsPerPage,
+      offset: page,
+      type: props.type,
+      start_date : props.start_date,
+      end_date: props.end_date
+    }), {
+      method: 'GET'
+    }).then(response=> {
+      if(response.ok)
+        return response.json()
+      }).then(data=>setPageData(data))
+  }
 
 
 

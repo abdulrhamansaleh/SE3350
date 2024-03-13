@@ -153,49 +153,74 @@ app.use('/childSignup', (req, res) => {
 
 app.get('/admin/get/events/length',(req,res)=>{
   var queryString=""
-  const start_date = req.query.start_date
-  const end_state = req.query.end_date
+  const start_date = req.query.start_date?req.query.start_date:""
+  const end_date = req.query.end_date?req.query.start_date:""
   
   const type = req.query.type
   switch(type){
-    case "All":
+    case "all":
       queryString = "SELECT COUNT(*) FROM Events"
       break;
-    case "Future":
+    case "future":
       queryString = "SELECT COUNT(*) FROM Events WHERE start_time > CURRENT_DATE()"
       break;
-    case "Previous":
+    case "past":
       queryString = "SELECT COUNT(*) FROM Events WHERE start_time < CURRENT_DATE()"
       break;
-    case "Custom":
+    case "custom":
       queryString = "SELECT COUNT(*) FROM Events WHERE start_time >= ? AND end_time <=?"
+      db.query(queryString,[start_date, end_date],(err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
+      break;
+    default:
+      queryString = "SELECT COUNT(*) FROM Events"
       break;
   }
-  db.query()
+  db.query(queryString, (err,result)=>{
+    if(err){
+      console.log(err)
+      console.log()
+      return res.status(500).send({"msg":"Error has occurred"})
+    }
+    return res.json(result)
+  })
+
 })
 
-app.get('/admin/get/events',(req,res)=>{
-  var queryString=""
-  const start_date = req.query.start_date
-  const end_state = req.query.end_date
+// app.get('/admin/get/events',(req,res)=>{
+//   var queryString=""
+//   const start_date = req.query.start_date
+//   const end_state = req.query.end_date
   
-  const type = req.query.type
-  switch(type){
-    case "All":
-      queryString = "SELECT * FROM Events"
-      break;
-    case "Future":
-      queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
-      break;
-    case "Previous":
-      queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
-      break;
-    case "Custom":
-      queryString = "SELECT * FROM Events WHERE start_time >= ? AND end_time <=?"
-      break;
-  }
-  db.query()
-})
+//   const type = req.query.type
+//   switch(type){
+//     case "all":
+//       queryString = "SELECT * FROM Events"
+//       break;
+//     case "future":
+//       queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
+//       break;
+//     case "past":
+//       queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
+//       break;
+//     case "custom":
+//       queryString = "SELECT * FROM Events WHERE start_time >= ? AND end_time <=?"
+//       db.query(queryString,[start_date, end_date],(err,result)=>{
+//         if(err){
+//           console.log(err)
+//           return res.status(500).send({"msg":"Error has occurred"})
+//         }
+//         return res.json(result)
+//       })
+//       break;
+//   }
+  
+// })
 
 app.post('/admin/add/event',(req,res)=>{
   const {name, descirption, start_date,end_date, transport} = req.body
