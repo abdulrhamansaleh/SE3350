@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import './AboutUs.css';
 import teamPhoto from '../../../resources/images/olli.jpg'; // Replace with the path to your team photo
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
 
 function AboutUs() {
   useEffect(() => {
@@ -9,13 +11,13 @@ function AboutUs() {
       const utterance = new SpeechSynthesisUtterance(textContent);
       window.speechSynthesis.speak(utterance);
     };
-    const readOLLIParagraph = document.getElementById('readOLLIParagraph');
-    if (readOLLIParagraph) {
-      readOLLIParagraph.addEventListener('click', speakNote);
+    const volumeButton = document.getElementById('volumeButton');
+    if (volumeButton) {
+      volumeButton.addEventListener('click', speakNote);
     }
     return () => {
-      if (readOLLIParagraph) {
-        readOLLIParagraph.removeEventListener('click', speakNote);
+      if (volumeButton) {
+        volumeButton.removeEventListener('click', speakNote);
       }
     };
   }, []);
@@ -26,7 +28,9 @@ function AboutUs() {
         <div className='aboutus_text_section'>
           <div className='aboutus_text_container'>
             <h1 className='aboutus_main_header'>OLLI</h1>
-            <button id="readOLLIParagraph" title="Read aloud">Speak</button>
+            <button id="volumeButton" title="Read aloud">
+              <FontAwesomeIcon icon={faVolumeHigh} className="volume-icon" />
+            </button>
               <div className="OLLI">
                 <p className='aboutus_mission'>
                   OLLI is a registered not-for-profit 
