@@ -1,37 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './AboutUs.css';
 import teamPhoto from '../../../resources/images/olli.jpg'; // Replace with the path to your team photo
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faVolumeHigh } from '@fortawesome/free-solid-svg-icons';
+import TextToSpeech from '../../../reusables/textToSpeech/TextToSpeech';
 
 function AboutUs() {
-  useEffect(() => {
-    const speakNote = () => {
-      const textContent = document.querySelector('.OLLI').innerText;
-      const utterance = new SpeechSynthesisUtterance(textContent);
-      window.speechSynthesis.speak(utterance);
-    };
-    const volumeButton = document.getElementById('volumeButton');
-    if (volumeButton) {
-      volumeButton.addEventListener('click', speakNote);
-    }
-    return () => {
-      if (volumeButton) {
-        volumeButton.removeEventListener('click', speakNote);
-      }
-    };
-  }, []);
-
   return (
     <div className='aboutus_main_container'>
       <div className='aboutus_content_container'>
         <div className='aboutus_text_section'>
           <div className='aboutus_text_container'>
             <h1 className='aboutus_main_header'>OLLI</h1>
-            <button id="volumeButton" title="Read aloud">
-              <FontAwesomeIcon icon={faVolumeHigh} className="volume-icon" />
-            </button>
-              <div className="OLLI">
+              <TextToSpeech selectedClassName="aboutUs" />
+              <div className="aboutUs">
                 <p className='aboutus_mission'>
                   OLLI is a registered not-for-profit 
                   caregiver-driven company with 
