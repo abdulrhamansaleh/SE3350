@@ -5,7 +5,7 @@ import teamPhoto from '../../../resources/images/olli.jpg'; // Replace with the 
 function AboutUs() {
   useEffect(() => {
     const speakNote = () => {
-      const textContent = document.querySelector('OLLI').innerText;
+      const textContent = document.querySelector('.OLLI').innerText;
       const utterance = new SpeechSynthesisUtterance(textContent);
       window.speechSynthesis.speak(utterance);
     };
