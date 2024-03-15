@@ -14,54 +14,31 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TablePagination from '@mui/material/TablePagination';
+import { DatePicker  } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
 import './EventTable.css'
-
-function Row(props) {
-  const [open, setOpen] = useState(false);
-  const [rowData, setRowData] = useState({})
-  const subdata = props.row["subdata"||"Subdata"]  //used in commented section
-
-
-  return (
-    <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
-        </TableCell>
-        {
-          Object.keys(props.row).map((d)=>{ 
-              return(
-                <TableCell >{props.row[d]}</TableCell> 
-              )
-          })         
-        }
-      </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={50}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    </React.Fragment>
-  );
-}
-
 
 export default function CollapsibleTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData]= useState([])
   const [maxRows, setMaxRows] = useState(0)
-
-
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [dropDownValue, setDropDownValue] = useState('all')
+  let x=0;
+  const dropDownChange = () =>{
+    let d = document.getElementById('select_type')
+    setDropDownValue(d.value)
+  }
 
   useEffect(()=>{
-      // getMaxRow()
-      // getData()
+      getMaxRow()
+      getData()
       
-  },[props.type, page, rowsPerPage  ])
+  },[dropDownValue, page, rowsPerPage])
 
   const handleChangePage = (event, newPage) => {
     //get next data
@@ -69,25 +46,32 @@ export default function CollapsibleTable(props) {
   };
 
   const getMaxRow = () =>{
-    fetch(props.url.toString()+'/length'+'?'+ new URLSearchParams({
-      type: props.type,
-      start_date : props.start_date,
-      end_date: props.end_date
+    if(dropDownValue =="custom" && (startDate.$y ===undefined || endDate.$y === undefined)){
+      return;
+    }
+    fetch('/admin/get/events/length'+'?'+ new URLSearchParams({
+      type: dropDownValue,
+      start_date : `${startDate.$y}-${startDate.$M}-${startDate.$D}`,
+      end_date: `${endDate.$y}-${endDate.$M}-${endDate.$D}`
     }),{
       method:"GET"
     }).then(response=> {
       if(response.ok)
         return response.json()
-      }).then(data=>setMaxRows(data[0].max))
+      }).then(data=>setMaxRows(data[0]? data[0].max: 0))
   }
 
   const getData = () =>{
-    fetch(props.url.toString()+'?'+ new URLSearchParams({
+    if(dropDownValue =="custom" &&(startDate.$y ===undefined || endDate.$y === undefined)){
+      return;
+    }
+
+    fetch('/admin/get/events'+'?'+ new URLSearchParams({
       length: rowsPerPage,
       offset: page,
-      type: props.type,
-      start_date : props.start_date,
-      end_date: props.end_date
+      type: dropDownValue,
+      start_date : `${startDate.$y}-${startDate.$M}-${startDate.$D}`,
+      end_date: `${endDate.$y}-${endDate.$M}-${endDate.$D}`
     }), {
       method: 'GET'
     }).then(response=> {
@@ -96,32 +80,105 @@ export default function CollapsibleTable(props) {
       }).then(data=>setPageData(data))
   }
 
-
-
   const handleChangeRowsPerPage = (event) => {
     //get new data
     setRowsPerPage(parseInt(event.target.value, 10));
-
   };
+
+  const onButtonClick= () =>{
+      getMaxRow()
+      getData()
+  }
+
+  const selectStartDate = (e) =>{
+    if(e.$M<10){
+      e.$M = parseInt(e.$M)+1
+      e.$M = '0'+e.$M
+    }
+    if(e.$D<10){
+      e.$D = '0'+e.$D
+    }
+    setStartDate(e)
+  }
+  const selectEndDate = (e)=>{
+    if(e.$M<10){
+      e.$M = parseInt(e.$M)+1
+      e.$M = '0'+e.$M
+    }
+    if(e.$D<10){
+      e.$D = '0'+e.$D
+    }
+    setEndDate(e)
+  }
+
+  const onRowClicked = (e)=>{
+    // e.preventDefault()
+    // console.log(e.target.parentElement.id)
+    props.callback(pageData[e.target.parentElement.id])
+  }
+
   return (
     <div className='table_container'>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+           
+           {dropDownValue==='custom' ? 
+           <div className='datepicker_container'> 
+             <DatePicker id='sd' label={'Enter Start Date'} views={['year', 'month', 'day']} value={startDate} onChange={(nvalue)=>{selectStartDate(nvalue)}}/>
+             <DatePicker id='ed' label={'Enter End Date'} views={['year', 'month', 'day']} value={endDate} onChange={(nvalue)=>selectEndDate(nvalue)}/>
+           </div>: 
+           <div>
+             <DatePicker disabled value={startDate}/>
+             <DatePicker disabled value={endDate}/>
+           </div> 
+           }
+
+           <select id='select_type' onChange={dropDownChange}>
+             <option value='all'>All</option>
+             <option value='future'>Future Events</option>
+             <option value='past'>Past Events</option>
+             <option value='custom'>Custom Time</option>
+           </select>
+         </LocalizationProvider>
+      <button onClick={onButtonClick}>Enter</button>
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table" size="small">
+      <Table aria-label="collapsible table" size="small" enableRowSelection>
         <TableHead>
           <TableRow>
             <TableCell />
-            {Object.keys(pageData[0]?pageData[0]:pageData).map((h)=>{
-                h = h.charAt(0).toUpperCase() + h.slice(1)    
-                return(
-                    <TableCell>{h}</TableCell>
-                )
+            
+            {Object.keys(pageData[0]?pageData[0]:{}).map((h)=>{
+                if(h!=='transport_details' && h!=='description'){
+                  h = h.charAt(0).toUpperCase() + h.slice(1)    
+                  return(
+                      <TableCell>{h}</TableCell>
+                  )
+                }
             })}
           </TableRow>
         </TableHead>
         <TableBody>
             {pageData.map((d)=>{
                 return(
-                    <Row row={d}/>
+                    <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} id={x++} onClick={(e)=>onRowClicked(e)}>
+                      <TableCell>
+                      </TableCell>
+                      {
+                        Object.keys(d).map((f)=>{ 
+                          if(f!=='transport_details' && f!=='description'){
+                            if(f==='start_time'|| f==='end_time'){
+                              try{
+                                d[f]=d[f].replace('T04:',' | ').replace('Z','').replace('T'," | ").substring(0,18)
+                              }catch{
+                                d[f] = null
+                              }
+                            }
+                            return(
+                              <TableCell >{d[f]}</TableCell> 
+                            )
+                          }
+                        })         
+                      }
+                    </TableRow>
                 )
             })}
         </TableBody>

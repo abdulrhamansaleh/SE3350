@@ -19,8 +19,8 @@ app.use(cors({
   credentials: true, origin: 'https://localhost:3000'
 }));
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use("/", express.static('../client/public'))
 app.use(express.json()); //middleware to parse json
@@ -84,6 +84,7 @@ app.post('/cheer/signup',(req,res)=>{
 
 app.post('/cheer/login', (req,res)=>{
   const {email, password} = req.body
+  console.log(email)
   var q ="SELECT email, password_hash FROM Accounts WHERE email = ?"
   db.query(q,[email], (err,result)=>{
     if(result==null){
@@ -153,22 +154,43 @@ app.use('/childSignup', (req, res) => {
 
 app.get('/admin/get/events/length',(req,res)=>{
   var queryString=""
-  const start_date = req.query.start_date?req.query.start_date:""
-  const end_date = req.query.end_date?req.query.start_date:""
+  const start_date = req.query.start_date
+  const end_date = req.query.end_date
   
   const type = req.query.type
   switch(type){
     case "all":
-      queryString = "SELECT COUNT(*) FROM Events"
+      queryString = "SELECT COUNT(*) AS max FROM Events"
+      db.query(queryString, (err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
       break;
     case "future":
-      queryString = "SELECT COUNT(*) FROM Events WHERE start_time > CURRENT_DATE()"
+      queryString = "SELECT COUNT(*) AS max FROM Events WHERE start_time > CURRENT_DATE()"
+      db.query(queryString, (err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
       break;
     case "past":
-      queryString = "SELECT COUNT(*) FROM Events WHERE start_time < CURRENT_DATE()"
+      queryString = "SELECT COUNT(*) AS max FROM Events WHERE start_time < CURRENT_DATE()"
+      db.query(queryString, (err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
       break;
     case "custom":
-      queryString = "SELECT COUNT(*) FROM Events WHERE start_time >= ? AND end_time <=?"
+      queryString = "SELECT COUNT(*) as max FROM Events WHERE start_time>= ? AND end_time <= ?"
       db.query(queryString,[start_date, end_date],(err,result)=>{
         if(err){
           console.log(err)
@@ -181,67 +203,69 @@ app.get('/admin/get/events/length',(req,res)=>{
       queryString = "SELECT COUNT(*) FROM Events"
       break;
   }
-  db.query(queryString, (err,result)=>{
-    if(err){
-      console.log(err)
-      console.log()
-      return res.status(500).send({"msg":"Error has occurred"})
-    }
-    return res.json(result)
-  })
-
 })
 
-// app.get('/admin/get/events',(req,res)=>{
-//   var queryString=""
-//   const start_date = req.query.start_date
-//   const end_state = req.query.end_date
-  
-//   const type = req.query.type
-//   switch(type){
-//     case "all":
-//       queryString = "SELECT * FROM Events"
-//       break;
-//     case "future":
-//       queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
-//       break;
-//     case "past":
-//       queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
-//       break;
-//     case "custom":
-//       queryString = "SELECT * FROM Events WHERE start_time >= ? AND end_time <=?"
-//       db.query(queryString,[start_date, end_date],(err,result)=>{
-//         if(err){
-//           console.log(err)
-//           return res.status(500).send({"msg":"Error has occurred"})
-//         }
-//         return res.json(result)
-//       })
-//       break;
-//   }
-  
-// })
 
-app.post('/admin/add/event',(req,res)=>{
-  const {name, descirption, start_date,end_date, transport} = req.body
-  var queryString='INSERT INTO Events (title, description, start_time, end_time, transport_details) VALUES =(?,?,?,?,?)'
+app.get('/admin/get/events',(req,res)=>{
+  var queryString=""
+  const start_date = req.query.start_date
+  const end_date = req.query.end_date
+
+
+  const type = req.query.type
+  switch(type){
+    case "all":
+      queryString = "SELECT * FROM Events"
+      db.query(queryString,(err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
+      break;
+    case "future":
+      queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
+      db.query(queryString,(err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
+      break;
+    case "past":
+      queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
+      db.query(queryString,(err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
+      break;
+    case "custom":
+      queryString = "SELECT * FROM Events WHERE start_time>= ? AND end_time <= ?"
+      db.query(queryString,[start_date, end_date],(err,result)=>{
+        if(err){
+          console.log(err)
+          return res.status(500).send({"msg":"Error has occurred"})
+        }
+        return res.json(result)
+      })
+      break;
+  }
+ 
 })
 
-app.post('/admin/edit/event',(req,res)=>{
-  
+
+app.post('/admin/edit/event/:id',(req,res)=>{
+  const {event_id, title, description, start_time, end_time, transport_details} = req.body
+  console.log(req.body)
+  return res.status(200).send({"msg":"Resend"})
 })
 
-app.delete('/admin/delete/event',(req,res)=>{
-  var queryString='DELETE FROM Events WHERE id=?'
-  const id = req.query.id
-  db.query(queryString,[id],(err,result)=>{
-    if(err){
-      console.log(err)
-      return res.status(500).send({"msg":"Error has occured"})
-    }
-    return res.json(result)
-  })
-})
+
 //CHEER-72
 app.get('/admin/get/users',(req,res)=>{
   var queryString=""
