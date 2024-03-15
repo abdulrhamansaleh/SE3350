@@ -1,0 +1,18 @@
+.volume-icon {
+    color: #333;
+    font-size: 1.5em;
+  }
+
+#volumeButton {
+    background-color: var(--cheer-light);;
+    padding: 1%;
+    border-radius: 30px;
+    border: 2px solid #333;
+    transition: background-color 0.3s;
+    box-shadow: 3px 3px 6px #000;
+}
+
+#volumeButton:hover {
+    cursor: pointer;
+    background-color: #fff;
+}
