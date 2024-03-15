@@ -36,7 +36,7 @@ function App() {
       {/* Public Routes */}
         <Route path='/cheer/home' element={<Home/>}></Route>
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
-        <Route path='/cheer/schedule' element={<Schedule/>}></Route>
+        <Route path='/cheer/events' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/contact' element={<ContactUs/>}></Route>
