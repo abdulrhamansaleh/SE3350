@@ -13,11 +13,13 @@ import SignUp from './pages/public/auth/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
+import AdminCommunalCalendar from './pages/admin/AdminCommunalCalendar';
 import useToken from './reusables/tokenHook/useToken';
 
 import ChildSignup from './pages/parent/ChildSignup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ContactUs from './pages/public/contact/ContactUs';
+
 const ROLES = {
   'User': 'User',
   'Admin': 'Admin',
@@ -34,7 +36,7 @@ function App() {
       {/* Public Routes */}
         <Route path='/cheer/home' element={<Home/>}></Route>
         <Route path='/cheer/gallery' element={<Gallery/>}></Route>
-        <Route path='/cheer/schedule' element={<Schedule/>}></Route>
+        <Route path='/cheer/events' element={<Schedule/>}></Route>
         <Route path='/cheer/login' element={<Login setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/signup' element={<SignUp setToken = {setToken} token = {token}/>}></Route>
         <Route path='/cheer/contact' element={<ContactUs/>}></Route>

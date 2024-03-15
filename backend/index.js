@@ -307,6 +307,16 @@ app.get('/admin/get/users',(req,res)=>{
     }
   })
 })
+
+// CHEER-86
+app.post('/verify', async (request, response) => {
+  const { captchaValue } = request.body
+  const { data } = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${SITE_SECRET}&response=${captchaValue}`,
+  )
+  response.send(data)
+})
+
 app.get('/admin/get/users/length',(req,res)=>{
   var queryString=""
   const type = req.query.type
@@ -402,6 +412,6 @@ app.use('/parent', parentRoutes)
 const childRoutes = require('./routes/child.route')
 app.use('/child', childRoutes)
 
-// event functionalities
-// const eventRoute = require('./routes/events.route')
-// app.use('/event', eventRoute)
+// event & calendar
+const eventRoutes = require('./routes/event.route')
+app.use('/calendar', eventRoutes)

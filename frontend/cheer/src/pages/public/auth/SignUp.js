@@ -66,11 +66,25 @@ function Signup({ setToken }) {
       return;
     }
 
-    // const captchaValue = recaptcha.current.getValue();
-    // if (!captchaValue) {
-    //   alert("Please verify using the reCAPTCHA!");
-    //   return;
-    // }
+    const captchaValue = recaptcha.current.getValue();
+    if (!captchaValue) {
+      alert("Please verify using the reCAPTCHA!");
+      // return;
+    } else {
+      const res = await fetch('/verify', {
+        method: 'POST',
+        body: JSON.stringify({ captchaValue }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      const data = await res.json()
+      if (data.success) {
+        alert('Form submission successful!')
+      } else {
+        alert('reCAPTCHA validation failed!')
+      }
+    }
 
     const {fname, lname, email, phone, password, cpassword, reason} = data
     try {
@@ -167,7 +181,7 @@ function Signup({ setToken }) {
               />
             </div>
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus email input" 
               className="auth-icon_button" 
@@ -186,7 +200,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus phone input" 
               className="auth-icon_button" 
@@ -198,7 +212,7 @@ function Signup({ setToken }) {
               className='auth-input'
               mask="(999) 999-9999"
               maskChar="_"
-              ref={phoneRef}
+              inputRef={phoneRef}
               placeholder='Phone number'
               id='phone'
               value={data.phone}
@@ -206,7 +220,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus password input" 
               className="auth-icon_button" 
@@ -225,7 +239,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus confirm password input" 
               className="auth-icon_button" 
@@ -244,7 +258,7 @@ function Signup({ setToken }) {
               required
             />
           </div>
-          <div className="auth-input-container">
+          <div className="signup-input-container">
             <button
               aria-label="Focus reason input" 
               className="auth-icon_button" 
@@ -262,9 +276,14 @@ function Signup({ setToken }) {
               onChange={(e) => setData({...data, reason: e.target.value})}
             />
           </div>
+          <div className="recaptcha-container">
+            <ReCAPTCHA
+              ref={recaptcha}
+              sitekey={process.env.REACT_APP_SITE_KEY}
+            />
+          </div>
+          <br />
           <button onClick = {signUpOnClick} className='auth-button'>Sign Up</button>
-          <br /> <br />
-          {/* <ReCAPTCHA ref={recaptcha} sitekey={process.env.REACT_APP_SITE_KEY} /> */}
         </form>
         <p className='auth-subtext'>Already have an account? <NavLink className='auth-switch' to="/cheer/login">Sign in!</NavLink></p>
         <NavLink className='auth-switch' to="/cheer/home">Return Home</NavLink>
