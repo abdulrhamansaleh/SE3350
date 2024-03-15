@@ -9,7 +9,7 @@
   
   .auth-container {
     width: 350px;
-    padding: 40px;
+    padding: 30px;
     background: var(--cheer-dark);
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
@@ -50,7 +50,13 @@
     /* margin-right: 8px; */
   }
   
-  .auth-input-container {
+  .signup-input-container {
+    position: relative;
+    width: 118%;
+    margin-bottom: 20px;
+  }
+
+  .login-input-container {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
@@ -64,10 +70,6 @@
   .auth-input-container-half {
     margin-right: 20px;
     margin-bottom: 20px;
-  }
-
-  .auth-input-container-half:last-child {
-    margin-right: 18%;
   }
 
   .auth-icon_button {
@@ -138,6 +140,12 @@
   .auth-button:hover {
     background: var(--cheer-tan);
     color: #000000;
+  }
+
+  .recaptcha-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .auth-subtext {

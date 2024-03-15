@@ -133,6 +133,15 @@ app.get('/admin/get/users',(req,res)=>{
   })
 })
 
+// CHEER-86
+app.post('/verify', async (request, response) => {
+  const { captchaValue } = request.body
+  const { data } = await axios.post(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${SITE_SECRET}&response=${captchaValue}`,
+  )
+  response.send(data)
+})
+
 app.get('/admin/get/users/length',(req,res)=>{
   var queryString=""
   const type = req.query.type
