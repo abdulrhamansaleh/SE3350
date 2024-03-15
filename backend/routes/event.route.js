@@ -10,18 +10,21 @@ router.get('/running-events', async(request, response) => {
 /* Add Events to Calendar */
 router.post('/create-event', async(request, response) => {
     // parse date into start and end times 
-    let event = "INSERT INTO Events (title, description, date, start_time, end_time, transport_details) VALUES (?, ?, ?, ?, ?, ?)"
-    console.log(request.body)
+    const start_time = req.body.date + start + ":00"
+    const end_time = req.body.date + end + ":00"
+    let event = "INSERT INTO Events (title, description, start_time, end_time, transport_details) VALUES (?, ?, ?, ?, ?, ?)"
     /*
-        {
-            date: '2024-03-06',
-            title: 'event',
-            description: 'event description',
-            transportation: 'event transport',
-            start: '15:31',
-            end: '19:37'
-        }
-     */
+
+        request.body => 
+                            {
+                                date: '2024-03-06',
+                                title: 'event',
+                                description: 'event description',
+                                transportation: 'event transport',
+                                start: '15:31',
+                                end: '19:37'
+                            }
+    */
 })
 
 /* Remove Events from Calendar */
