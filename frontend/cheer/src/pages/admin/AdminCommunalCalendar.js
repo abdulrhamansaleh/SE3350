@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
@@ -7,8 +8,9 @@ import './styles/CommunalCalendar.css';
 
 
 const CreateEventModal = ({date, onClose}) => {
+  const redirect = useNavigate()
+
   const [data, setData] = useState({
-    date: date,
     title: "",
     description: "",
     transportation: "",
@@ -26,6 +28,12 @@ const CreateEventModal = ({date, onClose}) => {
     try {
       let url = '/calendar/create-event'
       const res = await axios.post(url, data)
+
+      if (res.data.status == 200){
+        console.log(res.data.message)
+        onClose()
+        window.location.href = '/admin';
+      }
     }
     catch(err){
     }
@@ -65,7 +73,7 @@ const CreateEventModal = ({date, onClose}) => {
               />
               <label for="appt-time">Starts</label>
               <input
-                type="time"
+                type="datetime-local"
                 placeholder="Start Time"
                 name="start"
                 onChange={handleChange}
@@ -75,7 +83,7 @@ const CreateEventModal = ({date, onClose}) => {
               />
               <label for="appt-time">Ends</label>
               <input
-                type="time"
+                type="datetime-local"
                 placeholder="End Time"
                 name="end"
                 onChange={handleChange}
@@ -83,7 +91,6 @@ const CreateEventModal = ({date, onClose}) => {
                 required
                 className="form-input"
               />
-              <input className = "form-input" value={date} disabled />
               <div>
                 <button type="Submit" className="btn">Create Event</button>
                 <button onClick={onClose} className="btn">Exit</button>
@@ -97,8 +104,27 @@ const CreateEventModal = ({date, onClose}) => {
 }
 
 export default function AdminCommunalCalendar() {
-  // API call to get all events
-  const allEvents = [{ title: 'test 1', date: '2024-03-08' }, { title: 'test 2', date: '2024-03-08' }];
+  const [allEvents, setEvents] = useState([])
+
+  useEffect(() => {
+    const getEvents = async () => {
+      try{
+        let url = '/calendar/running-events'
+        let res = await axios.get(url)
+    
+        if (res.data.status == 200){
+          console.log(res.data.results)
+          setEvents(res.data.results)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    getEvents()
+  }, []) // no dependencies, run only once a render
+
+
   const [selectedDate, setSelectedDate] = useState("");
   const [createModalOpen, setCreateModalOpen] = useState(false);
 

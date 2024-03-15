@@ -28,7 +28,7 @@ const AdminPage = () => {
       case 'Communal Calendar':
         return <div><AdminCommunalCalendar /></div>
       default:
-        return <div></div>;
+        return <div><AdminCommunalCalendar /></div>;
     }
   };
 

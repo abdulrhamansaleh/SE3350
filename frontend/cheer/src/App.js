@@ -13,6 +13,7 @@ import SignUp from './pages/public/auth/SignUp'
 import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
+import AdminCommunalCalendar from './pages/admin/AdminCommunalCalendar';
 import useToken from './reusables/tokenHook/useToken';
 
 import ChildSignup from './pages/parent/ChildSignup';
