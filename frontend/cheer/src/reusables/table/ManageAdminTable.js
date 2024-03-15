@@ -119,10 +119,16 @@ export default function CollapsibleTable(props) {
   const [pageData, setPageData]= useState([])
   const [maxRows, setMaxRows] = useState(0)
 
+
+
   useEffect(()=>{
-      getMaxRow()
-      getData()
-  },[props.type, page,rowsPerPage  ])
+      if(props.type){
+        getMaxRow()
+        getData()
+      }else{
+        getDataNoType()
+      }
+  },[props.type, page, rowsPerPage  ])
 
   const handleChangePage = (event, newPage) => {
     //get next data
@@ -151,6 +157,16 @@ export default function CollapsibleTable(props) {
       if(response.ok)
         return response.json()
       }).then(data=>setPageData(data))
+  }
+
+  const getDataNoType = () =>{
+    fetch(props.url , {
+      method:'GET',
+    }).then(response=>{
+      if(response.ok){
+        return response.json()
+      }
+    }).then(data=>setPageData(data))
   }
 
 
