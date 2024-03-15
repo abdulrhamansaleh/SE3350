@@ -236,3 +236,7 @@ app.use('/parent', parentRoutes)
 // child functionalities
 const childRoutes = require('./routes/child.route')
 app.use('/child', childRoutes)
+
+// event & calendar
+const eventRoutes = require('./routes/event.route')
+app.use('/calendar', eventRoutes)
