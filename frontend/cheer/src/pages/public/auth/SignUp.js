@@ -19,6 +19,12 @@ function Signup({ setToken }) {
   const passwordRef = useRef(null);
   const cpasswordRef = useRef(null);
 
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,16}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordMatchError, setPasswordMatchError] = useState('');
   // const history = useHistory();
 
   const [data, setData] = useState ({
@@ -32,22 +38,56 @@ function Signup({ setToken }) {
     isVerified: false
   })
 
+  const validateForm = () => {
+    let isValid = true;
+
+    // Email validation
+    if (!data.email.match(emailRegex)) {
+        setEmailError('Email is invalid');
+        isValid = false;
+    } else {
+        setEmailError('');
+    }
+
+    // Password validation
+    if (!data.password.match(passwordRegex)) {
+        setPasswordError('Password must be 6-16 character long and must contain at least one number and special character');
+        isValid = false;
+    } else {
+        setPasswordError('');
+    }
+
+    // Password validation
+    if (data.password !== data.cpassword) {
+      setPasswordMatchError('Both passwords must be the same');
+      isValid = false;
+    } else {
+        setPasswordMatchError('');
+    }
+
+    return isValid;
+  };
+
   async function signUpPost() {
 
-    return fetch('/cheer/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(data => {
-        console.log(data)
-        if (data.status === 200) {
-            setToken({loggedIn: true})
-            navigate('/cheer/home')
-        }
-    })
+    if (validateForm()) {
+      return fetch('/cheer/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(data => {
+          console.log(data)
+          if (data.status === 200) {
+              setToken({loggedIn: true})
+              navigate('/cheer/home')
+          }
+      })
+    } else {
+      alert('Form fields are filled out incorrectly')
+    }
   }
 
   const signUpOnClick = async e => {
@@ -57,6 +97,9 @@ function Signup({ setToken }) {
 
   const [error, setError] = useState(null);
 
+
+  //I have no idea what this below function is supposed to be doing. the function is never called 
+  //or exported
   const signup = async (e) => {
     // prevent page from automatically loading
     e.preventDefault()
@@ -143,6 +186,8 @@ function Signup({ setToken }) {
         setError('Server unreachable');
     }
   }
+  //the above function is never called or exported
+
   return (
     <div className='auth-background'>
       <img 
@@ -200,6 +245,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display email error message */}
+          {emailError && <p className='auth-subtext'>{emailError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus phone input" 
@@ -239,6 +286,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display password error message */}
+          {passwordError && <p className='auth-subtext'>{passwordError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus confirm password input" 
@@ -258,6 +307,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display password error message */}
+          {passwordMatchError && <p className='auth-subtext'>{passwordMatchError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus reason input" 
