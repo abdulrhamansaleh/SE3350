@@ -8,13 +8,12 @@ router.get('/running-events', async(request, response) => {
 
     const today = new Date();
     const nextMonthStart = new Date(today.getFullYear(), today.getMonth() + 1, 1);
-    // Correct calculation of the current month's end date
+
     const currentMonthEnd = new Date(nextMonthStart.getTime() - 1);
 
     const start = today.toISOString().split('T')[0];
     const end = currentMonthEnd.toISOString().split('T')[0];
 
-    // Improved query to fetch events that are within or span across the current month
     const runningEventsQuery = `
         SELECT title, start_time, end_time 
         FROM Events
@@ -29,7 +28,6 @@ router.get('/running-events', async(request, response) => {
             console.log("[ERR]" + err);
         } else {
             var results = []
-            console.log(result)
             for (let i = 0; i < result.length; i++){
                 const title = result[i].title
 
@@ -67,7 +65,23 @@ router.get('/running-events', async(request, response) => {
 
 /* Details of an Event */
 router.get('/event-details', async(request, reponse) => {
+    const event = "SELECT * FROM Events WHERE title = ? AND start_time BETWEEN ? AND ?"
+    
+    const date = request.query.start.split('T')[0]
+    var title = request.query.title
 
+    if (title.includes("...")){
+        title = title.split("...")[0]
+    }
+
+    const params = [title, date + " 00:00:00", date + " 23:59:59"]
+
+    console.log(params)
+    db.query(event, params, (err, result) => {
+        if (err) console.log(err); 
+
+        console.log("Result", result)
+    })
 })
 
 /* Add Events to Calendar */

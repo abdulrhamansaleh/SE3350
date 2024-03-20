@@ -8,6 +8,24 @@ import axios from 'axios'
 export default function Schedule() {
   const [allEvents, setEvents] = useState([])
 
+  const [eventView, setView] = useState(false)
+  const [eventData, setData] = useState({})
+
+  const view = async (event) => {
+    const date_start = event.event._instance.range.start
+    const title = event.event._def.title
+
+    const params = {
+      title: title,
+      start: date_start,
+    }
+
+    let url = "/calendar/event-details"
+    const data = await axios.get(url, {params})
+
+    setView(true)
+  }
+
   useEffect(() => {
     const getEvents = async () => {
       try{
@@ -15,7 +33,6 @@ export default function Schedule() {
         let res = await axios.get(url)
     
         if (res.data.status == 200){
-          console.log(res.data.results)
           setEvents(res.data.results)
         }
       }catch(err){
@@ -32,7 +49,27 @@ export default function Schedule() {
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         events={allEvents}
+        eventClick={view}
       />
+      { eventView &&
+        <ViewEvent />
+      }
     </div>
   );
+}
+
+
+function ViewEvent(){
+  return (
+    <div className="modal-overlay">
+    <div className="event_container">
+      <h1 class="modal-title" > Event </h1>
+      <div className="event_form_container">
+        <div className="right">
+          <p>Title</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  )
 }
