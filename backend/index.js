@@ -61,39 +61,28 @@ app.post('/cheer/signup',(req,res)=>{
   }
 })
 
-
-
-//CHEER-89
-// app.post('/cheer/signup', (req, res) => {
-  
-//   let sql = 'INSERT INTO Accounts (first_name, last_name, email, password_hash, accepted) VALUES (?, ?, ?, ?, ?)'
-//   let values = [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.isVerified]
-//   db.query(sql, values, (err, result) => {
-//     if (err) {
-//       // if (err.code === 'ER_DUP_ENTRY') {
-//       //   //tell user that that account already exists
-        
-//       // }
-//       throw err
-//     }
-
-//     console.log('1 record inserted into accounts')
-//     res.send({success: true})
-//   })
-// });
-
 app.post('/cheer/login', (req,res)=>{
   const {email, password} = req.body
   console.log(email)
-  var q ="SELECT email, password_hash FROM Accounts WHERE email = ?"
-  db.query(q,[email], (err,result)=>{
+
+  let test = "SELECT * FROM Accounts"
+
+  db.query(test, [], (err, result) => {
+    //console.log(result)
+  })
+
+  //password_hash
+
+  var q ="SELECT email, password_hash, account_id FROM Accounts WHERE email = ?"
+  db.query(q, [email],(err,result)=>{
     if(result==null){
       return res.status(404).send({"msg":"Email not registered "})
     }else{
       bcrypt.compare(password, result[0].password_hash, function(err,hashresult){
         if(err){console.log(err); return res.status(500).send({"msg":"Error has occured"})}
         if(hashresult){
-          return res.send({success: true})
+          console.log(result[0])
+          return res.send({success: true, account_id: result[0]['account_id']})
           //cookie and JWT stuff here
         }else{
           return res.status(401).send({"msg":"Password does not match"})
@@ -103,40 +92,6 @@ app.post('/cheer/login', (req,res)=>{
   })
   
 })
-
-//CHEER-89
-// app.post('/cheer/login', (req, res) => {
-//   let sql = `SELECT * FROM Accounts ORDER BY account_id`
-
-//   const checkEmailPasswordMatch = (accountsList) => {
-//     let match = {match: false, account: {}}
-//     for (let account of accountsList) {
-//       if (account.email === req.body.email.email && account['password_hash'] === req.body.email.password) {
-//         match.match = true
-//         match.account = account
-//         return match
-//       }
-//     }
-//     return match 
-//   }
-
-//   db.query(sql, (err, result) => {
-//     if (err) {
-//       console.error('Error executing SQL query:', err);
-//       res.status(500).json({ error: 'Internal server error' });
-//       return;
-//     } 
-//     let accountData = checkEmailPasswordMatch(result)
-//      // Check if any rows were returned
-//      if (result.length > 0) {
-//       if(accountData.match) {
-//         res.send({success: true, account: accountData.account})
-//       }
-//     } else {
-//       res.status(404).json({ error: 'No rows found' });
-//     }
-//   })
-// });
 
 //CHEER-61
 app.use('/childSignup', (req, res) => {
