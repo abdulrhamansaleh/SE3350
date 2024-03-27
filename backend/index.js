@@ -73,7 +73,7 @@ app.post('/cheer/login', (req,res)=>{
 
   //password_hash
 
-  var q ="SELECT email, password_hash, account_id FROM Accounts WHERE email = ?"
+  var q ="SELECT email, password_hash, account_id, type FROM Accounts WHERE email = ?"
   db.query(q, [email],(err,result)=>{
     if(result==null){
       return res.status(404).send({"msg":"Email not registered "})
@@ -82,7 +82,7 @@ app.post('/cheer/login', (req,res)=>{
         if(err){console.log(err); return res.status(500).send({"msg":"Error has occured"})}
         if(hashresult){
           console.log(result[0])
-          return res.send({success: true, account_id: result[0]['account_id']})
+          return res.send({success: true, account_id: result[0]['account_id'], type: result[0]['type']})
           //cookie and JWT stuff here
         }else{
           return res.status(401).send({"msg":"Password does not match"})

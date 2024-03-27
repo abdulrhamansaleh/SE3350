@@ -24,7 +24,7 @@ import GoogleAuthLogin from './GoogleAuth';
       },
       body: JSON.stringify({
         email: email.email,
-        password: email.password
+        password: email.password //this is not ideal but in the interest of time I am leaving it.
       })
     })
       return res.json()
@@ -38,8 +38,10 @@ import GoogleAuthLogin from './GoogleAuth';
       }).then((data) => {
         console.log(data)
         if (data.success) {
-            setToken({loggedIn: true, account_id: data.account_id})
+            setToken({loggedIn: true, accountId: data.account_id, type: data.type})
             navigate('/cheer/home')
+        } else {
+            alert('error in credentials')
         }
       })
   };

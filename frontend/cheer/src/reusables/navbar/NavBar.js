@@ -110,7 +110,7 @@ const NavBar = ({token, setToken}) => {
     }
 
     const handleLogOut = () => {
-        setToken({loggedIn: false, accountId: -1})
+        setToken({loggedIn: false, accountId: -1, type: ''})
     }
 
     return (
@@ -145,7 +145,7 @@ const NavBar = ({token, setToken}) => {
                     </li>
 
                     {
-                        token?.loggedIn && !isClockedIn &&
+                        token?.loggedIn && !isClockedIn && token?.type === 'employee' &&
                         <li className='navbar_list_items login_button'>
                             <NavLink className="nav_link">
                                 <button onClick = {handleClockIn} className='clock-in'>
@@ -156,7 +156,7 @@ const NavBar = ({token, setToken}) => {
                     }
 
                     {
-                        token?.loggedIn && isClockedIn &&
+                        token?.loggedIn && isClockedIn && token?.type === 'employee' &&
                         <li className='navbar_list_items login_button'>
                             <NavLink className="nav_link">
                                 <button onClick = {handleClockOut} className='clock-in'>
