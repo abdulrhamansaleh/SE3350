@@ -65,11 +65,11 @@ app.post('/cheer/login', (req,res)=>{
   const {email, password} = req.body
   console.log(email)
 
-  let test = "SELECT * FROM Accounts"
+  // let test = "SELECT * FROM Accounts"
 
-  db.query(test, [], (err, result) => {
-    //console.log(result)
-  })
+  // db.query(test, [], (err, result) => {
+  //   console.log(result)
+  // })
 
   //password_hash
 
@@ -370,3 +370,78 @@ app.use('/child', childRoutes)
 // event & calendar
 const eventRoutes = require('./routes/event.route')
 app.use('/calendar', eventRoutes)
+
+///////// employee clock in clock out START ///////////
+
+app.post('/findTimeSheetId', (req, res) => {
+
+  var sql ="SELECT timesheet_id FROM TimeSheet WHERE clock_in_time = clock_out_time"
+
+  db.query(sql, (err, result) => {
+    if(err || !result[0]?.['timesheet_id']){  
+      console.log(err)
+      return res.status(500).send({"msg":"An error has occured"})
+    } else {
+      res.send({success: true, data: result[0]['timesheet_id']})
+    }
+  })
+  
+})
+
+app.post('/clockOut', (req, res) => {
+  const {clockOut, timeSheetId} = req.body
+
+  let sql = "UPDATE CHEER.TimeSheet SET clock_out_time = ? WHERE timesheet_id = ?"
+
+  db.query(sql, [clockOut, timeSheetId], (error, result) => {
+    if (error) {
+      res.status(500).json({ error: error });
+    } else {
+      res.send({success: true})
+    }
+  });
+
+
+})
+
+app.post('/clockIn', (req, res) => {
+
+  const {accountId, clockIn, clockOut} = req.body
+
+  //req has to send account_id and the clock in time 
+
+  const sql = "INSERT INTO CHEER.TimeSheet(account_id, clock_in_time, clock_out_time)VALUES(?,?,?);"
+
+  db.query(sql, [accountId,clockIn,clockOut], (err,result)=>{
+    if(err){  
+      console.log(err)
+      return res.status(500).send({"msg":"An error has occured"})
+    } else {
+      res.send({success: true})
+    }
+  })
+
+  const q = "SELECT * FROM TimeSheet"
+
+  db.query(q, (err, result) => {
+    console.log(result)
+  })
+
+
+})
+
+
+//for testing
+app.post('/resetTimeSheet', (req, res) => {
+  let sql = "DELETE FROM TimeSheet";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.send({success: true})
+    }
+  })
+})
+
+///////// employee clock in clock out END /////////////

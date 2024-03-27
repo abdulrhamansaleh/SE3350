@@ -14,7 +14,6 @@ import EmployeeHome from './pages/employee/EmployeeHome'
 import NewsletterUpload from './pages/admin/NewsletterUpload'
 import AdminHome from './pages/admin/AdminHome'
 import AdminCommunalCalendar from './pages/admin/AdminCommunalCalendar';
-import useToken from './reusables/tokenHook/useToken';
 
 import ChildSignup from './pages/parent/ChildSignup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -26,9 +25,7 @@ const ROLES = {
   'Employee': 'Employee'
 }
 
-function App() {
-
-  const { token, setToken } = useToken();
+function App({token, setToken}) {
 
   return (
     <Routes>
