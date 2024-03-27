@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import NavBar from './reusables/navbar/NavBar';
 import Footer from './reusables/footer/Footer';
 
+import useToken from './reusables/tokenHook/useToken'
+
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import MobileNavBar from './reusables/navbar/MobileNavBar';
 const AppWithNavBar = () => {
@@ -14,7 +16,9 @@ const AppWithNavBar = () => {
   const hideNavBarRoutes = ['/cheer/login', '/cheer/signup', '/cheer/contact']; // Add the routes that should not display the navbar
   const OAUTH_CLIENT_ID = "378445406446-am4uikvslek3och9rohrr6ct3fsic9jr.apps.googleusercontent.com"
 
-  const [token, setToken] = useState({loggedIn: false, account_id: -1})
+  //const [token, setToken] = useState({loggedIn: false, account_id: -1})
+
+  const [token, setToken] = useToken('token', {loggedIn: false, accountId: -1})
 
   return (
     <>

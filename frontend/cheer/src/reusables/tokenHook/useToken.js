@@ -1,21 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function useToken() {
-  const getToken = () => {
-    const tokenString = sessionStorage.getItem('token');
-    const userToken = JSON.parse(tokenString) === undefined ? JSON.parse(tokenString) : "" ;
-    return userToken?.token
-  };
+function useToken(key, initialValue) {
+  // Get the value from session storage or use the initial value
+  const [state, setState] = useState(() => {
+    const storedValue = sessionStorage.getItem(key);
+    return storedValue !== null ? JSON.parse(storedValue) : initialValue;
+  });
 
-  const [token, setToken] = useState(getToken());
+  // Update session storage whenever the state changes
+  useEffect(() => {
+    sessionStorage.setItem(key, JSON.stringify(state));
+  }, [key, state]);
 
-  const saveToken = userToken => {
-    sessionStorage.setItem('token', JSON.stringify(userToken));
-    setToken(userToken.token);
-  };
-
-  return {
-    setToken: saveToken,
-    token
-  }
+  return [state, setState];
 }
+
+export default useToken

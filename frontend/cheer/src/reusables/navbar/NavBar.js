@@ -109,6 +109,10 @@ const NavBar = ({token, setToken}) => {
         googleLogout();
     }
 
+    const handleLogOut = () => {
+        setToken({loggedIn: false, accountId: -1})
+    }
+
     return (
         <div className='nav_background'>
             <div className='nav_container'>
@@ -141,7 +145,7 @@ const NavBar = ({token, setToken}) => {
                     </li>
 
                     {
-                        token.loggedIn && !isClockedIn &&
+                        token?.loggedIn && !isClockedIn &&
                         <li className='navbar_list_items login_button'>
                             <NavLink className="nav_link">
                                 <button onClick = {handleClockIn} className='clock-in'>
@@ -152,7 +156,7 @@ const NavBar = ({token, setToken}) => {
                     }
 
                     {
-                        token.loggedIn && isClockedIn &&
+                        token?.loggedIn && isClockedIn &&
                         <li className='navbar_list_items login_button'>
                             <NavLink className="nav_link">
                                 <button onClick = {handleClockOut} className='clock-in'>
@@ -161,12 +165,27 @@ const NavBar = ({token, setToken}) => {
                             </NavLink>
                         </li>
                     }
+
+                    {
+                        !token?.loggedIn && 
+                        <li className='navbar_list_items login_button'>
+                            <NavLink className="nav_link" to="/cheer/login">
+                                <FontAwesomeIcon icon={faSignInAlt} /> Login
+                            </NavLink>
+                        </li>
+                    }
+
+                    {
+                        token?.loggedIn && 
+                        <li className='navbar_list_items login_button'>
+                            <NavLink className="nav_link">
+                                <button onClick = {handleLogOut} className='clock-in'>
+                                    <FontAwesomeIcon icon={faSignInAlt} /> Logout
+                                </button>
+                            </NavLink>
+                        </li>
+                    }
                     
-                    <li className='navbar_list_items login_button'>
-                        <NavLink className="nav_link" to="/cheer/login">
-                            <FontAwesomeIcon icon={faSignInAlt} /> Login
-                        </NavLink>
-                    </li>
                     <li className='navbar_list_items'>
                         <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
                     </li>
