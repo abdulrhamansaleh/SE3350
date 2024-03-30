@@ -64,7 +64,7 @@ router.get('/running-events', async(request, response) => {
 })
 
 /* Details of an Event */
-router.get('/event-details', async(request, reponse) => {
+router.get('/event-details', async(request, response) => {
     const event = "SELECT * FROM Events WHERE title = ? AND start_time BETWEEN ? AND ?"
     
     const date = request.query.start.split('T')[0]
@@ -76,11 +76,10 @@ router.get('/event-details', async(request, reponse) => {
 
     const params = [title, date + " 00:00:00", date + " 23:59:59"]
 
-    console.log(params)
     db.query(event, params, (err, result) => {
         if (err) console.log(err); 
 
-        console.log("Result", result)
+        response.send({result})
     })
 })
 

@@ -19,6 +19,12 @@ function Signup({ setToken }) {
   const passwordRef = useRef(null);
   const cpasswordRef = useRef(null);
 
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]{6,16}$/;
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordMatchError, setPasswordMatchError] = useState('');
   // const history = useHistory();
 
   const [data, setData] = useState ({
@@ -32,22 +38,56 @@ function Signup({ setToken }) {
     isVerified: false
   })
 
+  const validateForm = () => {
+    let isValid = true;
+
+    // Email validation
+    if (!data.email.match(emailRegex)) {
+        setEmailError('Email is invalid');
+        isValid = false;
+    } else {
+        setEmailError('');
+    }
+
+    // Password validation
+    if (!data.password.match(passwordRegex)) {
+        setPasswordError('Password must be 6-16 character long and must contain at least one number and special character');
+        isValid = false;
+    } else {
+        setPasswordError('');
+    }
+
+    // Password validation
+    if (data.password !== data.cpassword) {
+      setPasswordMatchError('Both passwords must be the same');
+      isValid = false;
+    } else {
+        setPasswordMatchError('');
+    }
+
+    return isValid;
+  };
+
   async function signUpPost() {
 
-    return fetch('/cheer/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(data => {
-        console.log(data)
-        if (data.status === 200) {
-            setToken({loggedIn: true})
-            navigate('/cheer/home')
-        }
-    })
+    if (validateForm()) {
+      return fetch('/cheer/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(data => {
+          console.log(data)
+          if (data.status === 200) {
+              setToken({loggedIn: true})
+              navigate('/cheer/home')
+          }
+      })
+    } else {
+      alert('Form fields are filled out incorrectly')
+    }
   }
 
   const signUpOnClick = async e => {
@@ -55,94 +95,6 @@ function Signup({ setToken }) {
     const token = await signUpPost();
   };
 
-  const [error, setError] = useState(null);
-
-  const signup = async (e) => {
-    // prevent page from automatically loading
-    e.preventDefault()
-
-    if (data.password !== data.cpassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    const captchaValue = recaptcha.current.getValue();
-    if (!captchaValue) {
-      alert("Please verify using the reCAPTCHA!");
-      // return;
-    } else {
-      const res = await fetch('/verify', {
-        method: 'POST',
-        body: JSON.stringify({ captchaValue }),
-        headers: {
-          'content-type': 'application/json',
-        },
-      })
-      const data = await res.json()
-      if (data.success) {
-        alert('Form submission successful!')
-      } else {
-        alert('reCAPTCHA validation failed!')
-      }
-    }
-
-    const {fname, lname, email, phone, password, cpassword, reason} = data
-    try {
-        const response = await fetch('/cheer/signup', {
-        // const response = ({
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                fname,
-                lname,
-                email,
-                phone,
-                password,
-                cpassword,
-                reason,
-                isVerified: data.isVerified
-            }),
-        });
-        if (!response.ok) {
-          console.error('Error:', response.status, response.statusText);
-          setError('Server error');
-          return;
-        }
-    
-        const responseData = await response.json();
-    
-        console.log('Response data:', responseData);
-    
-        if (responseData.error) {
-          setError(responseData.error);
-        } else {
-          // Redirect or handle success as needed
-          window.location.href = '/cheer/login';
-        }
-        /*
-        if (response.ok) {
-            const responseData = await response.json();
-            console.log('Response data:', responseData);
-            if (responseData.error) {
-                NavLink('/cheer/page');
-                // history.push('/cheer/page');
-                setError(responseData.error);
-            } else {
-                NavLink('/cheer/login');
-                // history.push('/cheer/page');
-            }
-        } else {
-            console.error('Error:', response.statusText);
-            setError('Server error');
-        }
-        */
-    } catch (error) {
-        console.log('Catch block error', error)
-        setError('Server unreachable');
-    }
-  }
   return (
     <div className='auth-background'>
       <img 
@@ -200,6 +152,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display email error message */}
+          {emailError && <p className='auth-subtext'>{emailError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus phone input" 
@@ -239,6 +193,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display password error message */}
+          {passwordError && <p className='auth-subtext'>{passwordError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus confirm password input" 
@@ -258,6 +214,8 @@ function Signup({ setToken }) {
               required
             />
           </div>
+          {/* Display password error message */}
+          {passwordMatchError && <p className='auth-subtext'>{passwordMatchError}</p>}
           <div className="signup-input-container">
             <button
               aria-label="Focus reason input" 

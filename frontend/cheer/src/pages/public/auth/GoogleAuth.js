@@ -15,7 +15,7 @@ function GoogleAuthLogin({ setToken }) {
         const res = await axios.post(uri, {email: email})
 
         if (res.data.status == 200){
-            setToken({loggedIn: true, account_id: res.data.id})
+            setToken({loggedIn: true, accountId: res.data.id, type: ''})
             redirect('/cheer/home')
         }
         else{
