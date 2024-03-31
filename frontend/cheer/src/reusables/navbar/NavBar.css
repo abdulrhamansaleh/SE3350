@@ -25,13 +25,13 @@ ul.navbar_list {
     align-items: center;
     margin: 0;
     padding: 0; /* Remove default padding */
-    gap: 20px; /* Space between nav items */
+    gap: 5%; /* Space between nav items */
 }
 
 .navbar_list_items {
     color: white; /* Text color for the nav items */
     font-size: 1.2em;
-    padding: 10px 15px;
+    /* padding: 10px 15px; this is contributing to poor spacing in nav, careful with using padding*/
     border-radius: 5px;
     transition: color 0.3s ease; /* Transition for color change */
 }
@@ -55,7 +55,7 @@ ul.navbar_list {
     padding: 12px 20px;
     border-radius: 30px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    margin-left: 500px; /* Push the login button to the end */
+    margin-left: 10%; /* Push the login button to the end */
     transition: all 0.3s ease; /* Smooth transition for hover effect */
     animation: pulse 2s infinite; /* Apply the pulse animation */
 }
@@ -63,6 +63,16 @@ ul.navbar_list {
 .navbar_list_items.login_button:hover {
     background-color: darken(var(--cheer-orange), 10%); /* Darker on hover */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+.clock-in {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
 @keyframes pulse {
