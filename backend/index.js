@@ -415,3 +415,6 @@ app.use('/child', childRoutes)
 // event & calendar
 const eventRoutes = require('./routes/event.route')
 app.use('/calendar', eventRoutes)
+
+const galleryRoutes = require('./routes/gallery.route')
+app.use('/gallery', galleryRoutes)
