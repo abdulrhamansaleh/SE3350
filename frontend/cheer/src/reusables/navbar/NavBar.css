@@ -2,7 +2,7 @@
     width: 100%;
     height: 20vh; /* Adjust the height as needed */
     background-color: #647249; /* Your chosen NavBar color */
-    margin: 0px;
+    margin: 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -10,46 +10,46 @@
     display: flex;
     align-items: center; /* Vertically center the content */
     justify-content: center; /* Center the navbar contents */
-}
-
-.nav_container {
+  }
+  
+  .nav_container {
     width: 90%; /* Adjust the width as needed */
     margin: 0 auto; /* Center the container */
     display: flex;
     justify-content: space-between; /* Space between the logo and navigation */
-}
-
-ul.navbar_list {
+  }
+  
+  ul.navbar_list {
     list-style: none;
     display: flex;
     align-items: center;
     margin: 0;
-    padding: 0; /* Remove default padding */
-    gap: 5%; /* Space between nav items */
-}
-
-.navbar_list_items {
+  }
+  
+  .navbar_list_items {
     color: white; /* Text color for the nav items */
     font-size: 1.2em;
-    /* padding: 10px 15px; this is contributing to poor spacing in nav, careful with using padding*/
     border-radius: 5px;
     transition: color 0.3s ease; /* Transition for color change */
-}
-
-.navbar_list_items:hover {
+    width: 140px;
+    margin: 0 20px; /* Add some spacing between nav items */
+    margin-right: 20px;
+  }
+  
+  .navbar_list_items:hover {
     color: #a8ddb5; /* Lighter color on hover for nav items */
-}
-
-.nav_link {
+  }
+  
+  .nav_link {
     color: inherit; /* Inherits color from navbar_list_items */
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px; /* Space between icon and text */
-}
-
-/* Login Button Styling */
-.navbar_list_items.login_button {
+  }
+  
+  /* Login Button Styling */
+  .navbar_list_items.login_button {
     background-color: var(--cheer-orange); /* Use your coral color variable */
     color: white; /* Text color for the login button */
     padding: 12px 20px;
@@ -58,34 +58,37 @@ ul.navbar_list {
     margin-left: 10%; /* Push the login button to the end */
     transition: all 0.3s ease; /* Smooth transition for hover effect */
     animation: pulse 2s infinite; /* Apply the pulse animation */
-}
-
-.navbar_list_items.login_button:hover {
+  }
+  
+  .navbar_list_items.login_button:hover {
     background-color: darken(var(--cheer-orange), 10%); /* Darker on hover */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
-}
-
-.clock-in {
+  }
+  .navbar_list_items:last-child {
+    margin-right: 0;
+  }
+  
+  .clock-in {
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
-@keyframes pulse {
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  
+  @keyframes pulse {
     0% {
       transform: scale(1);
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     50% {
       transform: scale(1.05);
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     }
     100% {
       transform: scale(1);
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
-  } 
+  }

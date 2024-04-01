@@ -143,7 +143,9 @@ const NavBar = ({token, setToken}) => {
                             <FontAwesomeIcon icon={faImages} /> Gallery
                         </NavLink>
                     </li>
-
+                    <li className='navbar_list_items'>
+                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
+                    </li>
                     {
                         token?.loggedIn && !isClockedIn && token?.type === 'employee' &&
                         <li className='navbar_list_items login_button'>
@@ -186,9 +188,7 @@ const NavBar = ({token, setToken}) => {
                         </li>
                     }
                     
-                    <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
-                    </li>
+                   
                 </ul>
             </div>
         </div>
