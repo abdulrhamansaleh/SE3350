@@ -3,8 +3,10 @@ import { NavLink } from 'react-router-dom';
 import './Home.css';
 
 import AboutUs from '../aboutus/AboutUs.js';
-import ContactUs from '../contact/ContactUs.js';
 import NewsletterModal from '../newsLetter/NewsletterModal.js';
+import CheerGroup from './CheerGroup.js';
+import CheerConnections from './CheerConnections.js';
+import CheerWorks from './CheerWorks.js';
 
 // Import images
 import placeholderImage from '../../../resources/images/placeholder1.jpg';
@@ -32,6 +34,11 @@ function Home() {
         </div>
       </div>
       <AboutUs />
+      <div className="cheer-section-container"> {/* New container div */}
+      <CheerGroup />
+      <CheerConnections />
+      <CheerWorks />
+      </div>
       {/* Add ContactUs and other sections as needed */}
     </div>
   );
