@@ -47,7 +47,7 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    max-width: 600px;
+    max-width: 850px;
     margin-top: -60px;
 }
 
@@ -128,7 +128,7 @@
 
 .contact-map {
     width: 100%;
-    height: 300px;
+    height: 500px;
     margin-top: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -138,4 +138,69 @@
 body, html {
     margin: 0;
     padding: 0;
+}
+.operation-hours-container {
+    display: flex;
+    justify-content: space-between; /* Distributes space evenly between items */
+    align-items: stretch; /* Stretch items to fill the container */
+    margin: 20px 0;
+}
+
+.operation-hours-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Aligns content to the top */
+    flex: 1; /* Gives each section an equal width */
+    margin: 10px;
+}
+
+.operation-hours-section h3 {
+    margin-bottom: 10px; /* Provides space below the header */
+    color:#db7859;
+    font-size:  23px;
+}
+
+.operation-hours-section p {
+    margin: 4px 0; /* Reduces the space between the text lines */
+    line-height: 1.3; /* Adjust line height to improve readability */
+    
+}
+
+/* Additional wrapper for the text to push the note to the bottom */
+.operation-hours-content {
+    flex: 1; /* Takes up all available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Splits space between top content and note */
+
+}
+
+.operation-hours-section .note,
+.operation-hours-section .openingDate {
+    align-self: flex-end;
+    margin-top: auto; /* Pushes the note/openingDate to the bottom */
+}
+
+/* Consistent width for larger screens and same height boxes */
+@media (min-width: 992px) {
+    .operation-hours-section {
+        flex-basis: 30%; /* Adjust the width as needed */
+    }
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 992px) {
+    .operation-hours-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .operation-hours-section {
+        width: 100%; /* Full width on small screens */
+        margin-bottom: 20px; /* Space between sections when stacked */
+    }
 }

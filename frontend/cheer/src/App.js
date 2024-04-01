@@ -18,7 +18,7 @@ import AdminCommunalCalendar from './pages/admin/AdminCommunalCalendar';
 import ChildSignup from './pages/parent/ChildSignup';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ContactUs from './pages/public/contact/ContactUs';
-
+import Donate from './pages/public/donate/Donate';
 const ROLES = {
   'User': 'User',
   'Admin': 'Admin',
@@ -41,6 +41,7 @@ function App({token, setToken}) {
         <Route path='/admin' element={<AdminHome/>}></Route>
         <Route path='/admin/upload-newsletter' element={<NewsletterUpload/>}></Route>
         <Route path="/parent/register-my-child" element = {<ChildSignup />}></Route>
+        <Route path="/cheer/donate" element = {<Donate />}></Route>
         {/* <Route path="/child/sign-in" element = {<AuthenticateChild />}></Route> */} 
       
       {/* Protected Routes For Accounts*/}

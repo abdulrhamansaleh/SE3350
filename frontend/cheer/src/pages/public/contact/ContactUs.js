@@ -9,11 +9,40 @@ const ContactUs = () => {
     const [success,setSuccess] = useState(null)
     const cheerEmail = 'abcgef@gmail.com'
     const ref = useRef()
+    const operationHours = {
+      CHEERGroup: {
+          Monday: "8:00-4:00",
+          Tuesday: "8:00-4:00",
+          Wednesday: "10:00-4:00",
+          Thursday: "8:00-4:00",
+          Friday: "8:00-4:00",
+          Saturday: "CLOSED",
+          Sunday: "CLOSED",
+          note: "*outing times may differ*"
+      },
+      CHEERConnections: {
+
+          Friday: "Summer Nights from 5:00-9:00 pm"
+  
+      },
+      CHEERWorks: {
+          Monday: "CLOSED",
+          Tuesday: "CLOSED",
+          Wednesday: "10:00-8:00",
+          Thursday: "10:00-8:00",
+          Friday: "10:00-8:00",
+          Saturday: "8:00-8:00",
+          Sunday: "8:00-8:00",
+          note: "*Hours may differ for long weekends*",
+          openingDate: "*Store opens May 18th 2024*"
+      }
+  };
+
     const location = {
-        address: '1151 Richmond St, London, ON N6A 3K7',
+        address: '8685 Rockglen Rd. Arkona ON, N0M 1B0',
         map: {
-            lat: 43.00973825943151,
-            lng: -81.27376578080369,
+            lat: 43.082300,
+            lng: -81.820580,
         }
     } 
     
@@ -61,9 +90,29 @@ const ContactUs = () => {
             </div>
             <div className="contact-info-section">
               {/* Contact information and icons */}
-              <p><FontAwesomeIcon icon={faEnvelope} /> user@gmail.com</p>
+              <p><FontAwesomeIcon icon={faEnvelope} />  ongoinglivinglearning@gmail.com</p>
               <p><FontAwesomeIcon icon={faPhone} /> 666-666-666</p>
-              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 1151 Richmond St, London</p>
+              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 8685 Rockglen Rd. Arkona ON, N0M 1B0</p>
+            </div>
+        </div>
+        <div className="operation-hours-container">
+            <div className="operation-hours-section cheer-group">
+                <h3>CHEER Group</h3>
+                {Object.entries(operationHours.CHEERGroup).map(([day, hours]) => (
+                    <p key={day}><strong>{day}:</strong> {hours}</p>
+                ))}
+            </div>
+            <div className="operation-hours-section cheer-connections">
+                <h3>CHEER Connections</h3>
+                {Object.entries(operationHours.CHEERConnections).map(([day, hours]) => (
+                    <p key={day}><strong>{day}:</strong> {hours}</p>
+                ))}
+            </div>
+            <div className="operation-hours-section cheer-works">
+                <h3>CHEER Works</h3>
+                {Object.entries(operationHours.CHEERWorks).map(([day, hours]) => (
+                    <p key={day}><strong>{day}:</strong> {hours}</p>
+                ))}
             </div>
         </div>
         <div className="contact-map">
