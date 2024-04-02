@@ -7,9 +7,7 @@ import axios from 'axios';
 import './styles/CommunalCalendar.css';
 
 
-const CreateEventModal = ({date, onClose}) => {
-  const redirect = useNavigate()
-
+const CreateEventModal = ({onClose}) => {
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -17,13 +15,12 @@ const CreateEventModal = ({date, onClose}) => {
     start: "",
     end: ""
   });
-  
 
   const handleChange = ({currentTarget:input}) => {
     setData({...data,[input.name]:input.value})
   }
 
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       let url = '/calendar/create-event'
@@ -113,7 +110,6 @@ export default function AdminCommunalCalendar() {
         let res = await axios.get(url)
     
         if (res.data.status == 200){
-          console.log(res.data.results)
           setEvents(res.data.results)
         }
       }catch(err){
