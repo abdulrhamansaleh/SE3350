@@ -45,6 +45,7 @@ ul.navbar_list {
     text-decoration: none;
     display: flex;
     align-items: center;
+    white-space: nowrap; /* keep text on one line */
     gap: 8px; /* Space between icon and text */
 }
 

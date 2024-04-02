@@ -59,6 +59,7 @@
     position: relative;
     width: 100%;
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
 .newsletter-input-icon {
@@ -70,13 +71,14 @@
 }
 
 .newsletter-input_field {
-    width: calc(100% - 40px); /* Adjust width based on padding and icon space */
+    width: 100%;
     padding: 10px 20px 10px 40px; /* Left padding to accommodate icon */
     border: 1px solid #bdc3c7; /* Cool grey border */
     border-radius: 4px;
     font-size: 16px;
     color: #34495e; /* Cool blue text color */
     background-color: #ecf0f1; /* Cool light background for input */
+    box-sizing: border-box;
 }
 
 .newsletter-submit {
