@@ -28,6 +28,8 @@ export default function CollapsibleTable(props) {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
   const [dropDownValue, setDropDownValue] = useState('all')
+  const [waivers, setWaivers] = useState([])
+
   let x=0;
   const dropDownChange = () =>{
     let d = document.getElementById('select_type')
@@ -72,8 +74,7 @@ export default function CollapsibleTable(props) {
       type: dropDownValue,
       start_date : `${startDate.$y}-${startDate.$M}-${startDate.$D}`,
       end_date: `${endDate.$y}-${endDate.$M}-${endDate.$D}`,
-      length: rowsPerPage,
-      offset: page,
+
     }), {
       method: 'GET'
     }).then(response=> {
@@ -116,7 +117,7 @@ export default function CollapsibleTable(props) {
   const onRowClicked = (e)=>{
     // e.preventDefault()
     // console.log(e.target.parentElement.id)
-    props.callback(pageData[e.target.parentElement.id])
+    props.callback(pageData[e.target.parentElement.id], waivers)
   }
 
   return (
