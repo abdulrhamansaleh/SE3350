@@ -6,6 +6,7 @@ import ManageUsers from './ManageUsers';
 import WaiverUpload from './WaiverUpload';
 import AdminCommunalCalendar from '../admin/AdminCommunalCalendar';
 import ManageEvents from './ManageEvents';
+import SiteReviews from './SiteReviews';
 
 const AdminPage = () => {
   const [currentView, setCurrentView] = useState('default');
@@ -25,7 +26,7 @@ const AdminPage = () => {
       case 'Reported Chats':
         return <div></div>
       case 'Site Reviews':
-        return <div></div> 
+        return <SiteReviews/> 
       case 'Communal Calendar':
         return <div><AdminCommunalCalendar /></div>
       default:

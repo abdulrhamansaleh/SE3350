@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "author": "asdfa",
+    "content": "asdfasf",
+    "isPublished": true
+  },
+  {
+    "id": 2,
+    "author": "user",
+    "content": "test",
+    "isPublished": true
+  }
+]

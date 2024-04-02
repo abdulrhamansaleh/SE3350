@@ -448,3 +448,6 @@ app.post('/resetTimeSheet', (req, res) => {
 
 const galleryRoutes = require('./routes/gallery.route')
 app.use('/gallery', galleryRoutes)
+
+const reviewRoutes = require('./routes/reviews.route')
+app.use('/api', reviewRoutes)
