@@ -3,3 +3,88 @@
     margin: 0 auto;
     padding-top: 20vh;
 }
+
+
+.modal-overlay {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it sits above other content */
+}
+
+.event_container {
+    background-color: #ece9d7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001; /* Above the overlay */
+}
+
+.event_form_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form_container {
+    overflow: auto;
+    background-color: #ece9d7;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-input {
+    color:black;
+    outline: none;
+	border: none;
+	width: 370px;
+	padding: 15px;
+	border-radius: 10px;
+	margin: 5px 0;
+	font-size: 14px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+textarea{
+    width: 300px; 
+    height: 100px;
+    resize: none;
+}
+
+.btn {
+    background: olive; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #d17d5e;
+    cursor: pointer;
+}
+
+.modal-title{
+    color:white;
+    justify-content: center;
+    text-align: center;
+    margin: -20px -20px 20px -20px; 
+    background-color: #d17d5e;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    padding:10px;
+}
+
+
+  
+

@@ -113,6 +113,8 @@
     color: #db7859;
 }
 .contact-info-section p{
+    display: flex;
+    gap: 8px;
     color:rgb(0, 0, 0);
 }
 @media (max-width: 768px) {

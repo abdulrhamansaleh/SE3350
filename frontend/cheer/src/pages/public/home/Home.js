@@ -58,7 +58,7 @@ function Home() {
       <div className='home-main-container'>
         <div className='overlay'></div>
         <div className='landing-section'>
-          <h1 className='landing-title'>C.H.E.E.R</h1>
+          <h1 className='landing-title'>C.H.E.E.R.</h1>
           <p className='landing-subtitle'>Empowering Lives, Building Community</p>
           <NavLink className="main-entry-button" to="/cheer/signup">Sign Up!</NavLink>
         </div>

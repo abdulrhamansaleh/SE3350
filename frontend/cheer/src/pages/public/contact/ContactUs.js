@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMapMarkerAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 const ContactUs = () => {
     const [success,setSuccess] = useState(null)
-    const cheerEmail = 'abcgef@gmail.com'
+    const cheerEmail = 'ongoinglivinglearning@gmail.com'
     const ref = useRef()
     const operationHours = {
       CHEERGroup: {
@@ -40,8 +40,9 @@ const ContactUs = () => {
 
     const location = {
         address: '8685 Rockglen Rd. Arkona ON, N0M 1B0',
+        address: '8685 Rockglen Rd. Arkona ON, N0M 1B0',
         map: {
-            lat: 43.082300,
+            lat: 43.082298,
             lng: -81.820580,
         }
     } 
@@ -73,7 +74,7 @@ const ContactUs = () => {
               <form ref={ref}  onSubmit={handleSubmit}>
                 <div className="contact-form-header">
                 <FontAwesomeIcon icon={faComments} className="contact-icon" />
-                <h2>Get in Touch</h2>
+                <h2>&nbsp;Get in Touch</h2>
               </div>
                 <div className="contact-form-field">
                   <input type="text" placeholder="Your Name (Required) " />

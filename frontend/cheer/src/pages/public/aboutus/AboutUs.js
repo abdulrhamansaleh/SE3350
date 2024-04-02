@@ -9,11 +9,12 @@ function AboutUs() {
       <div className='aboutus_content_container'>
         <div className='aboutus_text_section'>
           <div className='aboutus_text_container'>
-            <h1 className='aboutus_main_header'>OLLI</h1>
+            <h1 className='aboutus_main_header'>O.L.L.I.</h1>
               <TextToSpeech selectedClassName="aboutUs" />
               <div className="aboutUs">
                 <p className='aboutus_mission'>
-                  OLLI is a registered not-for-profit 
+                  Ongoing Living & Learning Inc. 
+                  is a registered not-for-profit 
                   caregiver-driven company with 
                   four areas of focus: Cheer Group, 
                   Cheer Works, Cheer Connections, 
