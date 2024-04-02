@@ -5,6 +5,15 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   border-radius: 5px;
   overflow: hidden;
-  margin-top: 22vh;
+  margin-top: 30vh;
+  min-height: 100vh;
 }
 
+/* Targeting the images displayed by the gallery */
+.image-gallery-image {
+  width: auto; /* maintain aspect ratio */
+  height: auto; /* maintain aspect ratio */
+  max-width: 35%; /* adjust this value to control the size */
+  max-height: 40vh; /* adjust this to control the maximum height */
+  margin: auto; /* center the image if smaller than the container */
+}

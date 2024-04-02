@@ -13,7 +13,7 @@ const Gallery = () => {
         const data = await response.json();
 
         const updatedImages = data.map((image) => ({
-          original: image.thumbnail || image.original,
+          original: image.thumbnail,
           thumbnail: image.thumbnail,
         }));
 
