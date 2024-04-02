@@ -371,6 +371,47 @@ app.use('/child', childRoutes)
 const eventRoutes = require('./routes/event.route')
 app.use('/calendar', eventRoutes)
 
+
+///////// CHEER-90 request accoung changes START  ///////////
+
+//using rac to abbreviate request account changes in the uri 
+
+
+app.post('/rac', (req, res) => {
+  const {requestedChange, accountId} = req.body
+
+  let sql = "UPDATE CHEER.Accounts SET requested_change = ? WHERE account_id = ?"
+
+  db.query(sql, [requestedChange, accountId], (error, result) => {
+    if (error) {
+      res.status(500).json({ error: error });
+    } else {
+      res.send({success: true})
+    }
+  });
+
+})
+
+app.post('/findRAC', (req, res) => {
+  const {accountId} = req.body
+
+  var sql ="SELECT account_id FROM Accounts WHERE account_id = ?"
+
+  db.query(sql, [accountId], (err, result) => {
+    if(err || !result[0]?.['account_id']){  
+      console.log(err)
+      return res.status(500).send({"msg":"An error has occured"})
+    } else {
+      res.send({success: true, data: result[0]['timesheet_id'], RAC: result[0]['requested_change']})
+    }
+  })
+  
+})
+
+
+///////// CHEER-90 request accoung changes START  ///////////
+
+
 ///////// employee clock in clock out START ///////////
 
 app.post('/findTimeSheetId', (req, res) => {

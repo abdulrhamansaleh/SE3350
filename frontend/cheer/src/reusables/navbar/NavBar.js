@@ -13,6 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { googleLogout } from '@react-oauth/google';
 
+import RequestAccountChanges from '../RAC/RequestAccountChanges';
+
 
 const NavBar = ({token, setToken}) => {
 
@@ -185,6 +187,16 @@ const NavBar = ({token, setToken}) => {
                             </NavLink>
                         </li>
                     }
+
+                    {
+                        token?.loggedIn && (token?.type === 'employee' || token?.type === 'child' || token?.type === 'parent') &&
+                        <li className='navbar_list_items login_button'>
+                            <NavLink className="nav_link">
+                                <RequestAccountChanges token={token}/>
+                            </NavLink>
+                        </li>
+                    }
+
                     
                     <li className='navbar_list_items'>
                         <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
