@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faMapMarkerAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 const ContactUs = () => {
     const [success,setSuccess] = useState(null)
-    const cheerEmail = 'abcgef@gmail.com'
+    const cheerEmail = 'ongoinglivinglearning@gmail.com'
     const ref = useRef()
     const location = {
-        address: '1151 Richmond St, London, ON N6A 3K7',
+        address: '8685 Rockglen Rd. Arkona ON, N0M 1B0',
         map: {
-            lat: 43.00973825943151,
-            lng: -81.27376578080369,
+            lat: 43.082298,
+            lng: -81.820580,
         }
     } 
     
@@ -44,7 +44,7 @@ const ContactUs = () => {
               <form ref={ref}  onSubmit={handleSubmit}>
                 <div className="contact-form-header">
                 <FontAwesomeIcon icon={faComments} className="contact-icon" />
-                <h2>Get in Touch</h2>
+                <h2>&nbsp;Get in Touch</h2>
               </div>
                 <div className="contact-form-field">
                   <input type="text" placeholder="Your Name (Required) " />
@@ -61,9 +61,9 @@ const ContactUs = () => {
             </div>
             <div className="contact-info-section">
               {/* Contact information and icons */}
-              <p><FontAwesomeIcon icon={faEnvelope} /> user@gmail.com</p>
-              <p><FontAwesomeIcon icon={faPhone} /> 666-666-666</p>
-              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 1151 Richmond St, London</p>
+              <p><FontAwesomeIcon icon={faEnvelope} /> ongoinglivinglearning@gmail.com</p>
+              <p><FontAwesomeIcon icon={faPhone} /> XXX-XXX-XXXX</p>
+              <p><FontAwesomeIcon icon={faMapMarkerAlt} /> 8685 Rockglen Rd. Arkona ON</p>
             </div>
         </div>
         <div className="contact-map">

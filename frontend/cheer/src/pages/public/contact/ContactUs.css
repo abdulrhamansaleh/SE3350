@@ -47,7 +47,7 @@
     padding: 20px;
     display: flex;
     flex-direction: row;
-    max-width: 600px;
+    max-width: 620px;
     margin-top: -60px;
 }
 
@@ -113,6 +113,8 @@
     color: #db7859;
 }
 .contact-info-section p{
+    display: flex;
+    gap: 8px;
     color:rgb(0, 0, 0);
 }
 @media (max-width: 768px) {

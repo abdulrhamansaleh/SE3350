@@ -145,7 +145,8 @@ const NavBar = ({token, setToken}) => {
                             <FontAwesomeIcon icon={faImages} /> Gallery
                         </NavLink>
                     </li>
-
+                </ul>
+                <ul className="navbar_list" navbar_list_right>
                     {
                         token?.loggedIn && !isClockedIn && token?.type === 'employee' &&
                         <li className='navbar_list_items login_button'>
