@@ -15,6 +15,12 @@ var validate_email = require('./validate/validate_email.js')
 var validate_password = require('./validate/validate_password.js')
 var clean_phone_number = require('./validate/clean_number')
 
+const fileUpload = require("express-fileupload")
+const path = require("path");
+
+const fileSizeLimiter = require('./uploads/middleware/fileSizeLimiter.js')
+const filesPayloadExists = require('./uploads/middleware/filesPayloadExists.js')
+
 app.use(cors({
   credentials: true, origin: 'https://localhost:3000'
 }));
@@ -165,13 +171,14 @@ app.get('/admin/get/events',(req,res)=>{
   var queryString=""
   const start_date = req.query.start_date
   const end_date = req.query.end_date
-
+  const count = req.query.length
+  const offset = req.query.offset
 
   const type = req.query.type
   switch(type){
     case "all":
-      queryString = "SELECT * FROM Events"
-      db.query(queryString,(err,result)=>{
+      queryString = "SELECT * FROM Events LIMIT ? OFFSET ?"
+      db.query(queryString, [parseInt(count), parseInt(count*offset)],(err,result)=>{
         if(err){
           console.log(err)
           return res.status(500).send({"msg":"Error has occurred"})
@@ -180,8 +187,8 @@ app.get('/admin/get/events',(req,res)=>{
       })
       break;
     case "future":
-      queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE()"
-      db.query(queryString,(err,result)=>{
+      queryString = "SELECT * FROM Events WHERE start_time > CURRENT_DATE() LIMIT ? OFFSET ?"
+      db.query(queryString, [parseInt(count), parseInt(count*offset)],(err,result)=>{
         if(err){
           console.log(err)
           return res.status(500).send({"msg":"Error has occurred"})
@@ -190,8 +197,8 @@ app.get('/admin/get/events',(req,res)=>{
       })
       break;
     case "past":
-      queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE()"
-      db.query(queryString,(err,result)=>{
+      queryString = "SELECT * FROM Events WHERE start_time < CURRENT_DATE() LIMIT ? OFFSET ?"
+      db.query(queryString,  [parseInt(count), parseInt(count*offset)],(err,result)=>{
         if(err){
           console.log(err)
           return res.status(500).send({"msg":"Error has occurred"})
@@ -200,8 +207,8 @@ app.get('/admin/get/events',(req,res)=>{
       })
       break;
     case "custom":
-      queryString = "SELECT * FROM Events WHERE start_time>= ? AND end_time <= ?"
-      db.query(queryString,[start_date, end_date],(err,result)=>{
+      queryString = "SELECT * FROM Events WHERE start_time>= ? AND end_time <= ? LIMIT ? OFFSET ?"
+      db.query(queryString,[start_date, end_date, parseInt(count), parseInt(count*offset)],(err,result)=>{
         if(err){
           console.log(err)
           return res.status(500).send({"msg":"Error has occurred"})
@@ -214,10 +221,42 @@ app.get('/admin/get/events',(req,res)=>{
 })
 
 
-app.post('/admin/edit/event/:id',(req,res)=>{
+app.post('/admin/edit/event/:id', fileUpload({createParentPath: true}), (req,res)=>{
   const {event_id, title, description, start_time, end_time, transport_details} = req.body
-  console.log(req.body)
-  return res.status(200).send({"msg":"Resend"})
+
+  // console.log(req.body)
+  // console.log(req.files)
+  const files = req.files
+  queryString='UPDATE CHEER.Events  SET title=?, description=?, start_time=?, end_time=?, transport_details=? WHERE event_id=?;'
+  db.query(queryString,[title,description, start_time, end_time, transport_details, event_id], (error, result)=>{
+    if(error){
+      console.log(err)
+      res.status(500).send({"msg":"Error has occured"})
+    }
+  })
+
+  Object.keys(files).forEach(key=>{
+    const filepath = path.join(__dirname,'uploads/waivers',files[key].name)
+    files[key].mv(filepath, (err)=>{
+      if (err) return res.status(500).json({ status: "error", message: err })
+    })
+
+  })
+
+  return res.status(200).send({"msg":"Updated"})
+})
+
+app.get('/admin/get/waivers',(req,res)=>{
+  const event_id = req.query.event_id
+  queryString ='SELECT waiver_id, name FROM EventWaivers WHERE event_id=?'
+  db.query(queryString, [event_id], (err,result)=>{
+    if(err){
+      console.log(err)
+      res.status(500).send({"msg":"Error has occured"})
+    }else{
+      return res.json(result)
+    }
+  })
 })
 
 
@@ -364,12 +403,13 @@ const parentRoutes = require('./routes/parent.route')
 app.use('/parent', parentRoutes)
 
 // child functionalities
-const childRoutes = require('./routes/child.route')
+const childRoutes = require('./routes/child.route');
 app.use('/child', childRoutes)
 
-// event & calendar
-const eventRoutes = require('./routes/event.route')
-app.use('/calendar', eventRoutes)
+// // event & calendar
+// const eventRoutes = require('./routes/manageevent.route.js')
+// app.use('/calendar', eventRoutes)
+
 
 ///////// employee clock in clock out START ///////////
 

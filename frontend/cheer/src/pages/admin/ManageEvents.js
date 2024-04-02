@@ -7,31 +7,71 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import Switch from '@mui/material/Switch';
 import './styles/ManageEvents.css'
 import dayjs from 'dayjs';
+import axios from 'axios';
+
 
 const ManageEvents = () => {
   const [rowData,setRowData]=useState({})
   const [checkboxState, setCheckboxState] = useState(false)
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
+  const [waivers, setWaivers] = useState([])
+  const [files, setFiles] = useState({});
 
 
   const handleCallback = (childData)=>{
     setRowData(childData)
-  }
-
-  const handleSubmit = (e) =>{
-    e.preventDefault()
-    fetch(`/admin/edit/event/${rowData.event_id}`,{
-      method: 'POST',
+    fetch(`/admin/get/waivers?`+new URLSearchParams({
+      event_id: childData.event_id
+    }),{
+      method:"GET",
       headers:{"Content-Type":"application/json" },
-      body: JSON.stringify({event_id: rowData.event_id, title: rowData.title, description: rowData.description, start_time:`${rowData.start_time} ${startTime}`, end_time:`${rowData.end_time} ${endTime}`, transport_details: rowData.transport_details})
     }).then(response=>{
       if(response.ok){
         return response.json()
       }
     }).then(data=>{
-      console.log(data)
+      setWaivers(data)
     })
+  }
+
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    let fD = new FormData()
+    Object.keys(rowData).forEach(key => {
+      fD.append(key, rowData[key])
+    })
+    Object.keys(files).forEach(key=>{
+      fD.append(key, files[key])
+    })
+
+  
+
+    const config = {headers: {'Content-Type': 'multipart/form-data'}}
+    try{
+      const data = axios.post(`/admin/edit/event/${rowData.event_id}`, fD, config)
+      
+    }catch{
+
+    }
+    // fetch(`/admin/edit/event/${rowData.event_id}`,{
+    //   method: 'POST',
+    //   headers:{"Content-Type":"multipart/form-data" },
+    //   body: JSON.stringify({
+    //     event_id: rowData.event_id, 
+    //     title: rowData.title, 
+    //     description: rowData.description, 
+    //     start_time:`${rowData.start_time} ${startTime}`, 
+    //     end_time:`${rowData.end_time} ${endTime}`, 
+    //     transport_details: rowData.transport_details, 
+    //     files:files})
+    // }).then(response=>{
+    //   if(response.ok){
+    //     return response.json()
+    //   }
+    // }).then(data=>{
+    //   console.log(data)
+    // })
   }
 
   const handleChange = (e) =>{
@@ -61,6 +101,37 @@ const ManageEvents = () => {
     setRowData(data=> ({...data, ['start_time']:`${e.$y}-${e.$M}-${e.$D}`}))
   }
 
+  const deleteWaiver = (e) =>{
+    console.log(e.target.id)
+    fetch('/admin/event/delete/waiver?'+new URLSearchParams({
+      event_id: e.target.id
+    }),{
+      method:"GET",
+      headers:{"Content-Type":"multipart/form-data" },
+    }).then(response=>{
+      if(response.ok){
+        console.log(response.json())
+      }
+    })
+  }
+
+  const handleMultipleUpload = (f) =>{
+    // const uploaded = [...files]
+    // for(var fi of f){
+    //   uploaded[fi.name]=fi
+    // }
+    // setFiles(uploaded);
+    for(var fi of f){
+      console.log(fi)
+      setFiles(pf => ({...pf, [fi.name]:fi}))
+    }
+  }
+
+  const handleFiles = (e) =>{
+    const choosenFiles = Array.prototype.slice.call(e.target.files)
+    handleMultipleUpload(choosenFiles)
+  }
+
   return (
     <div className='manage_events_background'>
         <div className='manage_events_currentEvents_container'>
@@ -77,7 +148,22 @@ const ManageEvents = () => {
             <textarea className='event_edit_description' name='description' value={rowData.description} onChange={handleChange}></textarea>
             <label>Transport Details</label>
             <input title='transport_details' value={rowData.transport_details} onChange={handleChange}></input>
-
+            <label>Waivers</label>
+            {
+              waivers.map((r)=>{
+                return(
+                  <div className='waiverrow_background'>
+                      <div className='waiverrow_name_container'>
+                        {r.name}
+                      </div>
+                      <button type="button" id={r.waiver_id} key={r.waiver_id} onClick={(e)=>deleteWaiver(e)}>
+                        X
+                      </button>
+                  </div>
+                )
+              })
+            }
+            <input type="file" className='edit_event_file_upload' multiple onChange={handleFiles} accept='application/pdf'/>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <div>
                 <label>Edit Date and Time?</label>
@@ -117,4 +203,14 @@ const ManageEvents = () => {
     </div>
   )
 }
+
+
+// const WaiverRow = (props) =>{
+//   return(
+//     <div className='wavierrow_background'>
+//       {props.data_name}
+//     </div>
+//   )
+// }
+
 export default ManageEvents

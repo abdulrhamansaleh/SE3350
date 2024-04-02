@@ -54,3 +54,18 @@ input.event_edit_submit_button{
 textarea.event_edit_description{
     height:200px;
 }
+
+div.waiverrow_background{
+    background-color: rgba(128, 128, 128, 0.425);   
+    height:3%;
+    padding:1%;
+    display:flex;
+    flex-direction: row; 
+}
+div.waiverrow_name_container{
+    width: 95%;
+}
+input.edit_event_file_upload{
+    background-color: rgba(255, 255, 255, 0);
+    color:black
+}

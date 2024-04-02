@@ -71,7 +71,9 @@ export default function CollapsibleTable(props) {
       offset: page,
       type: dropDownValue,
       start_date : `${startDate.$y}-${startDate.$M}-${startDate.$D}`,
-      end_date: `${endDate.$y}-${endDate.$M}-${endDate.$D}`
+      end_date: `${endDate.$y}-${endDate.$M}-${endDate.$D}`,
+      length: rowsPerPage,
+      offset: page,
     }), {
       method: 'GET'
     }).then(response=> {
