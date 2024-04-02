@@ -6,7 +6,7 @@ const RequestAccountChanges = ({token}) => {
 
     //on mount need to fetch request changes value
 
-    async function getRACStatus(id) {
+    async function getRACStatus(id = token?.accountId) {
         const res = await fetch('/findRAC', {
             method: 'POST',
             headers: {
@@ -69,23 +69,26 @@ const RequestAccountChanges = ({token}) => {
     return(
         <>
             {
-                isPopupActive && 
+                !isPopupActive && 
                 <div>
-                    <button onClick={togglePopup}>
+                    <button onClick={togglePopup} className='clock-in'>
                         Request Account Changes
                     </button>
                 </div>
             }
             {
-                !isPopupActive &&
+                isPopupActive &&
                 <div>
                     {
                         requested && 
-                        <h2>You have already requested account changes</h2>
+                        <p>Account changes requested</p>
                     }
-                    <button onClick={handleRequest}>
-                        Confirm account changes request.
-                    </button>
+                    {
+                        !requested && 
+                        <button onClick={handleRequest} className='clock-in'>
+                            Confirm account changes request
+                        </button>
+                    }
                 </div>
 
             }
