@@ -407,8 +407,8 @@ const childRoutes = require('./routes/child.route');
 app.use('/child', childRoutes)
 
 // // event & calendar
-// const eventRoutes = require('./routes/manageevent.route.js')
-// app.use('/calendar', eventRoutes)
+const eventRoutes = require('./routes/manageevent.route.js')
+app.use('/calendar', eventRoutes)
 
 
 
