@@ -72,7 +72,7 @@ const RequestAccountChanges = ({token}) => {
                 !isPopupActive && 
                 <div>
                     <button onClick={togglePopup} className='clock-in'>
-                        Request Account Changes
+                        Edit Account
                     </button>
                 </div>
             }

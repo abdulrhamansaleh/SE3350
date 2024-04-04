@@ -16,7 +16,6 @@
     width: 90%; /* Adjust the width as needed */
     margin: 0 auto; /* Center the container */
     display: flex;
-    justify-content: space-between; /* Space between the logo and navigation */
   }
   
   ul.navbar_list {

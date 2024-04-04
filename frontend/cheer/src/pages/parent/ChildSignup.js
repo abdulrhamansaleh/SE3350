@@ -40,7 +40,7 @@ const handleSubmit = async (e) =>{
             <div class="signup_form_container">
                 <div class="right">
                     <form class="form_container" onSubmit={handleSubmit}>
-                        <h1>Register Your Child</h1>
+                        <h1>Young Adult Registration</h1>
                         <input type="text" 
                         placeholder="First Name"
                         name = 'first_name'

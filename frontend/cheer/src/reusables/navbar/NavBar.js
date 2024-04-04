@@ -198,10 +198,14 @@ const NavBar = ({token, setToken}) => {
                         </li>
                     }
 
-                    
-                    <li className='navbar_list_items'>
-                        <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">Register Child</NavLink>
-                    </li>
+                    {
+                        token?.loggedIn && (token?.type === 'parent') &&
+                        <li className='navbar_list_items login_button'>
+                            <NavLink style={{"text-decoration": "none"}} className="nav_link" to="/parent/register-my-child">
+                                Register Your Loved One
+                            </NavLink>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
